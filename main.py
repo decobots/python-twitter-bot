@@ -1,11 +1,14 @@
 import base64
-
 import httplib2
 import oauth2
 import random
 from xml.etree import ElementTree as etree
 from urllib.parse import urlencode
 import json
+import pickle
+
+with open("keys.txt", "rb") as file:
+    CONSUMER_KEY, CONSUMER_SECRET, ACCESS_KEY, ACCESS_SECRET = pickle.load(file)
 
 
 def flickr_query_to_get_list_of_pictures(request_h):
@@ -44,7 +47,7 @@ def twitter_query(media_id):
     endpoint = "https://api.twitter.com/1.1/statuses/update.json"
     params = urlencode({'status': 'Hello from Python 2nd attempt',
                         'media_ids': media_id})
-    r,c = client.request(endpoint, "POST", params)
+    r, c = client.request(endpoint, "POST", params)
     print(c)
 
 
@@ -66,7 +69,7 @@ if __name__ == "__main__":
     pictures_list = flickr_query_to_get_list_of_pictures(h)
     indexes = random.sample(range(0, len(pictures_list)), len(pictures_list))
     pic = flickr_query2(h, pictures_list[0])
-    pic_id=upload_picture_to_twitter(pic)
+    pic_id = upload_picture_to_twitter(pic)
     twitter_query(pic_id)
     '''for index in indexes:
         pic = flickr_query2(h, pictures_list[index])
