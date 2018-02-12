@@ -44,10 +44,11 @@ def post_to_twitter(text_to_tweet, id_of_photo):
 
 if __name__ == "__main__":
     will_be_uploaded_N_photos = 10
-    while (will_be_uploaded_N_photos>0):
+    while (will_be_uploaded_N_photos > 0):
         pictures_list = flickr_get_photos_list()
         random_index = random.choice(range(0, len(pictures_list)))
         photo_flickr = flickr_get_photo(pictures_list[random_index])
         photo_twitter = upload_picture_to_twitter(photo_flickr)
         post_to_twitter(photo_twitter["name"], photo_twitter["id"])
         time.sleep(30)
+        will_be_uploaded_N_photos -= 1
