@@ -7,8 +7,8 @@ name = "pypi"
 
 [packages]
 
-"oauth2" = "*"
 requests = "*"
+requests-oauthlib = "*"
 
 
 [dev-packages]
