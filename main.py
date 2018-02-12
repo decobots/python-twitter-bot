@@ -5,10 +5,12 @@ import random
 from xml.etree import ElementTree as etree
 from urllib.parse import urlencode
 import json
-import pickle
+import os
 
-with open("keys.txt", "rb") as file:
-    CONSUMER_KEY, CONSUMER_SECRET, ACCESS_KEY, ACCESS_SECRET = pickle.load(file)
+CONSUMER_KEY = os.getenv("CONSUMER_KEY")
+CONSUMER_SECRET = os.getenv("CONSUMER_SECRET")
+ACCESS_KEY = os.getenv("ACCESS_KEY")
+ACCESS_SECRET = os.getenv("ACCESS_SECRET")
 
 
 def flickr_query_to_get_list_of_pictures(request_h):
@@ -45,7 +47,7 @@ def twitter_query(media_id):
     access_token = oauth2.Token(key=ACCESS_KEY, secret=ACCESS_SECRET)
     client = oauth2.Client(consumer, access_token)
     endpoint = "https://api.twitter.com/1.1/statuses/update.json"
-    params = urlencode({'status': 'Hello from Python 2nd attempt',
+    params = urlencode({'status': 'Hello from Python + Heroku',
                         'media_ids': media_id})
     r, c = client.request(endpoint, "POST", params)
     print(c)
