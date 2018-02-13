@@ -1,7 +1,7 @@
 import os
 
-CONSUMER_KEY = os.getenv("CONSUMER_KEY")  # twitter
-CONSUMER_SECRET = os.getenv("CONSUMER_SECRET")  # twitter
-ACCESS_KEY = os.getenv("ACCESS_KEY")  # twitter
-ACCESS_SECRET = os.getenv("ACCESS_SECRET")  # twitter
-FLICKR_API_KEY = os.getenv("FLICKR_API_KEY")  # flickr
+TWITTER_CONSUMER_KEY = os.getenv("CONSUMER_KEY")
+TWITTER_CONSUMER_SECRET = os.getenv("CONSUMER_SECRET")
+TWITTER_ACCESS_KEY = os.getenv("ACCESS_KEY")
+TWITTER_ACCESS_SECRET = os.getenv("ACCESS_SECRET")
+FLICKR_API_KEY = os.getenv("FLICKR_API_KEY")
