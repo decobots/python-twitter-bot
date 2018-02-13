@@ -5,12 +5,8 @@ import random
 from xml.etree import ElementTree as etree
 from urllib.parse import urlencode
 import json
-import os
-
-CONSUMER_KEY = os.getenv("CONSUMER_KEY")
-CONSUMER_SECRET = os.getenv("CONSUMER_SECRET")
-ACCESS_KEY = os.getenv("ACCESS_KEY")
-ACCESS_SECRET = os.getenv("ACCESS_SECRET")
+from environment_variables import TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET, TWITTER_ACCESS_KEY, \
+    TWITTER_ACCESS_SECRET, FLICKR_API_KEY
 
 
 def flickr_query_to_get_list_of_pictures(request_h):
