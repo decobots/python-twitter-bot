@@ -1,6 +1,4 @@
-keys.txt
 *.jpg
 *.jpeg
 .cache
 .idea
-key_writer.py
