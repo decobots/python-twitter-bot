@@ -13,7 +13,7 @@ class TestEnvironmentVariables(unittest.TestCase):
 class TestFlickr(unittest.TestCase):
     def test_flickr_get_photos_list_correct(self):
         """
-        check that returned value is list and attribute farm, server, id, secret exists for each list item
+        check that returned value is list and attributes farm, server, id, secret exist for each list item
         """
         flickr_get_photos_list_result = flickr_get_photos_list()
         self.assertIsInstance(flickr_get_photos_list_result, list)
@@ -26,7 +26,7 @@ class TestFlickr(unittest.TestCase):
 
     def test_flickr_get_photo_correct(self):
         """
-        check that returned value are exist and have types bytes and string
+        check that returned value exist and have types bytes and string
         """
         test_flickr_get_photo_result_binary, test_flickr_get_photo_result_name = flickr_get_photo(
             {"farm": "5", "server": "4368", "id": "372637598620", "secret": "5bc41f375d", "title": "test"})
