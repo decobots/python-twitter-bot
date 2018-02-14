@@ -9,6 +9,7 @@ name = "pypi"
 
 requests = "*"
 requests-oauthlib = "*"
+pytest = "*"
 
 
 [dev-packages]
