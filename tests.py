@@ -1,29 +1,13 @@
 import unittest
-from environment_variables import TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET, TWITTER_ACCESS_KEY, \
-    TWITTER_ACCESS_SECRET, FLICKR_API_KEY
+import environment_variables
 from main import flickr_get_photos_list, flickr_get_photo
 
 
 class TestEnvironmentVariables(unittest.TestCase):
-    def test_environment_variables_TWITTER_CONSUMER_KEY(self):
-        self.assertIsInstance(TWITTER_CONSUMER_KEY, str)
-        self.assertFalse(TWITTER_CONSUMER_KEY == '')
+    """TODO test that defined variable reads correctly"""
 
-    def test_environment_variables_TWITTER_CONSUMER_SECRET(self):
-        self.assertIsInstance(TWITTER_CONSUMER_SECRET, str)
-        self.assertFalse(TWITTER_CONSUMER_SECRET == '')
-
-    def test_environment_variables_TWITTER_ACCESS_KEY(self):
-        self.assertIsInstance(TWITTER_ACCESS_KEY, str)
-        self.assertFalse(TWITTER_ACCESS_KEY == '')
-
-    def test_environment_variables_TTWITTER_ACCESS_SECRET(self):
-        self.assertIsInstance(TWITTER_ACCESS_SECRET, str)
-        self.assertFalse(TWITTER_ACCESS_SECRET == '')
-
-    def test_environment_variables_FLICKR_API_KEY(self):
-        self.assertIsInstance(FLICKR_API_KEY, str)
-        self.assertFalse(FLICKR_API_KEY == '')
+    def test_environment_variables_not_defined(self):
+        self.assertRaises(OSError, environment_variables.get_env, "undefined_variable_name")
 
 
 class TestFlickr(unittest.TestCase):
@@ -62,4 +46,3 @@ class TestFlickr(unittest.TestCase):
             {"farm": "7", "server": "7", "id": "7", "secret": "7", "title": "7"})
         self.assertIsNone(test_flickr_get_photo_result_binary2)
         self.assertIsNone(test_flickr_get_photo_result_name2)
-
