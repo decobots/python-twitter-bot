@@ -5,12 +5,17 @@ from environment_variables import get_env
 from main import flickr_get_photos_list, flickr_get_photo
 
 
-def test_environment_variables_correct():
+@pytest.fixture
+def global_variable():
     key = "TEST_VARIABLE"
     value = "TEST_VALUE"
     os.environ[key] = value
-    assert get_env(key) == value
+    yield key, value
     os.environ.pop(key)
+
+
+def test_environment_variables_correct(global_variable):
+    assert get_env(global_variable[0]) == global_variable[1]
 
 
 def test_environment_variables_not_defined():
