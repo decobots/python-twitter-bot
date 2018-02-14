@@ -1,10 +1,17 @@
+import os
 import unittest
+
 import environment_variables
 from main import flickr_get_photos_list, flickr_get_photo
 
 
 class TestEnvironmentVariables(unittest.TestCase):
-    """TODO test that defined variable reads correctly"""
+    def test_environment_variables_correct(self):
+        key = "TEST_VARIABLE"
+        value = "TEST_VALUE"
+        os.environ[key] = value
+        self.assertEqual(environment_variables.get_env(key), value)
+        os.environ.pop(key)
 
     def test_environment_variables_not_defined(self):
         self.assertRaises(OSError, environment_variables.get_env, "undefined_variable_name")
