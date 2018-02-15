@@ -2,7 +2,8 @@ import os
 import pytest
 
 from environment_variables import get_env
-from main import flickr_get_photos_list, flickr_get_photo
+from flickr import Flickr
+import twitter
 
 
 @pytest.fixture
@@ -27,9 +28,10 @@ def test_flickr_get_photos_list_correct():
     """
     check that returned value is list and attributes farm, server, id, secret exist for each list item
     """
-    flickr_get_photos_list_result = flickr_get_photos_list()
-    assert isinstance(flickr_get_photos_list_result, list)
-    for photo in flickr_get_photos_list_result:
+    flickr = Flickr()
+    flickr_get_photos_result = flickr.get_photos()
+    assert isinstance(flickr_get_photos_result, list)
+    for photo in flickr_get_photos_result:
         assert isinstance(photo, dict)
         assert photo["farm"] is not None
         assert photo["server"] is not None
@@ -41,7 +43,8 @@ def test_flickr_get_photo_correct():
     """
     check that returned value exist and have types bytes and string
     """
-    test_flickr_get_photo_result_binary, test_flickr_get_photo_result_name = flickr_get_photo(
+    flickr = Flickr()
+    test_flickr_get_photo_result_binary, test_flickr_get_photo_result_name = flickr.get_photo(
         {"farm": "5", "server": "4368", "id": "372637598620", "secret": "5bc41f375d", "title": "test"})
     assert test_flickr_get_photo_result_binary is not None
     assert test_flickr_get_photo_result_name is not None
@@ -51,12 +54,14 @@ def test_flickr_get_photo_correct():
 
 def _test_flickr_get_photo_empty_input():
     with pytest.raises(ValueError):
-        flickr_get_photo()
+        flickr = Flickr()
+        flickr.get_photo()
 
 
 def _test_flickr_get_photo_with_incorrect_input_type():
     with pytest.raises(ValueError):
-        flickr_get_photo([])
+        flickr = Flickr()
+        flickr.get_photo([])
 
 
 def _test_flickr_get_photo_incorrect_input():

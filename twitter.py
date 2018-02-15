@@ -12,10 +12,10 @@ class Twitter:
               "twitter_get_users_posts": "https://api.twitter.com/1.1/statuses/user_timeline.json",
               "delete_tweet_by_id": "https://api.twitter.com/1.1/statuses/destroy/{}.json"}
 
-    method_type = {"twitter_upload_pic": "post",
-                   "twitter_create_post": "post",
-                   "twitter_get_users_posts": "get",
-                   "delete_tweet_by_id": "post"}
+    method_type = {"twitter_upload_pic": "POST",
+                   "twitter_create_post": "POST",
+                   "twitter_get_users_posts": "GET",
+                   "delete_tweet_by_id": "POST"}
 
     auth = OAuth1(get_env("TWITTER_CONSUMER_KEY"),
                   client_secret=get_env("TWITTER_CONSUMER_SECRET"),
@@ -24,12 +24,12 @@ class Twitter:
 
     def request(self, method_name, **kwargs):
         result = None
-        if self.method_type[method_name] == "post":
-            result = requests.post(self.method[method_name].format(kwargs.get("tweet_id", "")),
-                                   data=kwargs,
-                                   auth=self.auth)
+        if self.method_type[method_name] == "POST":
+            result = requests.post(self.method[method_name].format(kwargs.get("tweet_id", ""),
+                                                                   data=kwargs,
+                                                                   auth=self.auth))
             # format required for delete_tweet_by_id method
-        elif self.method_type[method_name] == "get":
+        elif self.method_type[method_name] == "GET":
             result = requests.get(self.method[method_name], params=kwargs, auth=self.auth)
         return result
 
