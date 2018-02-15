@@ -5,7 +5,7 @@ from xml.etree import ElementTree as etree
 import requests
 
 from environment_variables import FLICKR_API_KEY
-from twitter_class import Twitter
+from twitter import Twitter
 
 
 def flickr_get_photos_list():
