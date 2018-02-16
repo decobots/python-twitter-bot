@@ -27,5 +27,5 @@ class Flickr:
                                                                      photo_attributes["server"],
                                                                      photo_attributes['id'],
                                                                      photo_attributes["secret"]))
-
+        print("wow")
         return get_photo_response.content, photo_attributes["title"]

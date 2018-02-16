@@ -1,27 +1,6 @@
-import os
 import pytest
 
-from environment_variables import get_env
 from flickr import Flickr
-import twitter
-
-
-@pytest.fixture
-def global_variable():
-    key = "TEST_VARIABLE"
-    value = "TEST_VALUE"
-    os.environ[key] = value
-    yield key, value
-    os.environ.pop(key)
-
-
-def test_environment_variables_correct(global_variable):
-    assert get_env(global_variable[0]) == global_variable[1]
-
-
-def test_environment_variables_not_defined():
-    with pytest.raises(OSError):
-        get_env("undefined_variable_name")
 
 
 def test_flickr_get_photos_list_correct():
@@ -45,11 +24,18 @@ def test_flickr_get_photo_correct():
     """
     flickr = Flickr()
     test_flickr_get_photo_result_binary, test_flickr_get_photo_result_name = flickr.get_photo(
-        {"farm": "5", "server": "4368", "id": "372637598620", "secret": "5bc41f375d", "title": "test"})
+        {"farm": "5", "server": "4504", "id": "24003882568", "secret": "ca14f88bec", "title": "test"})
     assert test_flickr_get_photo_result_binary is not None
     assert test_flickr_get_photo_result_name is not None
-    assert test_flickr_get_photo_result_binary, bytes is not None
-    assert test_flickr_get_photo_result_name, str is not None
+    assert isinstance(test_flickr_get_photo_result_binary, bytes)
+    assert isinstance(test_flickr_get_photo_result_name, str)
+
+def test_flickr_get_photo_incorrect():
+    flickr = Flickr()
+    with pytest.raises(ValueError):
+        flickr.get_photo(
+            {"farm": "5", "server": "450904", "id": "24003882568", "secret": "ca14f88bec", "title": "test"})
+        # invalid server
 
 
 def _test_flickr_get_photo_with_incorrect_input_type():
@@ -59,7 +45,8 @@ def _test_flickr_get_photo_with_incorrect_input_type():
 
 
 def _test_flickr_get_photo_incorrect_input():
-    test_flickr_get_photo_result_binary2, test_flickr_get_photo_result_name2 = flickr_get_photo(
+    flickr = Flickr()
+    test_flickr_get_photo_result_binary2, test_flickr_get_photo_result_name2 = flickr.get_photo(
         {"farm": "7", "server": "7", "id": "7", "secret": "7", "title": "7"})
     assert test_flickr_get_photo_result_binary2 is not None
     assert test_flickr_get_photo_result_name2 is not None
