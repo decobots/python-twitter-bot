@@ -25,7 +25,9 @@ class Twitter:
     def request(self, method_name, **kwargs):
         result = None
         if self.method_type[method_name] == "post":
-            self.method[method_name].format(kwargs.get("tweet_id", ""), data=kwargs, auth=self.auth)
+            result = requests.post(self.method[method_name].format(kwargs.get("tweet_id", "")),
+                                   data=kwargs,
+                                   auth=self.auth)
             # format required for delete_tweet_by_id method
         elif self.method_type[method_name] == "get":
             result = requests.get(self.method[method_name], params=kwargs, auth=self.auth)
@@ -40,7 +42,7 @@ class Twitter:
         self.request("twitter_create_post", status=status, media_ids=id_of_photo)
 
     def get_users_posts(self, number_of_tweets_to_get):
-        get_users_posts_request = self.request("get_users_posts", count=number_of_tweets_to_get)
+        get_users_posts_request = self.request("twitter_get_users_posts", count=number_of_tweets_to_get)
         return [tweet["id"] for tweet in json.loads(get_users_posts_request.content)]
 
     def delete_tweet_by_id(self, tweet_id):
