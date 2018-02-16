@@ -52,12 +52,6 @@ def test_flickr_get_photo_correct():
     assert test_flickr_get_photo_result_name, str is not None
 
 
-def _test_flickr_get_photo_empty_input():
-    with pytest.raises(ValueError):
-        flickr = Flickr()
-        flickr.get_photo()
-
-
 def _test_flickr_get_photo_with_incorrect_input_type():
     with pytest.raises(ValueError):
         flickr = Flickr()

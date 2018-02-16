@@ -1,5 +1,6 @@
-import json
 import base64
+import json
+
 import requests
 from requests_oauthlib import OAuth1
 
