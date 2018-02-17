@@ -18,20 +18,24 @@ class Twitter:
                    "twitter_get_users_posts": "GET",
                    "delete_tweet_by_id": "POST"}
 
-    auth = OAuth1(get_env("TWITTER_CONSUMER_KEY"),
-                  client_secret=get_env("TWITTER_CONSUMER_SECRET"),
-                  resource_owner_key=get_env("TWITTER_ACCESS_KEY"),
-                  resource_owner_secret=get_env("TWITTER_ACCESS_SECRET"), signature_type="body")
+    auth_post = OAuth1(get_env("TWITTER_CONSUMER_KEY"),
+                       client_secret=get_env("TWITTER_CONSUMER_SECRET"),
+                       resource_owner_key=get_env("TWITTER_ACCESS_KEY"),
+                       resource_owner_secret=get_env("TWITTER_ACCESS_SECRET"), signature_type="body")
+    auth_get = OAuth1(get_env("TWITTER_CONSUMER_KEY"),
+                      client_secret=get_env("TWITTER_CONSUMER_SECRET"),
+                      resource_owner_key=get_env("TWITTER_ACCESS_KEY"),
+                      resource_owner_secret=get_env("TWITTER_ACCESS_SECRET"))
 
     def request(self, method_name, **kwargs):
         result = None
         if self.method_type[method_name] == "POST":
-            result = requests.post(self.method[method_name].format(kwargs.get("tweet_id", ""),
-                                                                   data=kwargs,
-                                                                   auth=self.auth))
+            result = requests.post(self.method[method_name].format(kwargs.get("tweet_id", "")),
+                                   data=kwargs,
+                                   auth=self.auth_post)
             # format required for delete_tweet_by_id method
         elif self.method_type[method_name] == "GET":
-            result = requests.get(self.method[method_name], params=kwargs, auth=self.auth)
+            result = requests.get(self.method[method_name], params=kwargs, auth=self.auth_get)
         return result
 
     def upload_photo(self, name, data):
@@ -42,8 +46,8 @@ class Twitter:
     def create_post(self, status, id_of_photo=[]):
         self.request("twitter_create_post", status=status, media_ids=id_of_photo)
 
-    def get_users_posts(self, number_of_tweets_to_get):
-        get_users_posts_request = self.request("twitter_get_users_posts", count=number_of_tweets_to_get)
+    def get_users_posts(self, amount):
+        get_users_posts_request = self.request("twitter_get_users_posts", count=amount)
         return [tweet["id"] for tweet in json.loads(get_users_posts_request.content)]
 
     def delete_tweet_by_id(self, tweet_id):

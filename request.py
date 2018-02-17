@@ -8,12 +8,12 @@ def request(method_type, url, **kwargs):
                               params=kwargs.get("params", None),
                               data=kwargs.get("data", None),
                               auth=kwargs.get("auth", None))
+    if result.status_code != 200:
+        raise ValueError(result.text)
     try:
-        response_tag = ElementTree.fromstring(result.content)
+        response_tag = ElementTree.fromstring(result.text)
         if response_tag.attrib["stat"] == 'fail':
             raise ValueError(result.text)
-    finally:
-        if result.status_code != "200" and result.status_code != 200:
-            raise ValueError(result.text)
+    except ElementTree.ParseError:
+        pass
     return result
-
