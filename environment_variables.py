@@ -8,6 +8,3 @@ def get_env(name):
     elif value == "":
         raise ValueError(f"global variable {name} could not be empty string")
     return value
-
-
-FLICKR_API_KEY = get_env("FLICKR_API_KEY")
