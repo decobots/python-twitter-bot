@@ -39,6 +39,7 @@ def test_upload_photo_incorrect(local_picture):
     not_picture = "string"
     with pytest.raises(TypeError):
         twitter.upload_photo(name="Test_name", data=not_picture)
+    with pytest.raises(TypeError):
         twitter.upload_photo(name=78.6765, data=local_picture)
 
 
@@ -60,9 +61,10 @@ def test_delete_tweet_by_id_correct(tweet_id):
     twitter = Twitter()
     twitter.delete_tweet_by_id(tweet_id)
 
+
 def setup_module():
     twitter = Twitter()
-    for n in range(0,13):
+    for n in range(0, 13):
         twitter.create_post(status=n)
 
 

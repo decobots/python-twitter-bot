@@ -1,8 +1,0 @@
-import pytest
-
-from environment_variables import get_env
-from twitter import Twitter
-
-
-def test_upload_photo():
-    pass

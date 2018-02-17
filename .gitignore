@@ -1,7 +1,7 @@
 *.jpg
 *.jpeg
 .cache
-.pytest_cashe
+.pytest_cache
 .venv
 .idea
 python
