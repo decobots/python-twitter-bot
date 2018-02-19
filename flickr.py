@@ -4,7 +4,7 @@ from xml.etree import ElementTree
 from environment_variables import get_env
 from request import request
 
-endpoint = collections.namedtuple('flickr_method', ["url", "method", "type"])
+endpoint = collections.namedtuple('endpoint', ["url", "method", "type"])
 
 
 class Flickr:
@@ -14,10 +14,11 @@ class Flickr:
     get_picture = endpoint("https://farm{}.staticflickr.com/{}/{}_{}.jpg", "", "GET")
 
     def get_photos(self):
-        params = {"method": self.get_pictures.method, "api_key": self.FLICKR_API_KEY, "user_id": self.user_id}
         get_photos_response = request(method_type=self.get_pictures.type,
                                       url=self.get_pictures.url,
-                                      payload=params
+                                      payload={"method": self.get_pictures.method,
+                                               "api_key": self.FLICKR_API_KEY,
+                                               "user_id": self.user_id}
                                       )
         return [tag.attrib for tag in ElementTree.fromstring(get_photos_response.text)[0]]
 
@@ -27,5 +28,4 @@ class Flickr:
                                                                      photo_attributes["server"],
                                                                      photo_attributes['id'],
                                                                      photo_attributes["secret"]))
-        print("wow")
         return get_photo_response.content, photo_attributes["title"]

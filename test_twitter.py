@@ -44,8 +44,7 @@ def test_upload_photo_incorrect(local_picture):
 def test_create_post_correct(picture_id):
     twitter = Twitter()
     result = twitter.create_post(status="Test_status", id_of_photo=picture_id)
-    assert isinstance(result,int)
-
+    assert isinstance(result, int)
 
 
 def test_get_users_posts_correct():
