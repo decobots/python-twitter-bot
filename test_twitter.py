@@ -39,8 +39,6 @@ def test_upload_photo_incorrect(local_picture):
     not_picture = "string"
     with pytest.raises(TypeError):
         twitter.upload_photo(name="Test_name", data=not_picture)
-    with pytest.raises(TypeError):
-        twitter.upload_photo(name=78.6765, data=local_picture)
 
 
 def test_create_post_correct(picture_id):
