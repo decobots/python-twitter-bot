@@ -43,7 +43,9 @@ def test_upload_photo_incorrect(local_picture):
 
 def test_create_post_correct(picture_id):
     twitter = Twitter()
-    twitter.create_post(status="Test_status", id_of_photo=picture_id)
+    result = twitter.create_post(status="Test_status", id_of_photo=picture_id)
+    assert isinstance(result,int)
+
 
 
 def test_get_users_posts_correct():
@@ -62,6 +64,9 @@ def test_delete_tweet_by_id_correct(tweet_id):
 
 def setup_module():
     twitter = Twitter()
+    posts = twitter.get_users_posts(100)
+    for post in posts:
+        twitter.delete_tweet_by_id(post)
     for n in range(0, 13):
         twitter.create_post(status=n)
 

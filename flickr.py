@@ -17,7 +17,7 @@ class Flickr:
         params = {"method": self.get_pictures.method, "api_key": self.FLICKR_API_KEY, "user_id": self.user_id}
         get_photos_response = request(method_type=self.get_pictures.type,
                                       url=self.get_pictures.url,
-                                      params=params
+                                      payload=params
                                       )
         return [tag.attrib for tag in ElementTree.fromstring(get_photos_response.text)[0]]
 
