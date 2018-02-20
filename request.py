@@ -3,10 +3,16 @@ from xml.etree import ElementTree
 
 
 def request(method_type, url, **kwargs):
+    params = None
+    data = None
+    if method_type == "GET":
+        params = kwargs.get("payload", None)
+    else:
+        data = kwargs.get("payload", None)
     result = requests.request(method=method_type,
                               url=url,
-                              params=kwargs.get("params", None),
-                              data=kwargs.get("data", None),
+                              params=params,
+                              data=data,
                               auth=kwargs.get("auth", None))
     if result.status_code != 200:
         raise ValueError(result.text)
