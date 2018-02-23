@@ -15,7 +15,7 @@ def request(method_type, url, **kwargs):
                               data=data,
                               auth=kwargs.get("auth", None))
     if result.status_code != 200:
-        raise ValueError(result.text)
+        raise ValueError("oops ", result.text)
     try:
         response_tag = ElementTree.fromstring(result.text)
         if response_tag.attrib["stat"] == 'fail':
