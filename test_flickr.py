@@ -20,6 +20,7 @@ def test_flickr_get_photos_list_correct():
         assert photo["server"] is not None
         assert photo["id"] is not None
         assert photo["secret"] is not None
+        # TODO add  check that pictures was written to the db
 
 
 def test_flickr_get_photo_correct():
@@ -30,8 +31,7 @@ def test_flickr_get_photo_correct():
     m.return_value = mock.MagicMock()
     m.return_value.content = b"/ff/ff"
     flickr = Flickr(m)
-    test_flickr_get_photo_result_binary, test_flickr_get_photo_result_name = flickr.get_photo(
-        {"farm": "5", "server": "4504", "id": "24003882568", "secret": "ca14f88bec", "title": "test"})
+    test_flickr_get_photo_result_binary, test_flickr_get_photo_result_name = flickr.get_photo("url", "name")
     assert test_flickr_get_photo_result_binary is not None
     assert test_flickr_get_photo_result_name is not None
     assert isinstance(test_flickr_get_photo_result_binary, bytes)

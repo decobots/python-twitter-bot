@@ -3,6 +3,7 @@ from xml.etree import ElementTree
 
 from environment_variables import get_env
 from request import request
+from data_base import add_photo
 
 endpoint = collections.namedtuple('endpoint', ["url", "method", "type"])
 
@@ -23,12 +24,12 @@ class Flickr:
                                                     "api_key": self.FLICKR_API_KEY,
                                                     "user_id": self.user_id}
                                            )
-        return [tag.attrib for tag in ElementTree.fromstring(get_photos_response.text)[0]]
+        for tag in ElementTree.fromstring(get_photos_response.text)[0]:
+            add_photo(attributes=tag.attrib)
+        return [tag.attrib for tag in ElementTree.fromstring(get_photos_response.text)[0]]  # TODO remove return
 
-    def get_photo(self, photo_attributes):
+    def get_photo(self, url, name):
+
         get_photo_response = self.request(method_type=self.get_picture.type,
-                                          url=self.get_picture.url.format(photo_attributes["farm"],
-                                                                          photo_attributes["server"],
-                                                                          photo_attributes['id'],
-                                                                          photo_attributes["secret"]))
-        return get_photo_response.content, photo_attributes["title"]
+                                          url=url)
+        return get_photo_response.content, name
