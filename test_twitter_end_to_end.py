@@ -23,6 +23,7 @@ def tweet_id():
     return tw_id
 
 
+@pytest.mark.end_to_end
 def test_upload_photo_correct(local_picture):
     twitter = Twitter()
     returned_id, returned_name = twitter.upload_photo(name="Test_name", data=local_picture)
@@ -34,6 +35,7 @@ def test_upload_photo_correct(local_picture):
     assert returned_name != ''
 
 
+@pytest.mark.end_to_end
 def test_upload_photo_incorrect(local_picture):
     twitter = Twitter()
     not_picture = "string"
@@ -41,12 +43,14 @@ def test_upload_photo_incorrect(local_picture):
         twitter.upload_photo(name="Test_name", data=not_picture)
 
 
+@pytest.mark.end_to_end
 def test_create_post_correct(picture_id):
     twitter = Twitter()
     result = twitter.create_post(status="Test_status", id_of_photo=picture_id)
     assert isinstance(result, int)
 
 
+@pytest.mark.end_to_end
 def test_get_users_posts_correct():
     twitter = Twitter()
     number_of_posts = 10
@@ -56,11 +60,13 @@ def test_get_users_posts_correct():
         assert isinstance(item, int)
 
 
+@pytest.mark.end_to_end
 def test_delete_tweet_by_id_correct(tweet_id):
     twitter = Twitter()
     twitter.delete_tweet_by_id(tweet_id)
 
 
+@pytest.mark.end_to_end
 def setup_module():
     twitter = Twitter()
     posts = twitter.get_users_posts(100)
@@ -70,6 +76,7 @@ def setup_module():
         twitter.create_post(status=n)
 
 
+@pytest.mark.end_to_end
 def teardown_module():
     twitter = Twitter()
     posts = twitter.get_users_posts(100)
