@@ -21,22 +21,26 @@ class Twitter:
                   resource_owner_key=get_env("TWITTER_ACCESS_KEY"),
                   resource_owner_secret=get_env("TWITTER_ACCESS_SECRET"))
 
-    def __init__(self, requester=request):
+    def __init__(self, database, requester=request):
         self.request = requester
+        self.db = database
 
-    def upload_photo(self, name, data):
-        data = base64.b64encode(data)
+    def upload_photo(self, photo):
+        data = base64.b64encode(photo.data)
         upload_photo_result = self.request(self.twitter_upload_pic.type,
                                            self.twitter_upload_pic.url,
-                                           payload={"name": name, "media_data": data},
+                                           payload={"name": photo.title, "media_data": data},
                                            auth=self.auth)
-        return json.loads(upload_photo_result.text)['media_id'], name
+        photo.id_twitter = json.loads(upload_photo_result.text)['media_id']
+        return photo
 
-    def create_post(self, status, id_of_photo=()):
+    def create_post(self, status, photo=None):
         created_post = self.request(self.twitter_create_post.type,
                                     self.twitter_create_post.url,
-                                    payload={"status": status, "media_ids": id_of_photo},
+                                    payload={"status": status, "media_ids": photo.id_twitter},
                                     auth=self.auth)
+        self.db.post_photo(photo.id_flickr)
+
         return json.loads(created_post.content)["id"]
 
     def get_users_posts(self, amount):
