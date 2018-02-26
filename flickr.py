@@ -1,7 +1,9 @@
 import collections
 import random
+from typing import Dict
 from xml.etree import ElementTree
 
+from data_base import DataBase
 from environment_variables import get_env
 from photo import Photo
 from request import request
@@ -15,11 +17,11 @@ class Flickr:
     get_pictures = endpoint("https://api.flickr.com/services/rest", "flickr.people.getPublicPhotos", "POST")
     get_picture = endpoint("https://farm{}.staticflickr.com/{}/{}_{}.jpg", "", "GET")
 
-    def __init__(self, database, requester=request):
+    def __init__(self, database: DataBase, requester=request):
         self.request = requester
         self.db = database
 
-    def get_photos(self):
+    def get_photos(self) -> Dict[str, Photo]:
         response = self.request(method_type=self.get_pictures.type,
                                 url=self.get_pictures.url,
                                 payload={"method": self.get_pictures.method,
@@ -27,17 +29,19 @@ class Flickr:
                                          "user_id": self.user_id}
                                 )
         result_photos = {}
-        for tag in ElementTree.fromstring(response.text)[0]:
+        photos = ElementTree.fromstring(response.text)
+        for tag in photos.iter('photo'):
             self.db.add_photo(id_photo=tag.attrib["id"])
-            photo = Photo(id=tag.attrib["id"])
-            photo.farm = tag.attrib["farm"]
-            photo.server = tag.attrib["server"]
-            photo.secret = tag.attrib["secret"]
-            photo.title = tag.attrib["title"]
+            photo = Photo(id_flickr=tag.attrib["id"],
+                          farm=tag.attrib["farm"],
+                          server=tag.attrib["server"],
+                          secret=tag.attrib["secret"],
+                          title=tag.attrib["title"])
             result_photos[photo.id_flickr] = photo
+
         return result_photos
 
-    def get_photo(self, photo):
+    def get_photo(self, photo: Photo) -> Photo:
         response = self.request(method_type=self.get_picture.type,
                                 url=self.get_picture.url.format(photo.farm,
                                                                 photo.server,
@@ -46,5 +50,5 @@ class Flickr:
         photo.data = response.content
         return photo
 
-    def random_photo(self, pictures):
+    def random_photo(self, pictures: Dict) -> Photo:
         return pictures[random.choice(self.db.unposted_photos())]

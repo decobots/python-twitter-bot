@@ -1,11 +1,12 @@
 import sqlite3
+from typing import List
+from photo import Photo
 
 
 class DataBase:
-    def __init__(self, file="test.db"):
-        self.file = file
-        self.db = sqlite3.connect(self.file)
-        self.db.cursor()
+    def __init__(self, file_path="test.db"):
+        self.file_path = file_path
+        self.db = sqlite3.connect(self.file_path)
         self.db.execute('''CREATE TABLE IF NOT EXISTS photos_list 
                         (id VARCHAR, 
                         posted BOOL, 
@@ -21,7 +22,7 @@ class DataBase:
         self.db.execute("INSERT OR IGNORE INTO photos_list(id, posted) VALUES(?,0)", (id_photo,))
         self.db.commit()
 
-    def unposted_photos(self):
+    def unposted_photos(self) -> List[Photo]:
         a = self.db.execute("SELECT id FROM photos_list WHERE posted = 0")
         return [row[0] for row in a]
 
@@ -29,13 +30,13 @@ class DataBase:
     #     a = self.db.execute("SELECT id FROM photos_list WHERE posted = 1")
     #     return [row[0] for row in a]
 
-    def post_photo(self, post_id):
+    def post_photo(self, post_id: str):
         self.db.execute("UPDATE photos_list SET posted = 1 WHERE id = ?", (post_id,))
         self.db.commit()
 
-    # def delete_photo(self, photo_id):
-    #     self.db.execute("DELETE FROM photos_list WHERE id = ? ", (photo_id,))
-    #     self.db.commit()
+    def delete_photo_from_twitter(self, post_id:str):
+        self.db.execute("UPDATE photos_list SET posted = 0 WHERE id = ?", (post_id,))
+        self.db.commit()
 
     def _print_db(self):
         a = self.db.execute("SELECT * FROM photos_list")

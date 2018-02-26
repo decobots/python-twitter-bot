@@ -2,7 +2,7 @@ import requests
 from xml.etree import ElementTree
 
 
-def request(method_type, url, **kwargs):
+def request(method_type:str, url:str, **kwargs):
     params = None
     data = None
     if method_type == "GET":
