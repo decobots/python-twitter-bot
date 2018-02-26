@@ -1,7 +1,7 @@
 from unittest import mock
 
-from flickr import Flickr
-from photo import Photo
+from src.flickr import Flickr
+from src.photo import Photo
 
 
 def test_flickr_get_photos_list_correct():

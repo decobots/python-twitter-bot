@@ -2,9 +2,9 @@ import random
 
 import pytest
 
-from data_base import DataBase
-from photo import Photo
-from twitter import Twitter
+from src.data_base import DataBase
+from src.photo import Photo
+from src.twitter import Twitter
 
 
 @pytest.fixture

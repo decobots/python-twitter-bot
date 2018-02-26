@@ -3,8 +3,8 @@ from unittest import mock
 
 import pytest
 
-from photo import Photo
-from twitter import Twitter
+from src.photo import Photo
+from src.twitter import Twitter
 
 
 @pytest.fixture
