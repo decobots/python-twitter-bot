@@ -3,8 +3,8 @@ from unittest import mock
 
 import pytest
 
-from twitter import Twitter
 from photo import Photo
+from twitter import Twitter
 
 
 @pytest.fixture
@@ -65,15 +65,16 @@ def test_create_post_text_only_correct():
     result = twitter.create_post(status="Test_status")
     assert result == 243145735212777472
 
-    def test_create_post_photo_only_correct(photo):
-        requester = mock.MagicMock()
-        requester.return_value = mock.MagicMock
-        requester.return_value.content = json.dumps({"id": 243145735212777472})
-        db = mock.MagicMock()
-        db.post_photo = mock.MagicMock()
-        twitter = Twitter(requester=requester, database=db)
-        result = twitter.create_post(photo=photo)
-        assert result == 243145735212777472
+
+def test_create_post_photo_only_correct(photo):
+    requester = mock.MagicMock()
+    requester.return_value = mock.MagicMock
+    requester.return_value.content = json.dumps({"id": 243145735212777472})
+    db = mock.MagicMock()
+    db.post_photo = mock.MagicMock()
+    twitter = Twitter(requester=requester, database=db)
+    result = twitter.create_post(photo=photo)
+    assert result == 243145735212777472
 
 
 def test_get_users_posts_correct():
@@ -96,4 +97,4 @@ def test_delete_tweet_by_id_correct():
     db = mock.MagicMock()
     db.delete_photo_from_twitter = mock.MagicMock()
     twitter = Twitter(requester=mock.MagicMock(), database=db)
-    twitter.delete_tweet_by_id(tweet_id=123456)
+    twitter._delete_tweet_by_id(tweet_id=123456)

@@ -1,8 +1,9 @@
-import requests
 from xml.etree import ElementTree
 
+import requests
 
-def request(method_type:str, url:str, **kwargs):
+
+def request(method_type: str, url: str, **kwargs):
     params = None
     data = None
     if method_type == "GET":

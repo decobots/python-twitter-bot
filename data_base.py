@@ -1,5 +1,6 @@
 import sqlite3
 from typing import List
+
 from photo import Photo
 
 
@@ -34,7 +35,7 @@ class DataBase:
         self.db.execute("UPDATE photos_list SET posted = 1 WHERE id = ?", (post_id,))
         self.db.commit()
 
-    def delete_photo_from_twitter(self, post_id:str):
+    def delete_photo_from_twitter(self, post_id: str):
         self.db.execute("UPDATE photos_list SET posted = 0 WHERE id = ?", (post_id,))
         self.db.commit()
 
