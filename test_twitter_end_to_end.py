@@ -1,60 +1,69 @@
+import random
+
 import pytest
 
+from data_base import DataBase
+from photo import Photo
 from twitter import Twitter
 
 
 @pytest.fixture
-def local_picture():
+def photo():
+    photo_mock = Photo(id_flickr="2636", secret="a123456",
+                       server="2",
+                       title="test_04",
+                       farm="5")
     with open("test_pic.jpg", "br") as f:
-        return f.read()
+        photo_mock.data = f.read()
 
-
-@pytest.fixture
-def picture_id(local_picture):
-    twitter = Twitter()
-    pic_id, pic_name = twitter.upload_photo("test", local_picture)
-    return pic_id
+    return photo_mock
 
 
 @pytest.fixture
 def tweet_id():
-    twitter = Twitter()
-    tw_id = twitter.create_post("test")
+    db = DataBase(file_path="end_to_end_test.db")
+    twitter = Twitter(database=db)
+    tw_id = twitter.create_post(f"test{random.random()}")
     return tw_id
 
 
 @pytest.mark.end_to_end
-def test_upload_photo_correct(local_picture):
-    twitter = Twitter()
-    returned_id, returned_name = twitter.upload_photo(name="Test_name", data=local_picture)
-    assert returned_id is not None
-    assert returned_name is not None
-    assert isinstance(returned_id, int)
-    assert isinstance(returned_name, str)
-    assert returned_id != ''
-    assert returned_name != ''
+def test_upload_photo_correct(photo):
+    db = DataBase(file_path="end_to_end_test.db")
+    twitter = Twitter(database=db)
+    result = twitter.upload_photo(photo)
+    assert isinstance(result, Photo)
+    assert isinstance(result.id_twitter, int)
+    assert result.id_twitter != ''
 
 
 @pytest.mark.end_to_end
-def test_upload_photo_incorrect(local_picture):
-    twitter = Twitter()
-    not_picture = "string"
+def test_upload_photo_incorrect(photo):
+    db = DataBase(file_path="end_to_end_test.db")
+    twitter = Twitter(database=db)
+    photo.data = "string"
     with pytest.raises(TypeError):
-        twitter.upload_photo(name="Test_name", data=not_picture)
+        twitter.upload_photo(photo)
 
 
 @pytest.mark.end_to_end
-def test_create_post_correct(picture_id):
-    twitter = Twitter()
-    result = twitter.create_post(status="Test_status", id_of_photo=picture_id)
+def test_create_post_correct(photo):
+    db = DataBase(file_path="end_to_end_test.db")
+    twitter = Twitter(database=db)
+    result = twitter.create_post(status=photo.title, photo=photo)
+    assert isinstance(result, int)
+    result = twitter.create_post(status="test")
+    assert isinstance(result, int)
+    result = twitter.create_post(photo=photo)
     assert isinstance(result, int)
 
 
 @pytest.mark.end_to_end
 def test_get_users_posts_correct():
-    twitter = Twitter()
+    db = DataBase(file_path="end_to_end_test.db")
+    twitter = Twitter(database=db)
     number_of_posts = 10
-    result = twitter.get_users_posts(number_of_posts)
+    result = twitter.get_user_posts(number_of_posts)
     assert len(result) == number_of_posts
     for item in result:
         assert isinstance(item, int)
@@ -62,23 +71,26 @@ def test_get_users_posts_correct():
 
 @pytest.mark.end_to_end
 def test_delete_tweet_by_id_correct(tweet_id):
-    twitter = Twitter()
-    twitter.delete_tweet_by_id(tweet_id)
+    db = DataBase(file_path="end_to_end_test.db")
+    twitter = Twitter(database=db)
+    twitter._delete_tweet_by_id(tweet_id)
 
 
 @pytest.mark.end_to_end
 def setup_module():
-    twitter = Twitter()
-    posts = twitter.get_users_posts(100)
+    db = DataBase(file_path="end_to_end_test.db")
+    twitter = Twitter(database=db)
+    posts = twitter.get_user_posts(100)
     for post in posts:
-        twitter.delete_tweet_by_id(post)
+        twitter._delete_tweet_by_id(post)
     for n in range(0, 13):
         twitter.create_post(status=n)
 
 
 @pytest.mark.end_to_end
 def teardown_module():
-    twitter = Twitter()
-    posts = twitter.get_users_posts(100)
+    db = DataBase(file_path="end_to_end_test.db")
+    twitter = Twitter(database=db)
+    posts = twitter.get_user_posts(100)
     for post in posts:
-        twitter.delete_tweet_by_id(post)
+        twitter._delete_tweet_by_id(post)
