@@ -5,15 +5,18 @@ import pytest
 
 from src.photo import Photo
 from src.twitter import Twitter
+import os
 
 
 @pytest.fixture
 def photo():
+    print("----------------------------------------------------")
+    print(os.getcwd())
     photo_mock = Photo(id_flickr="2636", secret="a123456",
                        server="2",
                        title="test_04",
                        farm="5")
-    with open("test_pic.jpg", "br") as f:
+    with open(os.path.join(os.getcwd(),"test_pic.jpg"), "br") as f:
         photo_mock.data = f.read()
 
     return photo_mock
