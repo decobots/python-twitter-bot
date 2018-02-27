@@ -1,3 +1,4 @@
+import base64
 from unittest import mock
 
 from src.flickr import Flickr
@@ -42,7 +43,7 @@ def test_flickr_get_photo_correct():
                                    title="test_04",
                                    farm="5"))
     assert photo is not None
-    assert photo.data == b"/ff/ff"
+    assert photo.data == base64.b64encode(b"/ff/ff")
 
 
 def test_random_photo_correct():
