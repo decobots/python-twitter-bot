@@ -8,12 +8,6 @@ from src.twitter import Twitter
 
 
 @pytest.fixture
-def local_picture():
-    with open("test_pic.jpg", "br") as f:
-        return f.read()
-
-
-@pytest.fixture
 def photo():
     photo_mock = Photo(id_flickr="2636", secret="a123456",
                        server="2",
