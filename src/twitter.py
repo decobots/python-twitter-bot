@@ -1,4 +1,3 @@
-import base64
 import collections
 import json
 from typing import Any, Optional, List
@@ -29,10 +28,9 @@ class Twitter:
         self.db = database
 
     def upload_photo(self, photo: Photo) -> Photo:
-        data = base64.b64encode(photo.data)
         upload_photo_result = self.request(self.twitter_upload_pic.type,
                                            self.twitter_upload_pic.url,
-                                           payload={"name": photo.title, "media_data": data},
+                                           payload={"name": photo.title, "media_data": photo.data},
                                            auth=self.auth)
         photo.id_twitter = json.loads(upload_photo_result.text)['media_id']
         return photo
