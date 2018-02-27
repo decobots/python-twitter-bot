@@ -5,10 +5,10 @@ from typing import Any, Optional, List
 
 from requests_oauthlib import OAuth1
 
-from data_base import DataBase
-from environment_variables import get_env
-from photo import Photo
-from request import request
+from src.data_base import DataBase
+from src.environment_variables import get_env
+from src.photo import Photo
+from src.request import request
 
 endpoint = collections.namedtuple('endpoint', ["url", "type"])
 

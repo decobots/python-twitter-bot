@@ -1,16 +1,11 @@
 import json
+import os
 from unittest import mock
 
 import pytest
 
-from photo import Photo
-from twitter import Twitter
-
-
-@pytest.fixture
-def local_picture():
-    with open("test_pic.jpg", "br") as f:
-        return f.read()
+from src.photo import Photo
+from src.twitter import Twitter
 
 
 @pytest.fixture
@@ -19,7 +14,7 @@ def photo():
                        server="2",
                        title="test_04",
                        farm="5")
-    with open("test_pic.jpg", "br") as f:
+    with open(os.path.join(os.getcwd(), "tests", "test_pic.jpg"), "br") as f:
         photo_mock.data = f.read()
 
     return photo_mock

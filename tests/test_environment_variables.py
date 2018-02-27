@@ -2,7 +2,7 @@ import os
 
 import pytest
 
-from environment_variables import get_env
+from src.environment_variables import get_env
 
 
 @pytest.fixture

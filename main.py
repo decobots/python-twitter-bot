@@ -1,8 +1,8 @@
 import time
 
-from data_base import DataBase
-from flickr import Flickr
-from twitter import Twitter
+from src.data_base import DataBase
+from src.flickr import Flickr
+from src.twitter import Twitter
 
 if __name__ == "__main__":
     will_be_uploaded_N_photos = 3

@@ -1,11 +1,11 @@
 import sqlite3
 from typing import List
 
-from photo import Photo
+from src.photo import Photo
 
 
 class DataBase:
-    def __init__(self, file_path="test.db"):
+    def __init__(self, file_path="src.test.db"):
         self.file_path = file_path
         self.db = sqlite3.connect(self.file_path)
         self.db.execute('''CREATE TABLE IF NOT EXISTS photos_list 

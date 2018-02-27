@@ -3,10 +3,10 @@ import random
 from typing import Dict
 from xml.etree import ElementTree
 
-from data_base import DataBase
-from environment_variables import get_env
-from photo import Photo
-from request import request
+from src.data_base import DataBase
+from src.environment_variables import get_env
+from src.photo import Photo
+from src.request import request
 
 endpoint = collections.namedtuple('endpoint', ["url", "method", "type"])
 
