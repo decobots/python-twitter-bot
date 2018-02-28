@@ -21,7 +21,7 @@ def photo():
 
 @pytest.fixture
 def tweet_id():
-    db = DataBase(file_path="end_to_end_test.db")
+    db = DataBase(table_name="test_twitter_table")
     twitter = Twitter(database=db)
     tw_id = twitter.create_post(f"test{random.random()}")
     return tw_id
@@ -29,7 +29,7 @@ def tweet_id():
 
 @pytest.mark.end_to_end
 def test_upload_photo_correct(photo):
-    db = DataBase(file_path="end_to_end_test.db")
+    db = DataBase(table_name="test_twitter_table")
     twitter = Twitter(database=db)
     result = twitter.upload_photo(photo)
     assert isinstance(result, Photo)
@@ -39,7 +39,7 @@ def test_upload_photo_correct(photo):
 
 @pytest.mark.end_to_end
 def test_upload_photo_incorrect(photo):
-    db = DataBase(file_path="end_to_end_test.db")
+    db = DataBase(table_name="test_twitter_table")
     twitter = Twitter(database=db)
     photo.data = "string"
     with pytest.raises(TypeError):
@@ -48,7 +48,7 @@ def test_upload_photo_incorrect(photo):
 
 @pytest.mark.end_to_end
 def test_create_post_correct(photo):
-    db = DataBase(file_path="end_to_end_test.db")
+    db = DataBase(table_name="test_twitter_table")
     twitter = Twitter(database=db)
     result = twitter.create_post(status=photo.title, photo=photo)
     assert isinstance(result, int)
@@ -60,7 +60,7 @@ def test_create_post_correct(photo):
 
 @pytest.mark.end_to_end
 def test_get_users_posts_correct():
-    db = DataBase(file_path="end_to_end_test.db")
+    db = DataBase(table_name="test_twitter_table")
     twitter = Twitter(database=db)
     number_of_posts = 10
     result = twitter.get_user_posts(number_of_posts)
@@ -71,14 +71,14 @@ def test_get_users_posts_correct():
 
 @pytest.mark.end_to_end
 def test_delete_tweet_by_id_correct(tweet_id):
-    db = DataBase(file_path="end_to_end_test.db")
+    db = DataBase(table_name="test_twitter_table")
     twitter = Twitter(database=db)
     twitter._delete_tweet_by_id(tweet_id)
 
 
 @pytest.mark.end_to_end
 def setup_module():
-    db = DataBase(file_path="end_to_end_test.db")
+    db = DataBase(table_name="test_twitter_table")
     twitter = Twitter(database=db)
     posts = twitter.get_user_posts(100)
     for post in posts:
@@ -89,7 +89,7 @@ def setup_module():
 
 @pytest.mark.end_to_end
 def teardown_module():
-    db = DataBase(file_path="end_to_end_test.db")
+    db = DataBase(table_name="test_twitter_table")
     twitter = Twitter(database=db)
     posts = twitter.get_user_posts(100)
     for post in posts:

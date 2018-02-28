@@ -16,4 +16,6 @@ if __name__ == "__main__":
             photo = flickr.get_photo(photo)
             photo = twitter.upload_photo(photo)
             twitter.create_post(photo.title, photo)
+            print("_______________________________________________________________", _)
+            db._print_db_posted()
             time.sleep(2)

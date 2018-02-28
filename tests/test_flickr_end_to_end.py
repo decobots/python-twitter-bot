@@ -10,7 +10,7 @@ def test_flickr_get_photos_list_correct():
     """
     check that returned value is list and attributes farm, server, id, secret exist for each list item
     """
-    db = DataBase(file_path="tests.end_to_end_test.db")
+    db = DataBase(table_name="test_flickr_table")
     flickr = Flickr(database=db)
     result = flickr.get_photos()
     assert isinstance(result, dict)
@@ -29,7 +29,7 @@ def test_flickr_get_photo_correct():
     """
     check that returned value exist and have types bytes and string
     """
-    db = DataBase(file_path="tests.end_to_end_test.db")
+    db = DataBase(table_name="test_flickr_table")
     flickr = Flickr(database=db)
     photo = flickr.get_photo(Photo(id_flickr="24003882568",
                                    secret="ca14f88bec",
@@ -43,7 +43,7 @@ def test_flickr_get_photo_correct():
 
 @pytest.mark.end_to_end
 def test_flickr_get_photo_incorrect():
-    db = DataBase(file_path="tests.end_to_end_test.db")
+    db = DataBase(table_name="test_flickr_table")
     flickr = Flickr(database=db)
     with pytest.raises(ValueError):
         flickr.get_photo(Photo(id_flickr="24003882568",
