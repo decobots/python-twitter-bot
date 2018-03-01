@@ -7,7 +7,7 @@ from src.twitter import Twitter
 if __name__ == "__main__":
     will_be_uploaded_N_photos = 3
 
-    with DataBase() as db:
+    with DataBase(photos_table_name="photos_list") as db:
         twitter = Twitter(database=db)
         flickr = Flickr(database=db)
         pictures = flickr.get_photos()
@@ -16,4 +16,6 @@ if __name__ == "__main__":
             photo = flickr.get_photo(photo)
             photo = twitter.upload_photo(photo)
             twitter.create_post(photo.title, photo)
+            print("_______________________________________________________________", _)
+            db._print_db_posted()
             time.sleep(2)
