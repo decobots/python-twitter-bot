@@ -4,74 +4,79 @@ from psycopg2 import sql
 
 from src.data_base import DataBase
 
-
-@pytest.fixture
-def table_name():
-    return "test_data_base"
+TABLE_NAME = "test_data_base"
+TEST_IDS = "42", "43", "44"
 
 
-@pytest.fixture
-def db(table_name):
-    database = DataBase(table_name)
+@pytest.fixture(scope="module")
+def db():
+    database = DataBase(TABLE_NAME)
     yield database
-    database.connection.close()
+    database.close()
 
 
 @pytest.fixture
-def test_ids():
-    return "42", "43", "44"
+def empty_table(db):
+    yield db
+    s = sql.SQL("DELETE FROM {}").format(sql.Identifier(TABLE_NAME))
+    db.cursor.execute(s)
+    db.connection.commit()
 
 
-def test_db_context_manager(table_name):
-    with DataBase(table_name) as db:
-        assert db.table_name == table_name
+@pytest.fixture
+def table_with_test_data(db):
+    for t_id in TEST_IDS:  # add photos
+        db.add_photo(t_id)
+    yield db
+    s = sql.SQL("DELETE FROM {}").format(sql.Identifier(TABLE_NAME))
+    db.cursor.execute(s)
+    db.connection.commit()
+
+
+def test_db_context_manager():
+    with DataBase(TABLE_NAME) as db:
+        assert db.photos_table_name == TABLE_NAME
         assert isinstance(db.connection, psycopg2.extensions.connection)
         assert isinstance(db.cursor, psycopg2.extensions.cursor)
-        assert db.cursor.closed is False
-        assert db.connection.closed == 0
+        assert not db.cursor.closed
+        assert not db.connection.closed
 
-    assert db.cursor.closed is True
-    assert db.connection.closed == 1
-
-
-def test_add_photo(db, table_name, test_ids):
-    test_id = test_ids[0]
-    db.add_photo(test_id)
-    db.cursor.execute(sql.SQL("SELECT * FROM {} WHERE id = %s").format(sql.Identifier(table_name)), (test_id,))
-    assert db.cursor.fetchall() == [(test_id, False)]
-
-    db.add_photo(test_id)
-    db.cursor.execute(sql.SQL("SELECT * FROM {} WHERE id = %s").format(sql.Identifier(table_name)), (test_id,))
-    assert db.cursor.fetchall() == [(test_id, False)]  # duplicate id's handled correctly
-    for t_id in test_ids:
-        db.add_photo(t_id)
-    db.cursor.execute(sql.SQL("SELECT * FROM {}").format(sql.Identifier(table_name)))
-    assert db.cursor.fetchall() == [(p_id, False) for p_id in test_ids]
+    assert db.cursor.closed
+    assert db.connection.closed
 
 
-def test_post_photo(db, table_name, test_ids):
-    db.post_photo(test_ids[0])
-    db.cursor.execute(sql.SQL("SELECT * FROM {}").format(sql.Identifier(table_name)))
-    list_ids = [(p_id, False) for p_id in test_ids]
-    list_ids[0] = (test_ids[0], True)
-    assert set(db.cursor.fetchall()) == set(list_ids)
+def test_add_photo(empty_table):
+    for t_id in TEST_IDS:
+        empty_table.add_photo(t_id)
+    empty_table.cursor.execute(sql.SQL("SELECT * FROM {}").format(sql.Identifier(TABLE_NAME)))
+    assert empty_table.cursor.fetchall() == [(p_id, False) for p_id in TEST_IDS]
 
 
-def test_unposted_photos(db, test_ids):
-    unposted = db.unposted_photos()
-    assert unposted == list(test_ids[1:])
+def test_add_photo_duplicate(empty_table):
+    for t_id in TEST_IDS:  # add photos
+        empty_table.add_photo(t_id)
+    for t_id in TEST_IDS:  # add duplicates
+        empty_table.add_photo(t_id)
+    empty_table.cursor.execute(sql.SQL("SELECT * FROM {}").format(sql.Identifier(TABLE_NAME)))
+    assert empty_table.cursor.fetchall() == [(p_id, False) for p_id in TEST_IDS]
 
 
-def test_unposted_photos_no_left(db, test_ids):
-    for t_id in test_ids:
-        db.post_photo(t_id)
-    unposted = db.unposted_photos()
+def test_post_photo(table_with_test_data):
+    table_with_test_data.post_photo(TEST_IDS[0])
+    table_with_test_data.cursor.execute(sql.SQL("SELECT * FROM {}").format(sql.Identifier(TABLE_NAME)))
+    list_ids = [(p_id, False) for p_id in TEST_IDS]
+    list_ids[0] = (TEST_IDS[0], True)
+    assert set(table_with_test_data.cursor.fetchall()) == set(list_ids)
+
+
+def test_unposted_photos(table_with_test_data):
+    table_with_test_data.post_photo(TEST_IDS[0])  # preparing test data
+    unposted = table_with_test_data.unposted_photos()
+    assert unposted == list(TEST_IDS[1:])
+
+
+def test_unposted_photos_no_left(table_with_test_data):
+    for t_id in TEST_IDS:  # preparing test data
+        table_with_test_data.post_photo(t_id)
+    unposted = table_with_test_data.unposted_photos()
     assert unposted == []
-
-
-def teardown_module():
-    name = table_name()
-    with DataBase(name) as db:
-        s = sql.SQL("DROP TABLE IF EXISTS {}").format(sql.Identifier(name))
-        db.cursor.execute(s)
-        db.connection.commit()
