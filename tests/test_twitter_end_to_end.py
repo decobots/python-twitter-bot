@@ -1,5 +1,3 @@
-import random
-
 import pytest
 
 from src.data_base import DataBase
@@ -7,24 +5,24 @@ from src.photo import Photo
 from src.twitter import Twitter
 
 
-@pytest.fixture
-def photo():
-    photo_mock = Photo(id_flickr="2636", secret="a123456",
-                       server="2",
-                       title="test_04",
-                       farm="5")
-    with open("test_pic.jpg", "br") as f:
-        photo_mock.data = f.read()
-
-    return photo_mock
-
-
-@pytest.fixture
-def tweet_id():
+@pytest.mark.end_to_end
+def setup_module():
     db = DataBase(photos_table_name="test_twitter_table")
     twitter = Twitter(database=db)
-    tw_id = twitter.create_post(f"test{random.random()}")
-    return tw_id
+    posts = twitter.get_user_posts(100)
+    for post in posts:
+        twitter._delete_tweet_by_id(post)
+    for n in range(0, 13):
+        twitter.create_post(status=n)
+
+
+@pytest.mark.end_to_end
+def teardown_module():
+    db = DataBase(photos_table_name="test_twitter_table")
+    twitter = Twitter(database=db)
+    posts = twitter.get_user_posts(300)
+    for post in posts:
+        twitter._delete_tweet_by_id(post)
 
 
 @pytest.mark.end_to_end
@@ -74,23 +72,3 @@ def test_delete_tweet_by_id_correct(tweet_id):
     db = DataBase(photos_table_name="test_twitter_table")
     twitter = Twitter(database=db)
     twitter._delete_tweet_by_id(tweet_id)
-
-
-@pytest.mark.end_to_end
-def setup_module():
-    db = DataBase(photos_table_name="test_twitter_table")
-    twitter = Twitter(database=db)
-    posts = twitter.get_user_posts(100)
-    for post in posts:
-        twitter._delete_tweet_by_id(post)
-    for n in range(0, 13):
-        twitter.create_post(status=n)
-
-
-@pytest.mark.end_to_end
-def teardown_module():
-    db = DataBase(photos_table_name="test_twitter_table")
-    twitter = Twitter(database=db)
-    posts = twitter.get_user_posts(300)
-    for post in posts:
-        twitter._delete_tweet_by_id(post)

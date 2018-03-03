@@ -7,6 +7,8 @@ from src.data_base import DataBase
 from src.environment_variables import get_env
 from src.photo import Photo
 from src.request import request
+import logging
+logging.basicConfig(filename="log.log", level=logging.INFO)
 
 endpoint = collections.namedtuple('endpoint', ["url", "method", "type"])
 
@@ -20,6 +22,7 @@ class Flickr:
     def __init__(self, database: DataBase, requester=request):
         self.request = requester
         self.db = database
+        logging.info(self.__class__)
 
     def get_photos(self) -> Dict[str, Photo]:
         response = self.request(method_type=self.get_pictures.type,

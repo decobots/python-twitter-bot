@@ -1,10 +1,23 @@
 import json
+import logging
 from unittest import mock
 
 import pytest
 
+from src.logger import init_logging
 from src.photo import Photo
 from src.twitter import Twitter
+
+log = logging.getLogger()
+
+
+def setup_module():
+    init_logging("test_log.log")
+    log.info("unit test Twitter started")
+
+
+def teardown_module():
+    log.info("unit test Twitter ended")
 
 
 def test_upload_photo_correct(photo, requester, db):

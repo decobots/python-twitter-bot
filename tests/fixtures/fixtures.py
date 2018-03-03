@@ -1,9 +1,12 @@
 import os
+import random
 from unittest import mock
 
 import pytest
 
+from src.data_base import DataBase
 from src.photo import Photo
+from src.twitter import Twitter
 
 
 @pytest.fixture
@@ -12,7 +15,8 @@ def photo():
                        server="2",
                        title="test_04",
                        farm="5")
-    with open(os.path.join(os.getcwd(), "tests", "test_pic.jpg"), "br") as f:
+    pic_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "test_pic.jpg")
+    with open(pic_path, "br") as f:
         photo_mock.data = f.read()
 
     return photo_mock
@@ -20,11 +24,22 @@ def photo():
 
 @pytest.fixture
 def requester():
-    requester = mock.MagicMock()
-    requester.return_value = mock.MagicMock()
-    return requester
+    req = mock.MagicMock()
+    req.return_value = mock.MagicMock()
+    req.__name__ = "mock_requester"
+    return req
+
 
 @pytest.fixture
 def db():
-    db = mock.MagicMock()
-    return db
+    dbs = mock.MagicMock()
+    dbs.photos_table_name = "mock_table"
+    return dbs
+
+
+@pytest.fixture
+def tweet_id():
+    dbs = DataBase(photos_table_name="test_twitter_table")
+    twitter = Twitter(database=dbs)
+    tw_id = twitter.create_post(f"test{random.random()}")
+    return tw_id

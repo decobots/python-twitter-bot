@@ -11,6 +11,11 @@ from src.request import request
 
 endpoint = collections.namedtuple('endpoint', ["url", "type"])
 
+from src.logger import init_logging
+import logging
+
+log = logging.getLogger()
+
 
 class Twitter:
     twitter_upload_pic = endpoint("https://upload.twitter.com/1.1/media/upload.json", "POST")
@@ -26,13 +31,17 @@ class Twitter:
     def __init__(self, database, requester=request):
         self.request = requester
         self.db = database
+        log.debug(
+            f"class Twitter initialized with requester={requester.__name__} and table={database.photos_table_name}")
 
     def upload_photo(self, photo: Photo) -> Photo:
+
         upload_photo_result = self.request(self.twitter_upload_pic.type,
                                            self.twitter_upload_pic.url,
                                            payload={"name": photo.title, "media_data": photo.data},
                                            auth=self.auth)
         photo.id_twitter = json.loads(upload_photo_result.text)['media_id']
+        log.info(f"Photo with flickr id {photo.id_flickr} uploaded to twitter with id {photo.id_twitter}")
         return photo
 
     def create_post(self, status: Any = "_", photo: Optional[Photo] = None) -> str:
@@ -43,15 +52,18 @@ class Twitter:
                                     auth=self.auth)
         if photo != {} and media_ids:
             self.db.post_photo(photo.id_flickr)
-
-        return json.loads(created_post.content)["id"]
+        result = json.loads(created_post.content)["id"]
+        log.info(f"Post with text {status} and photos {photo} uploaded to twitter with id {result}")
+        return result
 
     def get_user_posts(self, amount: int) -> List[str]:
         get_users_posts_request = self.request(self.twitter_get_users_posts.type,
                                                self.twitter_get_users_posts.url,
                                                payload={"count": amount},
                                                auth=self.auth)
-        return [tweet["id"] for tweet in json.loads(get_users_posts_request.content)]
+        result = [tweet["id"] for tweet in json.loads(get_users_posts_request.content)]
+        log.debug(f"received {len(result)} user messages from twitter")
+        return result
 
     def _delete_tweet_by_id(self, tweet_id: str):
         self.request(self.twitter_delete_tweet_by_id.type,
@@ -59,11 +71,14 @@ class Twitter:
                      auth=self.auth)
         try:
             self.db.delete_photo_from_twitter(post_id=tweet_id)
+            log.debug(f"deleted twitter message with id={tweet_id}")
         except:
-            pass
+            log.exception(f"NOT deleted twitter message with id={tweet_id}")
+
 
 
 if __name__ == '__main__':
-    db = DataBase()
-    t = Twitter(database=db)
-    t.create_post(status="9")
+    init_logging("log.log")
+    with DataBase("twitter") as db:
+        t = Twitter(database=db)
+        t.get_user_posts(1)
