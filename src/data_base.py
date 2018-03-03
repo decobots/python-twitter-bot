@@ -46,7 +46,8 @@ class DataBase:
         with self.connection as connection:
             with suppress(psycopg2.IntegrityError):
                 connection.cursor().execute(
-                    sql.SQL("INSERT INTO {}(id, posted) VALUES(%s, 'FALSE')").format(sql.Identifier(self.photos_table_name)),
+                    sql.SQL("INSERT INTO {}(id, posted) VALUES(%s, 'FALSE')").format(
+                        sql.Identifier(self.photos_table_name)),
                     (id_photo,))
 
     def post_photo(self, post_id: str):
@@ -56,7 +57,8 @@ class DataBase:
                 (post_id,))
 
     def unposted_photos(self) -> List[str]:
-        self.cursor.execute(sql.SQL("SELECT id FROM {} WHERE posted = 'FALSE'").format(sql.Identifier(self.photos_table_name)))
+        self.cursor.execute(
+            sql.SQL("SELECT id FROM {} WHERE posted = 'FALSE'").format(sql.Identifier(self.photos_table_name)))
         return [row[0] for row in self.cursor.fetchall()]
 
     def _print_db(self):
@@ -65,7 +67,8 @@ class DataBase:
             print(r)
 
     def _print_db_posted(self):
-        self.cursor.execute(sql.SQL("SELECT * FROM {} WHERE posted = 'TRUE'").format(sql.Identifier(self.photos_table_name)))
+        self.cursor.execute(
+            sql.SQL("SELECT * FROM {} WHERE posted = 'TRUE'").format(sql.Identifier(self.photos_table_name)))
         for r in self.cursor.fetchall():
             print(r)
 
