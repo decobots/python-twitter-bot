@@ -1,12 +1,19 @@
+import logging
+
 import pytest
 
 from src.data_base import DataBase
+from src.logger import init_logging
 from src.photo import Photo
 from src.twitter import Twitter
+
+log = logging.getLogger()
 
 
 @pytest.mark.end_to_end
 def setup_module():
+    init_logging("test_log.log")
+    log.debug("Twitter end to end test started")
     db = DataBase(photos_table_name="test_twitter_table")
     twitter = Twitter(database=db)
     posts = twitter.get_user_posts(100)
@@ -23,6 +30,7 @@ def teardown_module():
     posts = twitter.get_user_posts(300)
     for post in posts:
         twitter._delete_tweet_by_id(post)
+    log.debug("Twitter end to end test ended")
 
 
 @pytest.mark.end_to_end

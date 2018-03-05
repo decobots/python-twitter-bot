@@ -1,15 +1,42 @@
+import logging
+from functools import wraps
+
 import pytest
 
 from src.data_base import DataBase
 from src.flickr import Flickr
+from src.logger import init_logging
 from src.photo import Photo
+
+log = logging.getLogger()
+
+
+def log_test_name(func):
+    @wraps(func)
+    def decorator(*args, **kwargs):
+        log.debug(f"started {func.__name__}")
+        func(*args, **kwargs)
+        log.debug((f"ended {func.__name__}"))
+
+    return decorator()
+
+
+def setup_module():
+    init_logging("test_log.log")
+    log.debug("Flickr end to end test started")
+
+
+def teardown_module():
+    log.debug("Flickr end to end test ended")
 
 
 @pytest.mark.end_to_end
+@log_test_name
 def test_flickr_get_photos_list_correct():
     """
     check that returned value is list and attributes farm, server, id, secret exist for each list item
     """
+
     db = DataBase(photos_table_name="test_flickr_table")
     flickr = Flickr(database=db)
     result = flickr.get_photos()
@@ -25,6 +52,7 @@ def test_flickr_get_photos_list_correct():
 
 
 @pytest.mark.end_to_end
+@log_test_name
 def test_flickr_get_photo_correct():
     """
     check that returned value exist and have types bytes and string
@@ -42,6 +70,7 @@ def test_flickr_get_photo_correct():
 
 
 @pytest.mark.end_to_end
+@log_test_name
 def test_flickr_get_photo_incorrect():
     db = DataBase(photos_table_name="test_flickr_table")
     flickr = Flickr(database=db)

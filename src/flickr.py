@@ -1,4 +1,5 @@
 import collections
+import logging
 import random
 from typing import Dict
 from xml.etree import ElementTree
@@ -7,10 +8,10 @@ from src.data_base import DataBase
 from src.environment_variables import get_env
 from src.photo import Photo
 from src.request import request
-import logging
-logging.basicConfig(filename="log.log", level=logging.INFO)
 
 endpoint = collections.namedtuple('endpoint', ["url", "method", "type"])
+
+log = logging.getLogger()
 
 
 class Flickr:
@@ -23,6 +24,8 @@ class Flickr:
         self.request = requester
         self.db = database
         logging.info(self.__class__)
+        log.debug(
+            f"class Flickr initialized with requester={requester.__name__} and table={database.photos_table_name}")
 
     def get_photos(self) -> Dict[str, Photo]:
         response = self.request(method_type=self.get_pictures.type,
@@ -41,7 +44,7 @@ class Flickr:
                           secret=tag.attrib["secret"],
                           title=tag.attrib["title"])
             result_photos[photo.id_flickr] = photo
-
+        log.info(f"received {len(result_photos)} from flickr")
         return result_photos
 
     def get_photo(self, photo: Photo) -> Photo:
@@ -51,7 +54,10 @@ class Flickr:
                                                                 photo.id_flickr,
                                                                 photo.secret))
         photo.data = response.content
+        log.info(f"received data for photo with flickr id = {photo.id_flickr}")
         return photo
 
     def random_photo(self, pictures: Dict) -> Photo:
-        return pictures[random.choice(self.db.unposted_photos())]
+        result = pictures[random.choice(self.db.unposted_photos())]
+        log.info(f"selected random photo {result.id_flickr}")
+        return result

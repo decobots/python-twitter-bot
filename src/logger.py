@@ -6,7 +6,8 @@ def init_logging(filename):
     log_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), filename)
     log = logging.getLogger()
     handler = logging.FileHandler(filename=log_path)
-    formatter = logging.Formatter(fmt="%(asctime)s:%(levelname)s: %(message)s")
+    formatter = logging.Formatter(
+        fmt="%(name)s ==>  %(asctime)s:%(levelname)s: %(module)s: %(funcName)s:  %(message)s")
     log.addHandler(handler)
     handler.setFormatter(formatter)
     log.setLevel(logging.DEBUG)
@@ -14,3 +15,4 @@ def init_logging(filename):
     logging.getLogger("requests").setLevel(logging.WARNING)
     logging.getLogger("oauthlib").setLevel(logging.WARNING)
     logging.getLogger("requests_oauthlib.oauth1_auth").setLevel(logging.WARNING)
+    logging.getLogger("chardet").setLevel(logging.WARNING)

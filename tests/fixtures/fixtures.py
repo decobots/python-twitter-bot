@@ -3,6 +3,7 @@ import random
 from unittest import mock
 
 import pytest
+from psycopg2 import sql
 
 from src.data_base import DataBase
 from src.photo import Photo
@@ -43,3 +44,32 @@ def tweet_id():
     twitter = Twitter(database=dbs)
     tw_id = twitter.create_post(f"test{random.random()}")
     return tw_id
+
+
+TABLE_NAME = "test_data_base"
+TEST_IDS = "42", "43", "44"
+
+
+@pytest.fixture(scope="module")
+def db():
+    database = DataBase(TABLE_NAME)
+    yield database
+    database.close()
+
+
+@pytest.fixture
+def empty_table(db):
+    yield db
+    s = sql.SQL("DELETE FROM {}").format(sql.Identifier(TABLE_NAME))
+    db.cursor.execute(s)
+    db.connection.commit()
+
+
+@pytest.fixture
+def table_with_test_data(db):
+    for t_id in TEST_IDS:  # add photos
+        db.add_photo(t_id)
+    yield db
+    s = sql.SQL("DELETE FROM {}").format(sql.Identifier(TABLE_NAME))
+    db.cursor.execute(s)
+    db.connection.commit()

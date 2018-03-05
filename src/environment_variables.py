@@ -8,4 +8,3 @@ def get_env(name: str) -> str:
     elif value == "":
         raise ValueError(f"global variable {name} could not be empty string")
     return value
- 
