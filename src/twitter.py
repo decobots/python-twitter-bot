@@ -50,11 +50,11 @@ class Twitter:
                                     self.twitter_create_post.url,
                                     payload={"status": status, "media_ids": media_ids},
                                     auth=self.auth)
+        id_of_post = json.loads(created_post.content)["id"]
         if photo != {} and media_ids:
-            self.db.post_photo(photo.id_flickr)
-        result = json.loads(created_post.content)["id"]
-        log.info(f"Post with text '{status}' and photos '{photo}' uploaded to twitter with id '{result}'")
-        return result
+            self.db.post_photo(photo_id=photo.id_flickr, post_id=id_of_post)
+        log.info(f"Post with text '{status}' and photos '{photo}' uploaded to twitter with id '{id_of_post}'")
+        return id_of_post
 
     def get_user_posts(self, amount: int) -> List[str]:
         get_users_posts_request = self.request(self.twitter_get_users_posts.type,
@@ -71,9 +71,9 @@ class Twitter:
                      auth=self.auth)
         try:
             self.db.delete_photo_from_twitter(post_id=tweet_id)
-            log.debug(f"deleted twitter message with id '{tweet_id}'")
+            log.debug(f"deleted twitter message with id '{tweet_id}', and photos marked as unposted")
         except:
-            log.exception(f"NOT deleted twitter message with id '{tweet_id}'")
+            log.debug(f"deleted twitter message with id '{tweet_id}', NO photos marked as unposted")
 
 
 if __name__ == '__main__':

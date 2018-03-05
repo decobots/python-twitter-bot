@@ -1,5 +1,4 @@
 import logging
-from functools import wraps
 
 import pytest
 
@@ -7,25 +6,20 @@ from src.data_base import DataBase
 from src.flickr import Flickr
 from src.logger import init_logging
 from src.photo import Photo
+from tests.decorators import log_test_name
 
 log = logging.getLogger()
 
 
-def log_test_name(func):
-    @wraps(func)
-    def decorator(*args, **kwargs):
-        log.debug(f"started {func.__name__}")
-        func(*args, **kwargs)
-        log.debug((f"ended {func.__name__}"))
-
-    return decorator()
-
-
+@pytest.mark.end_to_end
+@log_test_name
 def setup_module():
     init_logging("test_log.log")
     log.debug("Flickr end to end test started")
 
 
+@pytest.mark.end_to_end
+@log_test_name
 def teardown_module():
     log.debug("Flickr end to end test ended")
 

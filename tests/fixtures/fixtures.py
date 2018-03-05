@@ -1,5 +1,4 @@
 import os
-import random
 from unittest import mock
 
 import pytest
@@ -7,7 +6,15 @@ from psycopg2 import sql
 
 from src.data_base import DataBase
 from src.photo import Photo
-from src.twitter import Twitter
+
+
+@pytest.fixture()
+def global_variable():
+    key = "TEST_VARIABLE"
+    value = "TEST_VALUE"
+    os.environ[key] = value
+    yield key, value
+    os.environ.pop(key)
 
 
 @pytest.fixture
@@ -36,14 +43,6 @@ def db():
     dbs = mock.MagicMock()
     dbs.photos_table_name = "mock_table"
     return dbs
-
-
-@pytest.fixture
-def tweet_id():
-    dbs = DataBase(photos_table_name="test_twitter_table")
-    twitter = Twitter(database=dbs)
-    tw_id = twitter.create_post(f"test{random.random()}")
-    return tw_id
 
 
 TABLE_NAME = "test_data_base"

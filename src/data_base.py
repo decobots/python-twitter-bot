@@ -44,6 +44,7 @@ class DataBase:
             connection.cursor().execute(sql.SQL('''CREATE TABLE IF NOT EXISTS {}
                                                     (id VARCHAR,
                                                     posted BOOL,
+                                                    tweet_id VARCHAR,
                                                     UNIQUE(id) )''').format(sql.Identifier(table_name)))
         log.debug(f"created (if not exist) table {table_name}")
 
@@ -58,11 +59,11 @@ class DataBase:
             except psycopg2.IntegrityError:
                 log.debug(f"photo with flickr id={id_photo} not written to db (already exists)")
 
-    def post_photo(self, post_id: str):
+    def post_photo(self, photo_id: str, post_id: str):
         with self.connection as connection:
             connection.cursor().execute(
-                sql.SQL("UPDATE {} SET posted = 'TRUE' WHERE id = %s").format(sql.Identifier(self.photos_table_name)),
-                (post_id,))
+                sql.SQL("UPDATE {} SET posted = 'TRUE', tweet_id=%s WHERE id = %s").format(
+                    sql.Identifier(self.photos_table_name)), (post_id, photo_id))
             log.info(f"photo with flickr id={post_id} updated, marked as posted to twitter")
 
     def unposted_photos(self) -> List[str]:
@@ -75,10 +76,9 @@ class DataBase:
     def delete_photo_from_twitter(self, post_id: str):
         with self.connection as connection:
             connection.cursor().execute(
-                sql.SQL("UPDATE {} SET posted = 'FALSE' WHERE id = %s").format(
-                    sql.Identifier(self.photos_table_name)),
-                (post_id,))
-            log.info(f"photo with flickr id={post_id} updated, marked as UNposted to twitter")
+                sql.SQL("UPDATE {} SET posted = 'FALSE', tweet_id=%s WHERE tweet_id = %s").format(
+                    sql.Identifier(self.photos_table_name)), (None, post_id))
+            log.info(f"photos from post with twitter id={post_id} updated, marked as UNposted to twitter")
 
     def _print_db(self):
         self.cursor.execute(sql.SQL("SELECT * FROM {}").format(sql.Identifier(self.photos_table_name)))
@@ -94,7 +94,10 @@ class DataBase:
 
 if __name__ == '__main__':
     init_logging("test_log.log")
-    with DataBase() as dbe:
-        print("hi")
+    with DataBase("test_twitter_table") as dbe:
+        # dbe.add_photo("33")
+        # dbe.post_photo("33","67")
         dbe._print_db()
-        print("hi")
+        dbe.delete_photo_from_twitter("67")
+        dbe._print_db()
+

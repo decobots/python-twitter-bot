@@ -33,12 +33,14 @@ def test_db_context_manager():
     assert db.cursor.closed
     assert db.connection.closed
 
+
 @log_test_name
 def test_add_photo(empty_table):
     for t_id in TEST_IDS:
         empty_table.add_photo(t_id)
     empty_table.cursor.execute(sql.SQL("SELECT * FROM {}").format(sql.Identifier(TABLE_NAME)))
-    assert empty_table.cursor.fetchall() == [(p_id, False) for p_id in TEST_IDS]
+    assert empty_table.cursor.fetchall() == [(p_id, False, None) for p_id in TEST_IDS]
+
 
 @log_test_name
 def test_add_photo_duplicate(empty_table):
@@ -47,26 +49,37 @@ def test_add_photo_duplicate(empty_table):
     for t_id in TEST_IDS:  # add duplicates
         empty_table.add_photo(t_id)
     empty_table.cursor.execute(sql.SQL("SELECT * FROM {}").format(sql.Identifier(TABLE_NAME)))
-    assert empty_table.cursor.fetchall() == [(p_id, False) for p_id in TEST_IDS]
+    assert empty_table.cursor.fetchall() == [(p_id, False, None) for p_id in TEST_IDS]
+
 
 @log_test_name
 def test_post_photo(table_with_test_data):
-    log.debug(TEST_IDS[0])
-    table_with_test_data.post_photo(TEST_IDS[0])
+    table_with_test_data.post_photo(TEST_IDS[0], "67")
     table_with_test_data.cursor.execute(sql.SQL("SELECT * FROM {}").format(sql.Identifier(TABLE_NAME)))
-    list_ids = [(p_id, False) for p_id in TEST_IDS]
-    list_ids[0] = (TEST_IDS[0], True)
+    list_ids = [(p_id, False, None) for p_id in TEST_IDS]
+    list_ids[0] = (TEST_IDS[0], True, "67")
     assert set(table_with_test_data.cursor.fetchall()) == set(list_ids)
+
+
+@log_test_name
+def test_delete_photo_from_twitter(table_with_test_data):
+    table_with_test_data.post_photo(TEST_IDS[0], "78")
+    table_with_test_data.delete_photo_from_twitter("78")
+    table_with_test_data.cursor.execute(sql.SQL("SELECT * FROM {}").format(sql.Identifier(TABLE_NAME)))
+    list_ids = [(p_id, False, None) for p_id in TEST_IDS]
+    assert set(table_with_test_data.cursor.fetchall()) == set(list_ids)
+
 
 @log_test_name
 def test_unposted_photos(table_with_test_data):
-    table_with_test_data.post_photo(TEST_IDS[0])  # preparing test data
+    table_with_test_data.post_photo(TEST_IDS[0], "89")  # preparing test data
     unposted = table_with_test_data.unposted_photos()
     assert unposted == list(TEST_IDS[1:])
+
 
 @log_test_name
 def test_unposted_photos_no_left(table_with_test_data):
     for t_id in TEST_IDS:  # preparing test data
-        table_with_test_data.post_photo(t_id)
+        table_with_test_data.post_photo(t_id, "99")
     unposted = table_with_test_data.unposted_photos()
     assert unposted == []
