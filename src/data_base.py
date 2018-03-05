@@ -1,11 +1,14 @@
 import logging
-from typing import List
+
+from contextlib import suppress
+from typing import List, Dict
 from urllib import parse
 
 import psycopg2
 from psycopg2 import sql
 
 from src.environment_variables import get_env
+from src.photo import Photo
 from src.logger import init_logging
 
 log = logging.getLogger()
@@ -48,17 +51,17 @@ class DataBase:
                                                     UNIQUE(id) )''').format(sql.Identifier(table_name)))
         log.debug(f"created (if not exist) table {table_name}")
 
-    def add_photo(self, id_photo: str):
+    def add_photo(self, photos: Dict[str, Photo]):
+        ids = list((photo,) for photo in photos)
         with self.connection as connection:
             try:
-                connection.cursor().execute(
-                    sql.SQL("INSERT INTO {}(id, posted) VALUES(%s, 'FALSE')").format(
-                        sql.Identifier(self.photos_table_name)),
-                    (id_photo,))
-                log.debug(f"photo with flickr id={id_photo} written to db")
+                connection.cursor().executemany(sql.SQL("INSERT INTO {}(id, posted) VALUES(%s, 'FALSE')").format(
+                    sql.Identifier(self.photos_table_name)), ids)
+                log.debug(f"photos written to db")
             except psycopg2.IntegrityError:
-                log.debug(f"photo with flickr id={id_photo} not written to db (already exists)")
+                log.debug(f"photos NOT written to db (already exists)")
 
+    def post_photo(self, post_id: str):
     def post_photo(self, photo_id: str, post_id: str):
         with self.connection as connection:
             connection.cursor().execute(
