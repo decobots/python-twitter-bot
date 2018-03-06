@@ -45,8 +45,7 @@ class Flickr:
                           title=tag.attrib["title"])
             result_photos[photo.id_flickr] = photo
         log.info(f"{len(result_photos)} photos received from flickr")
-        self.db.add_photo(result_photos)
-
+        self.db.add_photos(result_photos)
         return result_photos
 
     def get_photo(self, photo: Photo) -> Photo:

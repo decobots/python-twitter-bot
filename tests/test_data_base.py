@@ -42,14 +42,14 @@ def test_db_context_manager():
 
 
 def test_add_photo(empty_table):
-    empty_table.add_photo(TEST_IDS)
+    empty_table.add_photos(TEST_IDS)
     empty_table.cursor.execute(sql.SQL("SELECT * FROM {}").format(sql.Identifier(TABLE_NAME)))
     assert empty_table.cursor.fetchall() == [(p_id, False, None) for p_id in TEST_IDS]
 
 
 def test_add_photo_duplicate(empty_table):
-    empty_table.add_photo(TEST_IDS)# add photos
-    empty_table.add_photo(TEST_IDS)# add duplicates
+    empty_table.add_photos(TEST_IDS)  # add photos
+    empty_table.add_photos(TEST_IDS)  # add duplicates
     empty_table.cursor.execute(sql.SQL("SELECT * FROM {}").format(sql.Identifier(TABLE_NAME)))
     assert empty_table.cursor.fetchall() == [(p_id, False, None) for p_id in TEST_IDS]
 
