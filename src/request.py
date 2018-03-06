@@ -20,8 +20,8 @@ def request(method_type: str, url: str, **kwargs):
                               data=data,
                               auth=kwargs.get("auth", None))
     if result.status_code != 200:
-        log.exception(f'request status code !=200 (response status code {result.status_code})')
-        raise ValueError("oops ", result.text)
+        log.exception(f'response status code !=200 (response status code {result.status_code})')
+        raise ValueError("esponse status code !=200 ", result.text)
     # TODO move parsing json and xml to request
     try:  # try pars as xml, in other case consider that it is json or bytes
         response_tag = ElementTree.fromstring(result.text)
