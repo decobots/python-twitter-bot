@@ -70,7 +70,7 @@ class DataBase:
         self.cursor.execute(
             sql.SQL("SELECT id FROM {} WHERE posted = 'FALSE'").format(sql.Identifier(self.photos_table_name)))
         result = [row[0] for row in self.cursor.fetchall()]
-        log.debug(f"in database {len(result)} unposted photos")
+        log.debug(f"{len(result)} unposted photos in database")
         return result
 
     def delete_photo_from_twitter(self, post_id: str):
@@ -100,4 +100,3 @@ if __name__ == '__main__':
         dbe._print_db()
         dbe.delete_photo_from_twitter("67")
         dbe._print_db()
-

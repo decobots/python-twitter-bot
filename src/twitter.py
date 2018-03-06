@@ -1,18 +1,17 @@
 import collections
 import json
+import logging
 from typing import Any, Optional, List
 
 from requests_oauthlib import OAuth1
 
 from src.data_base import DataBase
 from src.environment_variables import get_env
+from src.logger import init_logging
 from src.photo import Photo
 from src.request import request
 
 endpoint = collections.namedtuple('endpoint', ["url", "type"])
-
-from src.logger import init_logging
-import logging
 
 log = logging.getLogger()
 
@@ -35,7 +34,7 @@ class Twitter:
             f"class Twitter initialized with requester={requester.__name__} and table={database.photos_table_name}")
 
     def upload_photo(self, photo: Photo) -> Photo:
-
+        log.info("started function Twitter upload_photo")
         upload_photo_result = self.request(self.twitter_upload_pic.type,
                                            self.twitter_upload_pic.url,
                                            payload={"name": photo.title, "media_data": photo.data},
@@ -45,6 +44,7 @@ class Twitter:
         return photo
 
     def create_post(self, status: Any = "_", photo: Optional[Photo] = None) -> str:
+        log.info("started function Twitter create_post")
         media_ids = photo.id_twitter if photo else None
         created_post = self.request(self.twitter_create_post.type,
                                     self.twitter_create_post.url,

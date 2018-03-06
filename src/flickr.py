@@ -23,11 +23,11 @@ class Flickr:
     def __init__(self, database: DataBase, requester=request):
         self.request = requester
         self.db = database
-        logging.info(self.__class__)
         log.debug(
             f"class Flickr initialized with requester={requester.__name__} and table={database.photos_table_name}")
 
     def get_photos(self) -> Dict[str, Photo]:
+        log.info("stared function Flickr get_photos")
         response = self.request(method_type=self.get_pictures.type,
                                 url=self.get_pictures.url,
                                 payload={"method": self.get_pictures.method,
@@ -44,10 +44,11 @@ class Flickr:
                           secret=tag.attrib["secret"],
                           title=tag.attrib["title"])
             result_photos[photo.id_flickr] = photo
-        log.info(f"received {len(result_photos)} from flickr")
+        log.info(f"{len(result_photos)} photos received from flickr")
         return result_photos
 
     def get_photo(self, photo: Photo) -> Photo:
+        log.info("started function Flickr get_photo")
         response = self.request(method_type=self.get_picture.type,
                                 url=self.get_picture.url.format(photo.farm,
                                                                 photo.server,
@@ -58,6 +59,7 @@ class Flickr:
         return photo
 
     def random_photo(self, pictures: Dict) -> Photo:
+        log.info("started function Flickr random_photo")
         result = pictures[random.choice(self.db.unposted_photos())]
         log.info(f"selected random photo {result.id_flickr}")
         return result

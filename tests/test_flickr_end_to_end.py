@@ -4,28 +4,32 @@ import pytest
 
 from src.data_base import DataBase
 from src.flickr import Flickr
-from src.logger import init_logging
+from src.logger import init_logging, log_func_name_ended, log_func_name_started
 from src.photo import Photo
-from tests.decorators import log_test_name
 
 log = logging.getLogger()
 
 
 @pytest.mark.end_to_end
-@log_test_name
 def setup_module():
     init_logging("test_log.log")
     log.debug("Flickr end to end test started")
 
 
 @pytest.mark.end_to_end
-@log_test_name
 def teardown_module():
     log.debug("Flickr end to end test ended")
 
 
+def setup_function(func):
+    log_func_name_started(func)
+
+
+def teardown_function(func):
+    log_func_name_ended(func)
+
+
 @pytest.mark.end_to_end
-@log_test_name
 def test_flickr_get_photos_list_correct():
     """
     check that returned value is list and attributes farm, server, id, secret exist for each list item
@@ -46,7 +50,6 @@ def test_flickr_get_photos_list_correct():
 
 
 @pytest.mark.end_to_end
-@log_test_name
 def test_flickr_get_photo_correct():
     """
     check that returned value exist and have types bytes and string
@@ -64,7 +67,6 @@ def test_flickr_get_photo_correct():
 
 
 @pytest.mark.end_to_end
-@log_test_name
 def test_flickr_get_photo_incorrect():
     db = DataBase(photos_table_name="test_flickr_table")
     flickr = Flickr(database=db)

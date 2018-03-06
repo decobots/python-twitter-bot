@@ -3,25 +3,29 @@ import logging
 from unittest import mock
 
 from src.flickr import Flickr
-from src.logger import init_logging
+from src.logger import init_logging, log_func_name_ended, log_func_name_started
 from src.photo import Photo
-from tests.decorators import log_test_name
 
 log = logging.getLogger()
 
 
-@log_test_name
 def setup_module():
     init_logging("test_log.log")
     log.debug("Flickr test started")
 
 
-@log_test_name
 def teardown_module():
     log.debug("flickr test ended")
 
 
-@log_test_name
+def setup_function(func):
+    log_func_name_started(func)
+
+
+def teardown_function(func):
+    log_func_name_ended(func)
+
+
 def test_flickr_get_photos_list_correct(requester, db):
     """
     check that returned value is dict of photos and attributes farm, server, id, secret exist and correct for each photo
@@ -43,7 +47,6 @@ def test_flickr_get_photos_list_correct(requester, db):
         assert photo_id == photo.id_flickr
 
 
-@log_test_name
 def test_flickr_get_photo_correct(requester, db):
     """
     check that returned value exist and correct
@@ -58,7 +61,6 @@ def test_flickr_get_photo_correct(requester, db):
     assert photo.data == base64.b64encode(b"/ff/ff")
 
 
-@log_test_name
 def test_random_photo_correct(requester, db):
     db.unposted_photos = mock.MagicMock()
     db.unposted_photos.return_value = ['1', '2']

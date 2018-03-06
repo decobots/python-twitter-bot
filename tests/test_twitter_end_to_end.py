@@ -4,16 +4,22 @@ import random
 import pytest
 
 from src.data_base import DataBase
-from src.logger import init_logging
+from src.logger import init_logging, log_func_name_ended, log_func_name_started
 from src.photo import Photo
 from src.twitter import Twitter
-from tests.decorators import log_test_name
 
 log = logging.getLogger()
 
 
+def setup_function(func):
+    log_func_name_started(func)
+
+
+def teardown_function(func):
+    log_func_name_ended(func)
+
+
 @pytest.mark.end_to_end
-@log_test_name
 def setup_module():
     init_logging("test_log.log")
     log.debug("Twitter end to end test started")
@@ -27,7 +33,6 @@ def setup_module():
 
 
 @pytest.mark.end_to_end
-@log_test_name
 def teardown_module():
     db = DataBase(photos_table_name="test_twitter_table")
     twitter = Twitter(database=db)
@@ -38,7 +43,6 @@ def teardown_module():
 
 
 @pytest.mark.end_to_end
-@log_test_name
 def test_upload_photo_correct(photo):
     db = DataBase(photos_table_name="test_twitter_table")
     twitter = Twitter(database=db)
@@ -49,7 +53,6 @@ def test_upload_photo_correct(photo):
 
 
 @pytest.mark.end_to_end
-@log_test_name
 def test_upload_photo_incorrect(photo):
     db = DataBase(photos_table_name="test_twitter_table")
     twitter = Twitter(database=db)
@@ -59,7 +62,6 @@ def test_upload_photo_incorrect(photo):
 
 
 @pytest.mark.end_to_end
-@log_test_name
 def test_create_post_correct(photo):
     db = DataBase(photos_table_name="test_twitter_table")
     twitter = Twitter(database=db)
@@ -72,7 +74,6 @@ def test_create_post_correct(photo):
 
 
 @pytest.mark.end_to_end
-@log_test_name
 def test_get_users_posts_correct():
     db = DataBase(photos_table_name="test_twitter_table")
     twitter = Twitter(database=db)
@@ -84,7 +85,6 @@ def test_get_users_posts_correct():
 
 
 @pytest.mark.end_to_end
-@log_test_name
 def test_delete_tweet_by_id_correct():
     db = DataBase(photos_table_name="test_twitter_table")
     twitter = Twitter(database=db)

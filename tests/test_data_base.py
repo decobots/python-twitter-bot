@@ -4,8 +4,7 @@ import psycopg2
 from psycopg2 import sql
 
 from src.data_base import DataBase
-from src.logger import init_logging
-from tests.decorators import log_test_name
+from src.logger import init_logging, log_func_name_ended, log_func_name_started
 
 log = logging.getLogger()
 TABLE_NAME = "test_data_base"
@@ -21,7 +20,14 @@ def teardown_module():
     log.info("unit test DataBase ended")
 
 
-@log_test_name
+def setup_function(func):
+    log_func_name_started(func)
+
+
+def teardown_function(func):
+    log_func_name_ended(func)
+
+
 def test_db_context_manager():
     with DataBase(TABLE_NAME) as db:
         assert db.photos_table_name == TABLE_NAME
@@ -34,7 +40,6 @@ def test_db_context_manager():
     assert db.connection.closed
 
 
-@log_test_name
 def test_add_photo(empty_table):
     for t_id in TEST_IDS:
         empty_table.add_photo(t_id)
@@ -42,7 +47,6 @@ def test_add_photo(empty_table):
     assert empty_table.cursor.fetchall() == [(p_id, False, None) for p_id in TEST_IDS]
 
 
-@log_test_name
 def test_add_photo_duplicate(empty_table):
     for t_id in TEST_IDS:  # add photos
         empty_table.add_photo(t_id)
@@ -52,7 +56,6 @@ def test_add_photo_duplicate(empty_table):
     assert empty_table.cursor.fetchall() == [(p_id, False, None) for p_id in TEST_IDS]
 
 
-@log_test_name
 def test_post_photo(table_with_test_data):
     table_with_test_data.post_photo(TEST_IDS[0], "67")
     table_with_test_data.cursor.execute(sql.SQL("SELECT * FROM {}").format(sql.Identifier(TABLE_NAME)))
@@ -61,7 +64,6 @@ def test_post_photo(table_with_test_data):
     assert set(table_with_test_data.cursor.fetchall()) == set(list_ids)
 
 
-@log_test_name
 def test_delete_photo_from_twitter(table_with_test_data):
     table_with_test_data.post_photo(TEST_IDS[0], "78")
     table_with_test_data.delete_photo_from_twitter("78")
@@ -70,14 +72,12 @@ def test_delete_photo_from_twitter(table_with_test_data):
     assert set(table_with_test_data.cursor.fetchall()) == set(list_ids)
 
 
-@log_test_name
 def test_unposted_photos(table_with_test_data):
     table_with_test_data.post_photo(TEST_IDS[0], "89")  # preparing test data
     unposted = table_with_test_data.unposted_photos()
     assert unposted == list(TEST_IDS[1:])
 
 
-@log_test_name
 def test_unposted_photos_no_left(table_with_test_data):
     for t_id in TEST_IDS:  # preparing test data
         table_with_test_data.post_photo(t_id, "99")

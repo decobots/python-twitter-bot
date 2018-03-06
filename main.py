@@ -15,17 +15,10 @@ if __name__ == "__main__":
     with DataBase(photos_table_name="photos_list") as db:
         twitter = Twitter(database=db)
         flickr = Flickr(database=db)
-
         for _ in range(will_be_uploaded_N_photos):
-            log.debug(f"==================================================== started cycle {_}")
             pictures = flickr.get_photos()
-            log.debug(f"==================================================== flickr.get_photos ended")
             photo = flickr.random_photo(pictures)
-            log.debug(f"==================================================== flickr.random_photo ended")
             photo = flickr.get_photo(photo)
-            log.debug(f"==================================================== flickr.get_photo ended")
             photo = twitter.upload_photo(photo)
-            log.debug(f"==================================================== flickr.upload_photo ended")
             twitter.create_post(photo.title, photo)
-            log.debug(f"==================================================== flickr.create_post ended")
             time.sleep(2)
