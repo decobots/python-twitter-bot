@@ -1,8 +1,29 @@
 import base64
+import logging
 from unittest import mock
 
 from src.flickr import Flickr
+from src.logger import init_logging, log_func_name_ended, log_func_name_started
 from src.photo import Photo
+
+log = logging.getLogger()
+
+
+def setup_module():
+    init_logging("test_log.log")
+    log.debug("Flickr test started")
+
+
+def teardown_module():
+    log.debug("flickr test ended")
+
+
+def setup_function(func):
+    log_func_name_started(func)
+
+
+def teardown_function(func):
+    log_func_name_ended(func)
 
 
 def test_flickr_get_photos_list_correct(requester, db):

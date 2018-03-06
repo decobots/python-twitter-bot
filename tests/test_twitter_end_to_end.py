@@ -1,30 +1,45 @@
+import logging
 import random
 
 import pytest
 
 from src.data_base import DataBase
+from src.logger import init_logging, log_func_name_ended, log_func_name_started
 from src.photo import Photo
 from src.twitter import Twitter
 
-
-@pytest.fixture
-def photo():
-    photo_mock = Photo(id_flickr="2636", secret="a123456",
-                       server="2",
-                       title="test_04",
-                       farm="5")
-    with open("test_pic.jpg", "br") as f:
-        photo_mock.data = f.read()
-
-    return photo_mock
+log = logging.getLogger()
 
 
-@pytest.fixture
-def tweet_id():
+def setup_function(func):
+    log_func_name_started(func)
+
+
+def teardown_function(func):
+    log_func_name_ended(func)
+
+
+@pytest.mark.end_to_end
+def setup_module():
+    init_logging("test_log.log")
+    log.debug("Twitter end to end test started")
     db = DataBase(photos_table_name="test_twitter_table")
     twitter = Twitter(database=db)
-    tw_id = twitter.create_post(f"test{random.random()}")
-    return tw_id
+    posts = twitter.get_user_posts(100)
+    for post in posts:
+        twitter._delete_tweet_by_id(post)
+    for n in range(0, 13):
+        twitter.create_post(status=n)
+
+
+@pytest.mark.end_to_end
+def teardown_module():
+    db = DataBase(photos_table_name="test_twitter_table")
+    twitter = Twitter(database=db)
+    posts = twitter.get_user_posts(300)
+    for post in posts:
+        twitter._delete_tweet_by_id(post)
+    log.debug("Twitter end to end test ended")
 
 
 @pytest.mark.end_to_end
@@ -70,27 +85,8 @@ def test_get_users_posts_correct():
 
 
 @pytest.mark.end_to_end
-def test_delete_tweet_by_id_correct(tweet_id):
+def test_delete_tweet_by_id_correct():
     db = DataBase(photos_table_name="test_twitter_table")
     twitter = Twitter(database=db)
-    twitter._delete_tweet_by_id(tweet_id)
-
-
-@pytest.mark.end_to_end
-def setup_module():
-    db = DataBase(photos_table_name="test_twitter_table")
-    twitter = Twitter(database=db)
-    posts = twitter.get_user_posts(100)
-    for post in posts:
-        twitter._delete_tweet_by_id(post)
-    for n in range(0, 13):
-        twitter.create_post(status=n)
-
-
-@pytest.mark.end_to_end
-def teardown_module():
-    db = DataBase(photos_table_name="test_twitter_table")
-    twitter = Twitter(database=db)
-    posts = twitter.get_user_posts(300)
-    for post in posts:
-        twitter._delete_tweet_by_id(post)
+    tw_id = twitter.create_post(f"test{random.random()}")
+    twitter._delete_tweet_by_id(tweet_id=tw_id)

@@ -1,10 +1,31 @@
 import json
+import logging
 from unittest import mock
 
 import pytest
 
+from src.logger import init_logging, log_func_name_ended, log_func_name_started
 from src.photo import Photo
 from src.twitter import Twitter
+
+log = logging.getLogger()
+
+
+def setup_module():
+    init_logging("test_log.log")
+    log.info("unit test Twitter started")
+
+
+def teardown_module():
+    log.info("unit test Twitter ended")
+
+
+def setup_function(func):
+    log_func_name_started(func)
+
+
+def teardown_function(func):
+    log_func_name_ended(func)
 
 
 def test_upload_photo_correct(photo, requester, db):
@@ -61,5 +82,6 @@ def test_get_users_posts_correct(requester, db):
 
 def test_delete_tweet_by_id_correct(requester, db):
     db.delete_photo_from_twitter = mock.MagicMock()
+    db.delete_photo_from_twitter.return_value = 0
     twitter = Twitter(requester=requester, database=db)
     twitter._delete_tweet_by_id(tweet_id=123456)
