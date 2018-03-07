@@ -50,7 +50,7 @@ TEST_IDS = "42", "43", "44"
 
 @pytest.fixture()
 def db(request):
-    name = getattr(request.module, "TABLE_NAME", "hmmm")
+    name = getattr(request.module, "TABLE_NAME", None)
     database = DataBase(name)
     yield database
     database.close()
