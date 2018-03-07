@@ -31,7 +31,7 @@ def photo():
 
 
 @pytest.fixture
-def requester():
+def mock_requester():
     req = mock.MagicMock()
     req.return_value = mock.MagicMock()
     req.__name__ = "mock_requester"
@@ -39,7 +39,7 @@ def requester():
 
 
 @pytest.fixture
-def db():
+def mock_db():
     dbs = mock.MagicMock()
     dbs.photos_table_name = "mock_table"
     return dbs

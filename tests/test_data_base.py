@@ -5,10 +5,9 @@ from psycopg2 import extensions, sql
 
 from src.data_base import DataBase
 from src.logger import init_logging, log_func_name_ended, log_func_name_started
+from tests.fixtures.fixtures import TEST_IDS, TABLE_NAME
 
 log = logging.getLogger()
-TABLE_NAME = "test_data_base"
-TEST_IDS = "42", "43", "44"
 
 
 def setup_module():
