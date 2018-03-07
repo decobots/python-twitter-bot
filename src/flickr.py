@@ -37,7 +37,6 @@ class Flickr:
         result_photos = {}
         photos = ElementTree.fromstring(response.text)
         for tag in photos.iter('photo'):
-
             photo = Photo(id_flickr=tag.attrib["id"],
                           farm=tag.attrib["farm"],
                           server=tag.attrib["server"],
