@@ -1,8 +1,7 @@
 import logging
 
 import psycopg2
-from psycopg2 import sql
-from psycopg2 import extensions
+from psycopg2 import extensions, sql
 
 from src.data_base import DataBase
 from src.logger import init_logging, log_func_name_ended, log_func_name_started

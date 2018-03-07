@@ -3,12 +3,11 @@ from typing import List, Dict
 from urllib import parse
 
 import psycopg2
-from psycopg2 import sql
-from psycopg2 import extras
+from psycopg2 import extras, sql
 
 from src.environment_variables import get_env
-from src.photo import Photo
 from src.logger import init_logging
+from src.photo import Photo
 
 log = logging.getLogger()
 
