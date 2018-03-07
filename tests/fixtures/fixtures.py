@@ -66,8 +66,7 @@ def empty_table(db):
 
 @pytest.fixture
 def table_with_test_data(db):
-    for t_id in TEST_IDS:  # add photos
-        db.add_photo(t_id)
+    db.add_photos(TEST_IDS)
     yield db
     s = sql.SQL("DELETE FROM {}").format(sql.Identifier(TABLE_NAME))
     db.cursor.execute(s)

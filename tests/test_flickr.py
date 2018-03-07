@@ -33,7 +33,7 @@ def test_flickr_get_photos_list_correct(requester, db):
     requester.return_value.text = """<rsp stat="ok"><photos>
                                     <photo id="2636" secret="a123456" server="2" title="test_04" farm="5"/>
                                     </photos></rsp>"""
-    db.add_photo = mock.MagicMock()
+    db.add_photos = mock.MagicMock()
     flickr = Flickr(requester=requester, database=db)
     flickr_get_photos_result = flickr.get_photos()
     assert isinstance(flickr_get_photos_result, dict)

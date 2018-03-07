@@ -37,7 +37,7 @@ class Flickr:
         result_photos = {}
         photos = ElementTree.fromstring(response.text)
         for tag in photos.iter('photo'):
-            self.db.add_photo(id_photo=tag.attrib["id"])
+
             photo = Photo(id_flickr=tag.attrib["id"],
                           farm=tag.attrib["farm"],
                           server=tag.attrib["server"],
@@ -45,6 +45,7 @@ class Flickr:
                           title=tag.attrib["title"])
             result_photos[photo.id_flickr] = photo
         log.info(f"{len(result_photos)} photos received from flickr")
+        self.db.add_photos(result_photos)
         return result_photos
 
     def get_photo(self, photo: Photo) -> Photo:

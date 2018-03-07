@@ -1,7 +1,7 @@
 import logging
 
 import psycopg2
-from psycopg2 import sql
+from psycopg2 import extensions, sql
 
 from src.data_base import DataBase
 from src.logger import init_logging, log_func_name_ended, log_func_name_started
@@ -41,17 +41,14 @@ def test_db_context_manager():
 
 
 def test_add_photo(empty_table):
-    for t_id in TEST_IDS:
-        empty_table.add_photo(t_id)
+    empty_table.add_photos(TEST_IDS)
     empty_table.cursor.execute(sql.SQL("SELECT * FROM {}").format(sql.Identifier(TABLE_NAME)))
     assert empty_table.cursor.fetchall() == [(p_id, False, None) for p_id in TEST_IDS]
 
 
 def test_add_photo_duplicate(empty_table):
-    for t_id in TEST_IDS:  # add photos
-        empty_table.add_photo(t_id)
-    for t_id in TEST_IDS:  # add duplicates
-        empty_table.add_photo(t_id)
+    empty_table.add_photos(TEST_IDS)  # add photos
+    empty_table.add_photos(TEST_IDS)  # add duplicates
     empty_table.cursor.execute(sql.SQL("SELECT * FROM {}").format(sql.Identifier(TABLE_NAME)))
     assert empty_table.cursor.fetchall() == [(p_id, False, None) for p_id in TEST_IDS]
 
