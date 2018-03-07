@@ -5,10 +5,11 @@ from psycopg2 import extensions, sql
 
 from src.data_base import DataBase
 from src.logger import init_logging, log_func_name_ended, log_func_name_started
+from tests.fixtures.fixtures import TEST_IDS
 
 log = logging.getLogger()
+
 TABLE_NAME = "test_data_base"
-TEST_IDS = "42", "43", "44"
 
 
 def setup_module():
@@ -17,6 +18,8 @@ def setup_module():
 
 
 def teardown_module():
+    db = DataBase(TABLE_NAME)
+    db._delete_table(TABLE_NAME)
     log.info("unit test DataBase ended")
 
 
@@ -50,7 +53,7 @@ def test_add_photo_duplicate(empty_table):
     empty_table.add_photos(TEST_IDS)  # add photos
     empty_table.add_photos(TEST_IDS)  # add duplicates
     empty_table.cursor.execute(sql.SQL("SELECT * FROM {}").format(sql.Identifier(TABLE_NAME)))
-    assert empty_table.cursor.fetchall() == [(p_id, False, None) for p_id in TEST_IDS]
+    assert set(empty_table.cursor.fetchall()) == {(p_id, False, None) for p_id in TEST_IDS}
 
 
 def test_post_photo(table_with_test_data):
@@ -80,3 +83,28 @@ def test_unposted_photos_no_left(table_with_test_data):
         table_with_test_data.post_photo(t_id, "99")
     unposted = table_with_test_data.unposted_photos()
     assert unposted == []
+
+
+def test_delete_table():
+    table_name = "test_delete_table"
+    db = DataBase(table_name)
+    db.cursor.execute(
+        "SELECT table_name FROM information_schema.tables WHERE table_schema='public' AND table_type='BASE TABLE';")
+    all_tables = set(db.cursor.fetchall())
+    assert (table_name,) in all_tables  # explicit check better than implicit
+    db._delete_table(table_name)
+    db.cursor.execute(
+        "SELECT table_name FROM information_schema.tables WHERE table_schema='public' AND table_type='BASE TABLE';")
+    all_tables = set(db.cursor.fetchall())
+    assert (table_name,) not in all_tables
+
+
+def test_clear_table():
+    table_name = "test_clear_table"
+    db = DataBase(table_name)
+    db.add_photos(TEST_IDS)
+    db._clear_table(table_name)
+    db.cursor.execute(sql.SQL("SELECT * FROM {}").format(sql.Identifier(table_name)))
+    all_rows = db.cursor.fetchall()
+    assert [] == all_rows
+    db._delete_table(table_name)

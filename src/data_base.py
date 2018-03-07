@@ -49,6 +49,16 @@ class DataBase:
                                                     UNIQUE(id) )''').format(sql.Identifier(table_name)))
         log.debug(f"created (if not exist) table {table_name}")
 
+    def _clear_table(self, table_name: str):
+        with self.connection as connection:
+            s = sql.SQL("DELETE FROM {}").format(sql.Identifier(table_name))
+            connection.cursor().execute(s)
+
+    def _delete_table(self, table_name: str):
+        with self.connection as connection:
+            s = sql.SQL("DROP TABLE {}").format(sql.Identifier(table_name))
+            connection.cursor().execute(s)
+
     def add_photos(self, photos: Dict[str, Photo]):
         ids = [(photo,) for photo in photos]
         with self.connection as connection:

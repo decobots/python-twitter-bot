@@ -31,7 +31,7 @@ def photo():
 
 
 @pytest.fixture
-def requester():
+def mock_requester():
     req = mock.MagicMock()
     req.return_value = mock.MagicMock()
     req.__name__ = "mock_requester"
@@ -39,35 +39,33 @@ def requester():
 
 
 @pytest.fixture
-def db():
+def mock_db():
     dbs = mock.MagicMock()
     dbs.photos_table_name = "mock_table"
     return dbs
 
 
-TABLE_NAME = "test_data_base"
 TEST_IDS = "42", "43", "44"
 
 
-@pytest.fixture(scope="module")
-def db():
-    database = DataBase(TABLE_NAME)
+@pytest.fixture()
+def db(request):
+    name = getattr(request.module, "TABLE_NAME", None)
+    database = DataBase(name)
     yield database
     database.close()
 
 
 @pytest.fixture
 def empty_table(db):
+    db._clear_table(db.photos_table_name)
     yield db
-    s = sql.SQL("DELETE FROM {}").format(sql.Identifier(TABLE_NAME))
-    db.cursor.execute(s)
-    db.connection.commit()
+    db._clear_table(db.photos_table_name)
 
 
 @pytest.fixture
 def table_with_test_data(db):
+    db._clear_table(db.photos_table_name)
     db.add_photos(TEST_IDS)
     yield db
-    s = sql.SQL("DELETE FROM {}").format(sql.Identifier(TABLE_NAME))
-    db.cursor.execute(s)
-    db.connection.commit()
+    db._clear_table(db.photos_table_name)
