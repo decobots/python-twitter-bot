@@ -8,7 +8,7 @@ from src.data_base import DataBase
 from src.environment_variables import get_env
 from src.logger import init_logging
 from src.photo import Photo
-from src.request import Request
+from src.requester import Requester
 
 endpoint = collections.namedtuple('endpoint', ["url", "type"])
 
@@ -26,7 +26,7 @@ class Twitter:
                   resource_owner_key=get_env("TWITTER_ACCESS_KEY"),
                   resource_owner_secret=get_env("TWITTER_ACCESS_SECRET"))
 
-    def __init__(self, database, requester=Request()):
+    def __init__(self, database, requester=Requester()):
         self.requester = requester
         self.db = database
         log.debug(

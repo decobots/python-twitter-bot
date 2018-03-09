@@ -6,7 +6,7 @@ from typing import Dict
 from src.data_base import DataBase
 from src.environment_variables import get_env
 from src.photo import Photo
-from src.request import Request
+from src.requester import Requester
 
 endpoint = collections.namedtuple('endpoint', ["url", "method", "type"])
 
@@ -19,7 +19,7 @@ class Flickr:
     get_pictures = endpoint("https://api.flickr.com/services/rest", "flickr.people.getPublicPhotos", "POST")
     get_picture = endpoint("https://farm{}.staticflickr.com/{}/{}_{}.jpg", "", "GET")
 
-    def __init__(self, database: DataBase, requester=Request()):
+    def __init__(self, database: DataBase, requester=Requester()):
         self.requester = requester
         self.db = database
         log.debug(
