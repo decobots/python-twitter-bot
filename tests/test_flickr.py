@@ -1,7 +1,7 @@
 import base64
 import logging
 from unittest import mock
-
+from xml.etree import ElementTree
 from src.flickr import Flickr
 from src.logger import init_logging, log_func_name_ended, log_func_name_started
 from src.photo import Photo
@@ -30,9 +30,9 @@ def test_flickr_get_photos_list_correct(mock_requester, mock_db):
     """
     check that returned value is dict of photos and attributes farm, server, id, secret exist and correct for each photo
     """
-    mock_requester.return_value.text = """<rsp stat="ok"><photos>
+    mock_requester.request_xml.return_value = ElementTree.fromstring("""<rsp stat="ok"><photos>
                                     <photo id="2636" secret="a123456" server="2" title="test_04" farm="5"/>
-                                    </photos></rsp>"""
+                                    </photos></rsp>""")
     mock_db.add_photo = mock.MagicMock()
     flickr = Flickr(requester=mock_requester, database=mock_db)
     flickr_get_photos_result = flickr.get_photos()
@@ -51,7 +51,7 @@ def test_flickr_get_photo_correct(mock_requester, mock_db):
     """
     check that returned value exist and correct
     """
-    mock_requester.return_value.content = b"/ff/ff"
+    mock_requester.request_binary.return_value = b"/ff/ff"
     flickr = Flickr(requester=mock_requester, database=mock_db)
     photo = flickr.get_photo(Photo(id_flickr="2636", secret="a123456",
                                    server="2",

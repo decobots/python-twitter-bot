@@ -10,6 +10,7 @@ class Photo:
         self.title = title
         self.data = None
         self.id_twitter = None
+        self.id_posted_tweet = None
 
     @property
     def data(self):

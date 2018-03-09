@@ -6,6 +6,7 @@ from psycopg2 import sql
 
 from src.data_base import DataBase
 from src.photo import Photo
+from src.request import Request
 
 
 @pytest.fixture()
@@ -33,8 +34,13 @@ def photo():
 @pytest.fixture
 def mock_requester():
     req = mock.MagicMock()
-    req.return_value = mock.MagicMock()
-    req.__name__ = "mock_requester"
+    req.request_json = mock.MagicMock()
+    req.request_xml = mock.MagicMock()
+    req.request_binary = mock.MagicMock()
+    req.request_json.return_value = mock.MagicMock()
+    req.request_xml.return_value = mock.MagicMock()
+    req.request_binary.return_value = mock.MagicMock()
+    req.__class__ = "mock_requester"
     return req
 
 
