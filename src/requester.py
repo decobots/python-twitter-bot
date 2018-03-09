@@ -1,7 +1,7 @@
 import logging
-from typing import Dict, List
+from typing import Dict
 from xml.etree import ElementTree
-import json
+
 import requests
 
 from src.logger import init_logging
@@ -28,7 +28,7 @@ class Requester:
     def request_json(self, method_type: str, url: str, **kwargs) -> Dict:
         response = self._request_basic(method_type, url, **kwargs)
         try:
-            result = json.loads(response.content)
+            result = response.json()
             log.debug(f'server returned json')
         except:
             log.debug("server returned not json")
