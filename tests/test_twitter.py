@@ -29,7 +29,7 @@ def teardown_function(func):
 
 
 def test_upload_photo_correct(photo, mock_requester, mock_db):
-    mock_requester.return_value.text = json.dumps({"media_id": 710511363345354753})
+    mock_requester.request_json.return_value = {"media_id": 710511363345354753}
     twitter = Twitter(requester=mock_requester, database=mock_db)
     result = twitter.upload_photo(photo=photo)
     assert isinstance(result, Photo)
@@ -44,7 +44,7 @@ def test_upload_photo_incorrect(photo, mock_requester, mock_db):
 
 
 def test_create_post_text_and_photo_correct(photo, mock_requester, mock_db):
-    mock_requester.return_value.content = json.dumps({"id": 243145735212777472})
+    mock_requester.request_json.return_value = {"id": 243145735212777472}
     mock_db.post_photo = mock.MagicMock()
     twitter = Twitter(requester=mock_requester, database=mock_db)
     result = twitter.create_post(status="Test_status", photo=photo)
@@ -52,7 +52,7 @@ def test_create_post_text_and_photo_correct(photo, mock_requester, mock_db):
 
 
 def test_create_post_text_only_correct(mock_requester, mock_db):
-    mock_requester.return_value.content = json.dumps({"id": 243145735212777472})
+    mock_requester.request_json.return_value = {"id": 243145735212777472}
     mock_db.post_photo = mock.MagicMock()
     twitter = Twitter(requester=mock_requester, database=mock_db)
     result = twitter.create_post(status="Test_status")
@@ -60,7 +60,7 @@ def test_create_post_text_only_correct(mock_requester, mock_db):
 
 
 def test_create_post_photo_only_correct(photo, mock_requester, mock_db):
-    mock_requester.return_value.content = json.dumps({"id": 243145735212777472})
+    mock_requester.request_json.return_value = {"id": 243145735212777472}
     mock_db.post_photo = mock.MagicMock()
     twitter = Twitter(requester=mock_requester, database=mock_db)
     result = twitter.create_post(photo=photo)
@@ -68,10 +68,10 @@ def test_create_post_photo_only_correct(photo, mock_requester, mock_db):
 
 
 def test_get_users_posts_correct(mock_requester, mock_db):
-    mock_requester.return_value.content = json.dumps([
+    mock_requester.request_json.return_value = [
         {"id": 850007368138018817},
         {"id": 848930551989915648}
-    ])
+    ]
     twitter = Twitter(requester=mock_requester, database=mock_db)
     number_of_posts = 2
     result = twitter.get_user_posts(number_of_posts)

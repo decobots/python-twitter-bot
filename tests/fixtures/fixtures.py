@@ -2,7 +2,6 @@ import os
 from unittest import mock
 
 import pytest
-from psycopg2 import sql
 
 from src.data_base import DataBase
 from src.photo import Photo
@@ -33,9 +32,23 @@ def photo():
 @pytest.fixture
 def mock_requester():
     req = mock.MagicMock()
-    req.return_value = mock.MagicMock()
-    req.__name__ = "mock_requester"
+    req.request_json = mock.MagicMock()
+    req.request_xml = mock.MagicMock()
+    req.request_binary = mock.MagicMock()
+    req.request_json.return_value = mock.MagicMock()
+    req.request_xml.return_value = mock.MagicMock()
+    req.request_binary.return_value = mock.MagicMock()
+    req.__class__ = "mock_requester"
     return req
+
+
+@pytest.fixture
+def mock_request_response():
+    import requests
+    requests.request = mock.MagicMock()
+    requests.request.return_value = mock.MagicMock()
+
+    return requests.request.return_value
 
 
 @pytest.fixture
