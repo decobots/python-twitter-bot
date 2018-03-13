@@ -1,4 +1,5 @@
 import logging
+from contextlib import suppress
 from typing import List, Dict
 from urllib import parse
 
@@ -39,30 +40,50 @@ class DataBase:
         self.connection.close()
         log.debug("connection to database closed")
 
-    def execute(self, query: str, identifiers: list = None, arguments: tuple = None, arglist: List[tuple] = None,
-                batch: bool = False):
+    @staticmethod
+    def _make_sql(query: str, identifiers: list = None):
+        return sql.SQL(query).format(sql.SQL(', ').join(map(sql.Identifier, identifiers)))
+
+    def execute(self, query: str, identifiers: list = None, arguments: tuple = None):
         """
-        :param batch: flag, True for queries that should be done in butch
         :param query: postgresSQL string with {} for SQL names and %s for values
         :param identifiers: SQL names (names of tables, columns)
         :param arguments: Values, that will be inserted into sql
+        """
+        s = self._make_sql(query=query, identifiers=identifiers)
+        with self.connection as con:
+            with con.cursor() as cursor:
+                cursor.execute(query=s, vars=arguments)
+
+    def execute_batch(self, query: str, identifiers: list = None, arglist: List[tuple] = None):
+        """
+        :param query: postgresSQL string with {} for SQL names and %s for values
+        :param identifiers: SQL names (names of tables, columns)
         :param arglist: list of tuples with arguments for batch processing
         """
-        s = sql.SQL(query).format(
-            sql.SQL(', ').join(map(sql.Identifier, identifiers))
-        )
-        log.debug(f"created query {s.as_string(self.connection)}")
-        with self.connection as connection:
-            if not batch:
-                connection.cursor().execute(query=s,
-                                            vars=arguments)
-            else:
-                psycopg2.extras.execute_batch(cur=connection.cursor(),
-                                              sql=s,
-                                              argslist=arglist)
+        s = self._make_sql(query=query, identifiers=identifiers)
+        with self.connection as con:
+            with con.cursor() as cursor:
+                psycopg2.extras.execute_batch(
+                    cur=cursor,
+                    sql=s,
+                    argslist=arglist
+                )
 
-    def fetch(self) -> List:
-        return [row for row in self.connection.cursor().fetchall()]
+    def select(self, query: str, identifiers: list = None, arguments: tuple = None):
+        """
+        :param query: postgresSQL string with {} for SQL names and %s for values
+        :param identifiers: SQL names (names of tables, columns)
+        :param arguments: Values, that will be inserted into sql
+        """
+        s = self._make_sql(query=query, identifiers=identifiers)
+        with self.connection as con:
+            with con.cursor() as cursor:
+                cursor.execute(
+                    query=s,
+                    vars=arguments
+                )
+                return [row for row in cursor.fetchall()]
 
     def create_table(self, table_name: str):
         self.photos_table_name = table_name
@@ -87,11 +108,10 @@ class DataBase:
     def add_photos(self, photos: Dict[str, Photo]):
         ids = [(photo,) for photo in photos]
         try:
-            self.execute(
+            self.execute_batch(
                 query="INSERT INTO {}(id, posted) VALUES(%s, 'FALSE')",
                 identifiers=[self.photos_table_name],
                 arglist=ids,
-                batch=True
             )
             log.debug(f"photos written to db")
         except psycopg2.IntegrityError:
@@ -106,13 +126,12 @@ class DataBase:
         log.info(f"photo with flickr id={post_id} updated, marked as posted to twitter")
 
     def unposted_photos(self) -> List[str]:
-        self.execute(
+        result = self.select(
             query="SELECT id FROM {} WHERE posted = 'FALSE'",
             identifiers=[self.photos_table_name]
         )
-        result = [row[0] for row in self.cursor.fetchall()]
         log.debug(f"{len(result)} unposted photos in database")
-        return result
+        return [res[0] for res in result]
 
     def delete_photo_from_twitter(self, post_id: str):
         with self.connection as connection:
@@ -124,19 +143,19 @@ class DataBase:
             log.info(f"photos from post with twitter id={post_id} updated, marked as UNposted to twitter")
 
     def _print_db(self):
-        self.execute(
+        result = self.select(
             query="SELECT * FROM {}",
             identifiers=[self.photos_table_name]
         )
-        for r in self.cursor.fetchall():
+        for r in result:
             print(r)
 
     def _print_db_posted(self):
-        self.execute(
+        result = self.select(
             query="SELECT * FROM {} WHERE posted = 'TRUE'",
             identifiers=[self.photos_table_name]
         )
-        for r in self.cursor.fetchall():
+        for r in result:
             print(r)
 
 
