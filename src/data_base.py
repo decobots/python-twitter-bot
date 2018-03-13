@@ -1,6 +1,5 @@
 import logging
-from contextlib import suppress
-from typing import List, Dict
+from typing import List, Dict, Tuple
 from urllib import parse
 
 import psycopg2
@@ -25,7 +24,6 @@ class DataBase:
             host=url.hostname,
             port=url.port
         )
-        self.cursor = self.connection.cursor()
         log.debug("connection to database opened")
         self.create_table(self.photos_table_name)
 
@@ -36,7 +34,6 @@ class DataBase:
         self.close()
 
     def close(self):
-        self.cursor.close()
         self.connection.close()
         log.debug("connection to database closed")
 
@@ -70,7 +67,7 @@ class DataBase:
                     argslist=arglist
                 )
 
-    def select(self, query: str, identifiers: list = None, arguments: tuple = None):
+    def select(self, query: str, identifiers: list = None, arguments: tuple = None) -> List[Tuple[str]]:
         """
         :param query: postgresSQL string with {} for SQL names and %s for values
         :param identifiers: SQL names (names of tables, columns)
@@ -134,13 +131,13 @@ class DataBase:
         return [res[0] for res in result]
 
     def delete_photo_from_twitter(self, post_id: str):
-        with self.connection as connection:
-            self.execute(
-                query="UPDATE {} SET posted = 'FALSE', tweet_id=%s WHERE tweet_id = %s",
-                identifiers=[self.photos_table_name],
-                arguments=(None, post_id)
-            )
-            log.info(f"photos from post with twitter id={post_id} updated, marked as UNposted to twitter")
+        self.execute(
+            query="UPDATE {} SET posted = 'FALSE', tweet_id=%s WHERE tweet_id = %s",
+            identifiers=[self.photos_table_name],
+            arguments=(None, post_id)
+        )
+
+        log.info(f"photos from post with twitter id={post_id} updated, marked as UNposted to twitter")
 
     def _print_db(self):
         result = self.select(
@@ -161,9 +158,9 @@ class DataBase:
 
 if __name__ == '__main__':
     init_logging("test_log.log")
-    with DataBase("test_twitter_table") as dbe:
-        # dbe.add_photos("33")
-        # dbe.post_photo("33","67")
-        dbe._print_db()
-    dbe.delete_photo_from_twitter("67")
-    dbe._print_db()
+    # with DataBase("test_twitter_table") as dbe:
+    # dbe.add_photos("33")
+    # dbe.post_photo("33","67")
+    # dbe._print_db()
+    # dbe.delete_photo_from_twitter("67")
+    # dbe._print_db()

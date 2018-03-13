@@ -32,18 +32,15 @@ def test_db_context_manager():
     with DataBase(TABLE_NAME) as db:
         assert db.photos_table_name == TABLE_NAME
         assert isinstance(db.connection, psycopg2.extensions.connection)
-        assert isinstance(db.cursor, psycopg2.extensions.cursor)
-        assert not db.cursor.closed
         assert not db.connection.closed
-
-    assert db.cursor.closed
     assert db.connection.closed
 
 
 def test_add_photo(empty_table):
     empty_table.add_photos(TEST_IDS)
-    empty_table.cursor.execute(sql.SQL("SELECT * FROM {}").format(sql.Identifier(TABLE_NAME)))
-    assert empty_table.cursor.fetchall() == [(p_id, False, None) for p_id in TEST_IDS]
+    cur =  empty_table.connection.cursor()
+    cur.execute(sql.SQL("SELECT * FROM {}").format(sql.Identifier(TABLE_NAME)))
+    assert cur.fetchall() == [(p_id, False, None) for p_id in TEST_IDS]
 
 
 def test_add_photo_duplicate(empty_table):
