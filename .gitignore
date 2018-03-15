@@ -1,5 +1,7 @@
 .cache
 .pytest_cache
-.venv
+venv
 .idea
-python
+
+.coverage
+*.log

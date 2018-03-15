@@ -32,8 +32,3 @@ def test_environment_variables_correct(global_variable):
 def test_environment_variables_not_defined():
     with pytest.raises(OSError):
         get_env("undefined_variable_name")
-
-
-def test_environment_variables_incorrect_name():
-    with pytest.raises(ValueError):
-        get_env(34)

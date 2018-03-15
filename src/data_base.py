@@ -108,13 +108,12 @@ class Table:
         )
         log.debug(f"deleted table {self.table_name}")
 
-    def _print(self):
-        result = self.db.select(
-            query="SELECT * FROM {}",
-            identifiers=[self.table_name]
-        )
-        for r in result:
-            print(r)
+    # def __str__(self):
+    #     result = self.db.select(
+    #         query="SELECT * FROM {}",
+    #         identifiers=[self.table_name]
+    #     )
+    #     return '\n'.join(result)
 
 
 class PhotoTable(Table):
@@ -155,17 +154,17 @@ class PhotoTable(Table):
 
         log.info(f"photos from post with twitter id={post_id} updated, marked as UNposted to twitter")
 
-    def _print_db_posted(self):
-        result = self.db.select(
-            query="SELECT * FROM {} WHERE posted = 'TRUE'",
-            identifiers=[self.table_name]
-        )
-        for r in result:
-            print(r)
+    # def _print_db_posted(self):
+    #     result = self.db.select(
+    #         query="SELECT * FROM {} WHERE posted = 'TRUE'",
+    #         identifiers=[self.table_name]
+    #     )
+    #     for r in result:
+    #         print(r)
 
 
-if __name__ == '__main__':
-    init_logging("test_log.log")
+# if __name__ == '__main__':
+#     init_logging("test_log.log")
     # with DataBase("test_twitter_table") as dbe:
     # dbe.add_photos("33")
     # dbe.post_photo("33","67")
