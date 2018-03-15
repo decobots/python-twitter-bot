@@ -14,7 +14,7 @@ class Requester:
     def _request_basic(method_type: str, url: str, **kwargs) -> requests.Response:
         log.debug(f"started request to url '{url}'")
         params = kwargs.get("payload", None)
-        data = kwargs.get("payload", None)
+        data = kwargs.get("data", None)
         response = requests.request(method=method_type,
                                     url=url,
                                     params=params,

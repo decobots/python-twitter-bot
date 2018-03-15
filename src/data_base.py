@@ -1,5 +1,5 @@
 import logging
-from typing import List, Dict
+from typing import List, Dict, Tuple
 from urllib import parse
 
 import psycopg2
@@ -13,8 +13,7 @@ log = logging.getLogger()
 
 
 class DataBase:
-    def __init__(self, photos_table_name: str = None):
-        self.photos_table_name = photos_table_name
+    def __init__(self):
         parse.uses_netloc.append("postgres")
         url = parse.urlparse(get_env("HEROKU_DATABASE_URL"))
         self.connection = psycopg2.connect(
@@ -24,9 +23,7 @@ class DataBase:
             host=url.hostname,
             port=url.port
         )
-        self.cursor = self.connection.cursor()
         log.debug("connection to database opened")
-        self.create_table(self.photos_table_name)
 
     def __enter__(self):
         return self
@@ -35,79 +32,143 @@ class DataBase:
         self.close()
 
     def close(self):
-        self.cursor.close()
         self.connection.close()
         log.debug("connection to database closed")
 
-    def create_table(self, table_name: str):
-        self.photos_table_name = table_name
-        with self.connection as connection:
-            connection.cursor().execute(sql.SQL('''CREATE TABLE IF NOT EXISTS {}
-                                                    (id VARCHAR,
-                                                    posted BOOL,
-                                                    tweet_id VARCHAR,
-                                                    UNIQUE(id) )''').format(sql.Identifier(table_name)))
-        log.debug(f"created (if not exist) table {table_name}")
+    @staticmethod
+    def _make_sql(query: str, identifiers: list = None):
+        return sql.SQL(query).format(sql.SQL(', ').join(map(sql.Identifier, identifiers)))
 
-    def _clear_table(self, table_name: str):
-        with self.connection as connection:
-            s = sql.SQL("DELETE FROM {}").format(sql.Identifier(table_name))
-            connection.cursor().execute(s)
+    def execute(self, query: str, identifiers: list = None, arguments: tuple = None):
+        """
+        :param query: postgresSQL string with {} for SQL names and %s for values
+        :param identifiers: SQL names (names of tables, columns)
+        :param arguments: Values, that will be inserted into sql
+        """
+        s = self._make_sql(query=query, identifiers=identifiers)
+        with self.connection as con:
+            with con.cursor() as cursor:
+                cursor.execute(query=s, vars=arguments)
 
-    def _delete_table(self, table_name: str):
-        with self.connection as connection:
-            s = sql.SQL("DROP TABLE {}").format(sql.Identifier(table_name))
-            connection.cursor().execute(s)
+    def execute_batch(self, query: str, identifiers: list = None, arglist: List[tuple] = None):
+        """
+        :param query: postgresSQL string with {} for SQL names and %s for values
+        :param identifiers: SQL names (names of tables, columns)
+        :param arglist: list of tuples with arguments for batch processing
+        """
+        s = self._make_sql(query=query, identifiers=identifiers)
+        with self.connection as con:
+            with con.cursor() as cursor:
+                psycopg2.extras.execute_batch(
+                    cur=cursor,
+                    sql=s,
+                    argslist=arglist
+                )
 
-    def add_photos(self, photos: Dict[str, Photo]):
-        ids = [(photo,) for photo in photos]
-        with self.connection as connection:
-            try:
-                psycopg2.extras.execute_batch(cur=connection.cursor(),
-                                              sql=sql.SQL("INSERT INTO {}(id, posted) VALUES(%s, 'FALSE')").format(
-                                                  sql.Identifier(self.photos_table_name)), argslist=ids)
-                log.debug(f"photos written to db")
-            except psycopg2.IntegrityError:
-                log.debug(f"photos NOT written to db (already exists)")
+    def select(self, query: str, identifiers: list = None, arguments: tuple = None) -> List[Tuple[str]]:
+        """
+        :param query: postgresSQL string with {} for SQL names and %s for values
+        :param identifiers: SQL names (names of tables, columns)
+        :param arguments: Values, that will be inserted into sql
+        """
+        s = self._make_sql(query=query, identifiers=identifiers)
+        with self.connection as con:
+            with con.cursor() as cursor:
+                cursor.execute(
+                    query=s,
+                    vars=arguments
+                )
+                return [row for row in cursor.fetchall()]
 
-    def post_photo(self, photo_id: str, post_id: str):
-        with self.connection as connection:
-            connection.cursor().execute(
-                sql.SQL("UPDATE {} SET posted = 'TRUE', tweet_id=%s WHERE id = %s").format(
-                    sql.Identifier(self.photos_table_name)), (post_id, photo_id))
-            log.info(f"photo with flickr id={post_id} updated, marked as posted to twitter")
 
-    def unposted_photos(self) -> List[str]:
-        self.cursor.execute(
-            sql.SQL("SELECT id FROM {} WHERE posted = 'FALSE'").format(sql.Identifier(self.photos_table_name)))
-        result = [row[0] for row in self.cursor.fetchall()]
-        log.debug(f"{len(result)} unposted photos in database")
-        return result
+class Table:
+    def __init__(self, db, table_name: str):
+        self.db = db
+        self.table_name = table_name
+        self.__create()
 
-    def delete_photo_from_twitter(self, post_id: str):
-        with self.connection as connection:
-            connection.cursor().execute(
-                sql.SQL("UPDATE {} SET posted = 'FALSE', tweet_id=%s WHERE tweet_id = %s").format(
-                    sql.Identifier(self.photos_table_name)), (None, post_id))
-            log.info(f"photos from post with twitter id={post_id} updated, marked as UNposted to twitter")
+    def __create(self):
+        self.db.execute(
+            query='CREATE TABLE IF NOT EXISTS {} (id VARCHAR, posted BOOL, tweet_id VARCHAR, UNIQUE(id) )',
+            identifiers=[self.table_name]
+        )
+        log.debug(f"created (if not exist) table {self.table_name}")
 
-    def _print_db(self):
-        self.cursor.execute(sql.SQL("SELECT * FROM {}").format(sql.Identifier(self.photos_table_name)))
-        for r in self.cursor.fetchall():
+    def _clear(self):
+        self.db.execute(
+            query="DELETE FROM {}",
+            identifiers=[self.table_name]
+        )
+        log.debug(f"cleared table {self.table_name}")
+
+    def _delete(self):
+        self.db.execute(
+            query="DROP TABLE {}",
+            identifiers=[self.table_name]
+        )
+        log.debug(f"deleted table {self.table_name}")
+
+    def _print(self):
+        result = self.db.select(
+            query="SELECT * FROM {}",
+            identifiers=[self.table_name]
+        )
+        for r in result:
             print(r)
 
+
+class PhotoTable(Table):
+    def add_photos(self, photos: Dict[str, Photo]):
+        ids = [(photo,) for photo in photos]
+        try:
+            self.db.execute_batch(
+                query="INSERT INTO {}(id, posted) VALUES(%s, 'FALSE')",
+                identifiers=[self.table_name],
+                arglist=ids,
+            )
+            log.debug(f"photos written to table")
+        except psycopg2.IntegrityError:
+            log.debug(f"photos NOT written to table (already exists)")
+
+    def post_photo(self, photo_id: str, post_id: str):
+        self.db.execute(
+            query="UPDATE {} SET posted = 'TRUE', tweet_id=%s WHERE id = %s",
+            identifiers=[self.table_name],
+            arguments=(post_id, photo_id)
+        )
+        log.info(f"photo with flickr id={post_id} updated, marked as posted to twitter")
+
+    def unposted_photos(self) -> List[str]:
+        result = self.db.select(
+            query="SELECT id FROM {} WHERE posted = 'FALSE'",
+            identifiers=[self.table_name]
+        )
+        log.debug(f"{len(result)} unposted photos in database")
+        return [res[0] for res in result]
+
+    def delete_photo_from_twitter(self, post_id: str):
+        self.db.execute(
+            query="UPDATE {} SET posted = 'FALSE', tweet_id=%s WHERE tweet_id = %s",
+            identifiers=[self.table_name],
+            arguments=(None, post_id)
+        )
+
+        log.info(f"photos from post with twitter id={post_id} updated, marked as UNposted to twitter")
+
     def _print_db_posted(self):
-        self.cursor.execute(
-            sql.SQL("SELECT * FROM {} WHERE posted = 'TRUE'").format(sql.Identifier(self.photos_table_name)))
-        for r in self.cursor.fetchall():
+        result = self.db.select(
+            query="SELECT * FROM {} WHERE posted = 'TRUE'",
+            identifiers=[self.table_name]
+        )
+        for r in result:
             print(r)
 
 
 if __name__ == '__main__':
     init_logging("test_log.log")
-    with DataBase("test_twitter_table") as dbe:
-        # dbe.add_photos("33")
-        # dbe.post_photo("33","67")
-        dbe._print_db()
-        dbe.delete_photo_from_twitter("67")
-        dbe._print_db()
+    # with DataBase("test_twitter_table") as dbe:
+    # dbe.add_photos("33")
+    # dbe.post_photo("33","67")
+    # dbe._print()
+    # dbe.delete_photo_from_twitter("67")
+    # dbe._print()

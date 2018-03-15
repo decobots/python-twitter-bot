@@ -3,7 +3,7 @@ import logging
 import random
 from typing import Dict
 
-from src.data_base import DataBase
+from src.data_base import PhotoTable
 from src.environment_variables import get_env
 from src.photo import Photo
 from src.requester import Requester
@@ -19,11 +19,11 @@ class Flickr:
     get_pictures = endpoint("https://api.flickr.com/services/rest", "flickr.people.getPublicPhotos", "POST")
     get_picture = endpoint("https://farm{}.staticflickr.com/{}/{}_{}.jpg", "", "GET")
 
-    def __init__(self, database: DataBase, requester=Requester()):
+    def __init__(self, table: PhotoTable, requester: Requester = Requester()):
         self.requester = requester
-        self.db = database
+        self.table = table
         log.debug(
-            f"class Flickr initialized with requester={requester.__class__} and table={database.photos_table_name}")
+            f"class Flickr initialized with requester={requester.__class__} and table={table.table_name}")
 
     def get_photos(self) -> Dict[str, Photo]:
         log.info("stared function Flickr get_photos")
@@ -42,7 +42,7 @@ class Flickr:
                           title=tag.attrib["title"])
             result_photos[photo.id_flickr] = photo
         log.info(f"{len(result_photos)} photos received from flickr")
-        self.db.add_photos(result_photos)
+        self.table.add_photos(result_photos)
         return result_photos
 
     def get_photo(self, photo: Photo) -> Photo:
@@ -58,6 +58,6 @@ class Flickr:
 
     def random_photo(self, pictures: Dict) -> Photo:
         log.info("started function Flickr random_photo")
-        result = pictures[random.choice(self.db.unposted_photos())]
+        result = pictures[random.choice(self.table.unposted_photos())]
         log.info(f"selected random photo {result.id_flickr}")
         return result

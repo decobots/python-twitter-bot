@@ -3,11 +3,11 @@ from unittest import mock
 
 import pytest
 
-from src.data_base import DataBase
+from src.data_base import DataBase, PhotoTable
 from src.photo import Photo
 
 
-@pytest.fixture()
+@pytest.fixture(scope="session")
 def global_variable():
     key = "TEST_VARIABLE"
     value = "TEST_VALUE"
@@ -16,7 +16,7 @@ def global_variable():
     os.environ.pop(key)
 
 
-@pytest.fixture
+@pytest.fixture(scope="session")
 def photo():
     photo_mock = Photo(id_flickr="2636", secret="a123456",
                        server="2",
@@ -38,7 +38,7 @@ def mock_requester():
     req.request_json.return_value = mock.MagicMock()
     req.request_xml.return_value = mock.MagicMock()
     req.request_binary.return_value = mock.MagicMock()
-    req.__class__ = "mock_requester"
+    req.__class__.return_value = "mock_requester"
     return req
 
 
@@ -58,27 +58,30 @@ def mock_db():
     return dbs
 
 
-TEST_IDS = "42", "43", "44"
-
-
-@pytest.fixture()
-def db(request):
-    name = getattr(request.module, "TABLE_NAME", None)
-    database = DataBase(name)
+@pytest.fixture(scope="session")
+def db():
+    database = DataBase()
     yield database
     database.close()
 
 
-@pytest.fixture
-def empty_table(db):
-    db._clear_table(db.photos_table_name)
-    yield db
-    db._clear_table(db.photos_table_name)
+@pytest.fixture(scope="module")
+def table(db, request):
+    tb = PhotoTable(db=db, table_name=getattr(request.module, "TABLE_NAME", None))
+    yield tb
+    tb._delete()
 
 
 @pytest.fixture
-def table_with_test_data(db):
-    db._clear_table(db.photos_table_name)
-    db.add_photos(TEST_IDS)
-    yield db
-    db._clear_table(db.photos_table_name)
+def empty_table(table):
+    table._clear()
+    yield table
+    table._clear()
+
+
+@pytest.fixture
+def table_with_test_data(table, request):
+    table._clear()
+    table.add_photos(getattr(request.module, "TEST_IDS", None))
+    yield table
+    table._clear()

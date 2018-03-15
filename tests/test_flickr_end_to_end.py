@@ -2,13 +2,12 @@ import logging
 
 import pytest
 
-from src.data_base import DataBase
 from src.flickr import Flickr
 from src.logger import init_logging, log_func_name_ended, log_func_name_started
 from src.photo import Photo
 
 TABLE_NAME = "test_flickr_end_to_end"
-
+TEST_IDS = "42", "43", "44"
 log = logging.getLogger()
 
 
@@ -20,8 +19,6 @@ def setup_module():
 
 @pytest.mark.end_to_end
 def teardown_module():
-    db = DataBase(TABLE_NAME)
-    db._delete_table(TABLE_NAME)
     log.debug("Flickr end to end test ended")
 
 
@@ -34,11 +31,11 @@ def teardown_function(func):
 
 
 @pytest.mark.end_to_end
-def test_flickr_get_photos_list_correct(db):
+def test_flickr_get_photos_list_correct(table_with_test_data):
     """
     check that returned value is list and attributes farm, server, id, secret exist for each list item
     """
-    flickr = Flickr(database=db)
+    flickr = Flickr(table=table_with_test_data)
     result = flickr.get_photos()
     assert isinstance(result, dict)
     assert result != {}
@@ -52,11 +49,11 @@ def test_flickr_get_photos_list_correct(db):
 
 
 @pytest.mark.end_to_end
-def test_flickr_get_photo_correct(db):
+def test_flickr_get_photo_correct(table_with_test_data):
     """
     check that returned value exist and have types bytes and string
     """
-    flickr = Flickr(database=db)
+    flickr = Flickr(table=table_with_test_data)
     photo = flickr.get_photo(Photo(id_flickr="24003882568",
                                    secret="ca14f88bec",
                                    server="4504",
@@ -68,8 +65,8 @@ def test_flickr_get_photo_correct(db):
 
 
 @pytest.mark.end_to_end
-def test_flickr_get_photo_incorrect(db):
-    flickr = Flickr(database=db)
+def test_flickr_get_photo_incorrect(table_with_test_data):
+    flickr = Flickr(table=table_with_test_data)
     with pytest.raises(ValueError):
         flickr.get_photo(Photo(id_flickr="24003882568",
                                secret="ca14f88bec",
