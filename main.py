@@ -1,7 +1,7 @@
 import logging
 import time
 
-from src.data_base import DataBase, Table, PhotoTable
+from src.data_base import DataBase, PhotoTable
 from src.flickr import Flickr
 from src.logger import init_logging
 from src.twitter import Twitter
