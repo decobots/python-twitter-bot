@@ -13,7 +13,7 @@ if __name__ == "__main__":
     will_be_uploaded_N_photos = 3
 
     with DataBase() as db:
-        table = PhotoTable(db)
+        table = PhotoTable(db=db, table_name="main_photos")
         twitter = Twitter(table=table)
         flickr = Flickr(table=table)
         for _ in range(will_be_uploaded_N_photos):

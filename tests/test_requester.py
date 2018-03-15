@@ -2,17 +2,15 @@ import json
 from unittest import mock
 
 import pytest
-import requests
 
 from src.requester import Requester
 
 
 def test_request_basic_incorrect():
     r = Requester()
-    requests.request = mock.MagicMock()
-    requests.request.return_value.status_code = "x"
-    with pytest.raises(ValueError):
-        r._request_basic("GET", "URL")
+    with mock.patch(target="requests.request"):
+        with pytest.raises(ValueError):
+            r._request_basic("GET", "URL")
 
 
 def test_request_json_correct():
