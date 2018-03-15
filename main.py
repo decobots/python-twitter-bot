@@ -1,7 +1,7 @@
 import logging
 import time
 
-from src.data_base import DataBase
+from src.data_base import DataBase, Table, PhotoTable
 from src.flickr import Flickr
 from src.logger import init_logging
 from src.twitter import Twitter
@@ -12,9 +12,10 @@ if __name__ == "__main__":
     init_logging("log.log")
     will_be_uploaded_N_photos = 3
 
-    with DataBase(photos_table_name="photos_list") as db:
-        twitter = Twitter(database=db)
-        flickr = Flickr(database=db)
+    with DataBase() as db:
+        table = PhotoTable(db)
+        twitter = Twitter(table=table)
+        flickr = Flickr(table=table)
         for _ in range(will_be_uploaded_N_photos):
             pictures = flickr.get_photos()
             photo = flickr.random_photo(pictures)

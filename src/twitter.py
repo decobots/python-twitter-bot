@@ -4,7 +4,7 @@ from typing import Any, Optional, List
 
 from requests_oauthlib import OAuth1
 
-from src.data_base import DataBase
+from src.data_base import PhotoTable
 from src.environment_variables import get_env
 from src.logger import init_logging
 from src.photo import Photo
@@ -26,17 +26,17 @@ class Twitter:
                   resource_owner_key=get_env("TWITTER_ACCESS_KEY"),
                   resource_owner_secret=get_env("TWITTER_ACCESS_SECRET"))
 
-    def __init__(self, database, requester=Requester()):
+    def __init__(self, table: PhotoTable, requester: Requester = Requester()):
         self.requester = requester
-        self.db = database
+        self.table = table
         log.debug(
-            f"class Twitter initialized with requester={requester.__class__} and table={database.photos_table_name}")
+            f"class Twitter initialized with requester={requester.__class__} and table={self.table.table_name}")
 
     def upload_photo(self, photo: Photo) -> Photo:
         log.info("started function Twitter upload_photo")
         uploaded_photo = self.requester.request_json(self.twitter_upload_pic.type,
                                                      self.twitter_upload_pic.url,
-                                                     payload={"name": photo.title, "media_data": photo.data},
+                                                     data={"name": photo.title, "media_data": photo.data},
                                                      auth=self.auth)
         photo.id_twitter = uploaded_photo['media_id']
         log.info(f"Photo with flickr id '{photo.id_flickr}' uploaded to twitter with id '{photo.id_twitter}'")
@@ -51,7 +51,7 @@ class Twitter:
                                                    auth=self.auth)
         if photo != {} and media_ids:
             photo.id_posted_tweet = created_post["id"]
-            self.db.post_photo(photo_id=photo.id_flickr, post_id=photo.id_posted_tweet)
+            self.table.post_photo(photo_id=photo.id_flickr, post_id=photo.id_posted_tweet)
         log.info(
             f"Post with text '{status}' and photos '{photo}' uploaded to twitter with id '{created_post['id']}'")
         return created_post['id']
@@ -65,12 +65,12 @@ class Twitter:
         log.debug(f"received {len(result)} user messages from twitter")
         return result
 
-    def _delete_tweet_by_id(self, tweet_id: str):
+    def _delete_tweet_by_id(self, tweet_id: [str, int]):
         self.requester.request_json(self.twitter_delete_tweet_by_id.type,
                                     self.twitter_delete_tweet_by_id.url.format(tweet_id),
                                     auth=self.auth)
         try:
-            self.db.delete_photo_from_twitter(post_id=tweet_id)
+            self.table.delete_photo_from_twitter(post_id=tweet_id)
             log.debug(f"deleted twitter message with id '{tweet_id}', and photos marked as unposted")
         except:
             log.debug(f"deleted twitter message with id '{tweet_id}', NO photos marked as unposted")
@@ -78,6 +78,6 @@ class Twitter:
 
 if __name__ == '__main__':
     init_logging("log.log")
-    with DataBase("twitter") as db:
-        t = Twitter(database=db)
-        t.get_user_posts(1)
+    # with DataBase("twitter") as table:
+    #     t = Twitter(table=table)
+    #     t.get_user_posts(1)

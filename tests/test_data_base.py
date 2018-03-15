@@ -29,8 +29,7 @@ def teardown_function(func):
 
 
 def test_db_context_manager():
-    with DataBase(TABLE_NAME) as db:
-        assert db.photos_table_name == TABLE_NAME
+    with DataBase() as db:
         assert isinstance(db.connection, psycopg2.extensions.connection)
         assert not db.connection.closed
     assert db.connection.closed
@@ -38,36 +37,39 @@ def test_db_context_manager():
 
 def test_add_photo(empty_table):
     empty_table.add_photos(TEST_IDS)
-    cur =  empty_table.connection.cursor()
-    cur.execute(sql.SQL("SELECT * FROM {}").format(sql.Identifier(TABLE_NAME)))
-    assert cur.fetchall() == [(p_id, False, None) for p_id in TEST_IDS]
+    with empty_table.db.connection.cursor() as cur:
+        cur.execute(sql.SQL("SELECT * FROM {}").format(sql.Identifier(TABLE_NAME)))
+        assert cur.fetchall() == [(p_id, False, None) for p_id in TEST_IDS]
 
 
 def test_add_photo_duplicate(empty_table):
     empty_table.add_photos(TEST_IDS)  # add photos
     empty_table.add_photos(TEST_IDS)  # add duplicates
-    try:
-        empty_table.cursor.execute(sql.SQL("SELECT * FROM {}").format(sql.Identifier(TABLE_NAME)))
-    except psycopg2.InternalError as e:
-        log.error(e.pgerror)
-        raise
-    assert empty_table.cursor.fetchall() == [(p_id, False, None) for p_id in TEST_IDS]
+    with empty_table.db.connection.cursor() as cur:
+        try:
+            cur.execute(sql.SQL("SELECT * FROM {}").format(sql.Identifier(TABLE_NAME)))
+        except psycopg2.InternalError as e:
+            log.error(e.pgerror)
+            raise
+        assert cur.fetchall() == [(p_id, False, None) for p_id in TEST_IDS]
 
 
 def test_post_photo(table_with_test_data):
     table_with_test_data.post_photo(TEST_IDS[0], "67")
-    table_with_test_data.cursor.execute(sql.SQL("SELECT * FROM {}").format(sql.Identifier(TABLE_NAME)))
-    list_ids = [(p_id, False, None) for p_id in TEST_IDS]
-    list_ids[0] = (TEST_IDS[0], True, "67")
-    assert set(table_with_test_data.cursor.fetchall()) == set(list_ids)
+    with table_with_test_data.db.connection.cursor() as cur:
+        cur.execute(sql.SQL("SELECT * FROM {}").format(sql.Identifier(TABLE_NAME)))
+        list_ids = [(p_id, False, None) for p_id in TEST_IDS]
+        list_ids[0] = (TEST_IDS[0], True, "67")
+        assert set(cur.fetchall()) == set(list_ids)
 
 
 def test_delete_photo_from_twitter(table_with_test_data):
     table_with_test_data.post_photo(TEST_IDS[0], "78")
     table_with_test_data.delete_photo_from_twitter("78")
-    table_with_test_data.cursor.execute(sql.SQL("SELECT * FROM {}").format(sql.Identifier(TABLE_NAME)))
-    list_ids = [(p_id, False, None) for p_id in TEST_IDS]
-    assert set(table_with_test_data.cursor.fetchall()) == set(list_ids)
+    with table_with_test_data.db.connection.cursor() as cur:
+        cur.execute(sql.SQL("SELECT * FROM {}").format(sql.Identifier(TABLE_NAME)))
+        list_ids = [(p_id, False, None) for p_id in TEST_IDS]
+        assert set(cur.fetchall()) == set(list_ids)
 
 
 def test_unposted_photos(table_with_test_data):

@@ -2,6 +2,7 @@ import base64
 import logging
 from unittest import mock
 from xml.etree import ElementTree
+
 from src.flickr import Flickr
 from src.logger import init_logging, log_func_name_ended, log_func_name_started
 from src.photo import Photo
@@ -34,7 +35,7 @@ def test_flickr_get_photos_list_correct(mock_requester, mock_db):
                                     <photo id="2636" secret="a123456" server="2" title="test_04" farm="5"/>
                                     </photos></rsp>""")
     mock_db.add_photo = mock.MagicMock()
-    flickr = Flickr(requester=mock_requester, database=mock_db)
+    flickr = Flickr(requester=mock_requester, table=mock_db)
     flickr_get_photos_result = flickr.get_photos()
     assert isinstance(flickr_get_photos_result, dict)
     assert flickr_get_photos_result != {}
@@ -52,7 +53,7 @@ def test_flickr_get_photo_correct(mock_requester, mock_db):
     check that returned value exist and correct
     """
     mock_requester.request_binary.return_value = b"/ff/ff"
-    flickr = Flickr(requester=mock_requester, database=mock_db)
+    flickr = Flickr(requester=mock_requester, table=mock_db)
     photo = flickr.get_photo(Photo(id_flickr="2636", secret="a123456",
                                    server="2",
                                    title="test_04",
@@ -64,7 +65,7 @@ def test_flickr_get_photo_correct(mock_requester, mock_db):
 def test_random_photo_correct(mock_requester, mock_db):
     mock_db.unposted_photos = mock.MagicMock()
     mock_db.unposted_photos.return_value = ['1', '2']
-    flickr = Flickr(requester=mock_requester, database=mock_db)
+    flickr = Flickr(requester=mock_requester, table=mock_db)
     photos = {"1": Photo(id_flickr="1", farm="1", server="1", secret="1", title="1"),
               "2": Photo(id_flickr="2", farm="2", server="2", secret="2", title="2")}
     result = flickr.random_photo(photos)
