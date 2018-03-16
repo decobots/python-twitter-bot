@@ -50,7 +50,7 @@ class Twitter:
                                                    payload={"status": status, "media_ids": media_ids},
                                                    auth=self.auth)
         if photo != {} and media_ids:
-            photo.id_posted_tweet = created_post["id"]
+            photo.id_posted_tweet = created_post["id"]  # TODO TEST IT!!!!
             self.table.post_photo(photo_id=photo.id_flickr, post_id=photo.id_posted_tweet)
         log.info(
             f"Post with text '{status}' and photos '{photo}' uploaded to twitter with id '{created_post['id']}'")
@@ -75,9 +75,8 @@ class Twitter:
         except:
             log.debug(f"deleted twitter message with id '{tweet_id}', NO photos marked as unposted")
 
-
-if __name__ == '__main__':
-    init_logging("log.log")
-    # with DataBase("twitter") as table:
-    #     t = Twitter(table=table)
-    #     t.get_user_posts(1)
+# if __name__ == '__main__':
+#     init_logging("log.log")
+# with DataBase("twitter") as table:
+#     t = Twitter(table=table)
+#     t.get_user_posts(1)

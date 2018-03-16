@@ -21,7 +21,7 @@ def init_logging(filename):
 
     log.addHandler(file_handler)
     log.addHandler(console_handler)
-    log.setLevel(logging.INFO)
+    log.setLevel(logging.DEBUG)
     for logger_name in ("urllib3", "requests", "oauthlib", "requests_oauthlib.oauth1_auth", "chardet"):
         logging.getLogger(logger_name).setLevel(logging.WARNING)
     log.initialized = True

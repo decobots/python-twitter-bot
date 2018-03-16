@@ -43,6 +43,7 @@ def teardown_module():
     posts = twitter.get_user_posts(300)
     for post in posts:
         twitter._delete_tweet_by_id(post)
+    table._delete()
     log.debug("Twitter end to end test ended")
 
 

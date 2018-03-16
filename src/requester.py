@@ -44,7 +44,7 @@ class Requester:
             raise ValueError("server returned not xml")
         if result.attrib["stat"] == 'fail':
             log.exception(f'server returned fail status in xml')
-            raise ValueError(response.text)
+            raise ValueError(f'server returned fail status in xml {response.text}')
         log.debug(f'server returned xml')
         return result
 
@@ -54,7 +54,7 @@ class Requester:
         return response.content
 
 
-if __name__ == '__main__':
-    init_logging("test_log.log")
-    r = Requester()
-    r.request_xml(method_type="GET", url="https://farm4.staticflickr.com/3856/14848963128_9e4e83e446.jpg")
+# if __name__ == '__main__':
+    # init_logging("test_log.log")
+    # r = Requester()
+    # r.request_xml(method_type="GET", url="https://farm4.staticflickr.com/3856/14848963128_9e4e83e446.jpg")

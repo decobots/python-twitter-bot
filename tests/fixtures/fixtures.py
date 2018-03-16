@@ -7,7 +7,7 @@ from src.data_base import DataBase, PhotoTable
 from src.photo import Photo
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture()
 def global_variable():
     key = "TEST_VARIABLE"
     value = "TEST_VALUE"
@@ -16,7 +16,7 @@ def global_variable():
     os.environ.pop(key)
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture()
 def photo():
     photo_mock = Photo(id_flickr="2636", secret="a123456",
                        server="2",
@@ -40,15 +40,6 @@ def mock_requester():
     req.request_binary.return_value = mock.MagicMock()
     req.__class__.return_value = "mock_requester"
     return req
-
-
-@pytest.fixture
-def mock_request_response():
-    import requests
-    requests.request = mock.MagicMock()
-    requests.request.return_value = mock.MagicMock()
-
-    return requests.request.return_value
 
 
 @pytest.fixture
