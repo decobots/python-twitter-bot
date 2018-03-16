@@ -1,5 +1,4 @@
 import json
-from xml.etree import ElementTree
 from unittest import mock
 
 import pytest
