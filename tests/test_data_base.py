@@ -64,7 +64,7 @@ def test_post_photo(table_with_test_data):
 
 
 def test_delete_photo_from_twitter(table_with_test_data):
-    table_with_test_data.post_photo(TEST_IDS[0], "78")  # flickr_id, twitter_pic_id
+    table_with_test_data.post_photo(photo_id=TEST_IDS[0], post_id="78")
     table_with_test_data.delete_photo_from_twitter("78")
     with table_with_test_data.db.connection.cursor() as cur:
         cur.execute(sql.SQL("SELECT * FROM {}").format(sql.Identifier(TABLE_NAME)))

@@ -112,7 +112,7 @@ class Table:
             query="SELECT * FROM {}",
             identifiers=[self.table_name]
         )
-        return '\n'.join(map(str, result))  # result is list of tuples
+        return '\n'.join(map(str, result))  # result is a list of tuples
 
 
 class PhotoTable(Table):
@@ -145,7 +145,6 @@ class PhotoTable(Table):
         return [res[0] for res in result]
 
     def delete_photo_from_twitter(self, post_id: str):
-        print("0000000000000000000000000 i/m trying")
         self.db.execute(
             query="UPDATE {} SET posted = 'FALSE', tweet_id=%s WHERE tweet_id=%s",
             identifiers=[self.table_name],
