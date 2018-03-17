@@ -12,6 +12,7 @@ requests-oauthlib = "*"
 pytest = "*"
 "psycopg2" = "*"
 pytest-cov = "*"
+colormath = "*"
 
 
 [dev-packages]
