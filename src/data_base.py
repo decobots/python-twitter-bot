@@ -6,7 +6,6 @@ import psycopg2
 from psycopg2 import extras, sql
 
 from src.environment_variables import get_env
-from src.logger import init_logging
 from src.photo import Photo
 
 log = logging.getLogger()
@@ -108,12 +107,12 @@ class Table:
         )
         log.debug(f"deleted table {self.table_name}")
 
-    # def __str__(self):
-    #     result = self.db.select(
-    #         query="SELECT * FROM {}",
-    #         identifiers=[self.table_name]
-    #     )
-    #     return '\n'.join(result)
+    def __str__(self) -> str:
+        result = self.db.select(
+            query="SELECT * FROM {}",
+            identifiers=[self.table_name]
+        )
+        return '\n'.join(map(str, result))  # result is a list of tuples
 
 
 class PhotoTable(Table):
@@ -147,11 +146,10 @@ class PhotoTable(Table):
 
     def delete_photo_from_twitter(self, post_id: str):
         self.db.execute(
-            query="UPDATE {} SET posted = 'FALSE', tweet_id=%s WHERE tweet_id = %s",
+            query="UPDATE {} SET posted = 'FALSE', tweet_id=%s WHERE tweet_id=%s",
             identifiers=[self.table_name],
             arguments=(None, post_id)
         )
-
         log.info(f"photos from post with twitter id={post_id} updated, marked as UNposted to twitter")
 
     # def _print_db_posted(self):
@@ -162,12 +160,11 @@ class PhotoTable(Table):
     #     for r in result:
     #         print(r)
 
-
 # if __name__ == '__main__':
 #     init_logging("test_log.log")
-    # with DataBase("test_twitter_table") as dbe:
-    # dbe.add_photos("33")
-    # dbe.post_photo("33","67")
-    # dbe._print()
-    # dbe.delete_photo_from_twitter("67")
-    # dbe._print()
+# with DataBase("test_twitter_table") as dbe:
+# dbe.add_photos("33")
+# dbe.post_photo("33","67")
+# dbe._print()
+# dbe.delete_photo_from_twitter("67")
+# dbe._print()

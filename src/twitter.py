@@ -9,7 +9,7 @@ from src.environment_variables import get_env
 from src.logger import init_logging
 from src.photo import Photo
 from src.requester import Requester
-
+import psycopg2
 endpoint = collections.namedtuple('endpoint', ["url", "type"])
 
 log = logging.getLogger()
@@ -54,7 +54,7 @@ class Twitter:
             self.table.post_photo(photo_id=photo.id_flickr, post_id=photo.id_posted_tweet)
         log.info(
             f"Post with text '{status}' and photos '{photo}' uploaded to twitter with id '{created_post['id']}'")
-        return created_post['id']
+        return str(created_post['id'])
 
     def get_user_posts(self, amount: int) -> List[int]:
         user_posts = self.requester.request_json(self.twitter_get_users_posts.type,
@@ -72,7 +72,7 @@ class Twitter:
         try:
             self.table.delete_photo_from_twitter(post_id=tweet_id)
             log.debug(f"deleted twitter message with id '{tweet_id}', and photos marked as unposted")
-        except:
+        except psycopg2.ProgrammingError:
             log.debug(f"deleted twitter message with id '{tweet_id}', NO photos marked as unposted")
 
 # if __name__ == '__main__':

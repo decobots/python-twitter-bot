@@ -64,7 +64,7 @@ def test_post_photo(table_with_test_data):
 
 
 def test_delete_photo_from_twitter(table_with_test_data):
-    table_with_test_data.post_photo(TEST_IDS[0], "78")
+    table_with_test_data.post_photo(photo_id=TEST_IDS[0], post_id="78")
     table_with_test_data.delete_photo_from_twitter("78")
     with table_with_test_data.db.connection.cursor() as cur:
         cur.execute(sql.SQL("SELECT * FROM {}").format(sql.Identifier(TABLE_NAME)))
@@ -83,3 +83,9 @@ def test_unposted_photos_no_left(table_with_test_data):
         table_with_test_data.post_photo(t_id, "99")
     unposted = table_with_test_data.unposted_photos()
     assert unposted == []
+
+
+def test_str(table_with_test_data):
+    obj_list = (f"('{p_id}', False, None)" for p_id in TEST_IDS)
+    string = '\n'.join(obj_list)
+    assert str(table_with_test_data) == string

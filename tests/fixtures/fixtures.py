@@ -25,7 +25,7 @@ def photo():
     pic_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "test_pic.jpg")
     with open(pic_path, "br") as f:
         photo_mock.data = f.read()
-
+    photo_mock.id_twitter = 321
     return photo_mock
 
 
@@ -43,10 +43,10 @@ def mock_requester():
 
 
 @pytest.fixture
-def mock_db():
-    dbs = mock.MagicMock()
-    dbs.photos_table_name = "mock_table"
-    return dbs
+def mock_table():
+    tab = mock.MagicMock()
+    tab.table_name = "mock_table"
+    return tab
 
 
 @pytest.fixture(scope="session")
