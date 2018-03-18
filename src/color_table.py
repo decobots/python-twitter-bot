@@ -69,12 +69,11 @@ class ColorTable:
         with open(file=self.file_raw, mode='r') as inp, \
                 open(file=self.file_lab, mode="w") as out_lab, \
                 open(file=self.file_rgb, mode="w") as out_rgb:
-            for line in inp:
-                line = line.rstrip('\n')
+            for line in inp.read().splitlines():
                 name, r, g, b = line.split('	')
-                c = Color(int(r), int(g), int(b))
-                rgb_colors[name] = c.rgb_values
-                lab_colors[name] = c.lab_values
+                color = Color(int(r), int(g), int(b))
+                rgb_colors[name] = color.rgb_values
+                lab_colors[name] = color.lab_values
             json.dump(lab_colors, fp=out_lab)
             json.dump(rgb_colors, fp=out_rgb)
         log.info(f"generated files for color tables {self.file_lab} and {self.file_rgb}")
