@@ -1,8 +1,9 @@
+import os
+from contextlib import suppress
+
 import pytest
 
 from src.color_table import Color, ColorTable
-import colormath.color_objects
-import colormath.color_conversions
 
 
 def test_color_incorrect():
@@ -21,7 +22,15 @@ def test_lab_values():
 
 
 def test_color_table():
-    test_table = ColorTable(filename_raw_data="colors_test.txt",
-                            filename_lab_out="lab_test_txt",
-                            filename_rgb_out="rgb_test.txt")
-
+    with suppress(FileNotFoundError):
+        os.remove(os.path.join(os.path.dirname(os.path.dirname(__file__)), "tests/lab_test_txt"))
+    with suppress(FileNotFoundError):
+        os.remove(os.path.join(os.path.dirname(os.path.dirname(__file__)), "tests/rgb_test_txt"))
+    test_table = ColorTable(filename_raw_data=os.path.join("tests", "colors_test.txt"),
+                            filename_lab_out=os.path.join("tests", "lab_test_txt"),
+                            filename_rgb_out=os.path.join("tests", "rgb_test.txt"))
+    # can't actually compare LAB colors
+    assert len(test_table.color_table_lab) == 3
+    assert test_table.color_table_lab['Afterglow'].get_value_tuple() == Color(206, 151, 50).lab_values
+    assert test_table.color_table_lab['Ajay'].get_value_tuple() == Color(176, 172, 174).lab_values
+    assert test_table.color_table_lab['Akaroa'].get_value_tuple() == Color(190, 178, 154).lab_values

@@ -1,13 +1,12 @@
 import json
 import logging
+import os
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict, List, Tuple
 
 import colormath.color_conversions
 import colormath.color_diff
 import colormath.color_objects
-
-from src.logger import init_logging
 
 log = logging.getLogger()
 
@@ -15,10 +14,14 @@ log = logging.getLogger()
 class Color:
     def __init__(self, r: int, g: int, b: int):
         self.__rgb_checker(r, g, b)
+
         self.rgb = colormath.color_objects.AdobeRGBColor(rgb_r=r, rgb_g=g, rgb_b=b)
         self.lab = colormath.color_conversions.convert_color(
             color=self.rgb,
             target_cs=colormath.color_objects.LabColor)
+
+    def __eq__(self, other) -> bool:
+        return self.rgb_values == (other.r, other.g, other.b)
 
     @staticmethod
     def __rgb_checker(r, g, b):
@@ -28,11 +31,11 @@ class Color:
             raise ValueError(message)
 
     @property
-    def rgb_values(self):
+    def rgb_values(self) -> Tuple[int]:
         return self.rgb.get_value_tuple()
 
     @property
-    def lab_values(self):
+    def lab_values(self) -> Tuple[int]:
         return self.lab.get_value_tuple()
 
 
@@ -41,9 +44,9 @@ class ColorTable:
                  filename_raw_data: str = 'colors.txt',
                  filename_lab_out: str = 'out_lab.txt',
                  filename_rgb_out: str = 'out_rgb.txt'):
-        self.file_raw = filename_raw_data
-        self.file_lab = filename_lab_out
-        self.file_rgb = filename_rgb_out
+        self.file_raw = os.path.join(os.path.dirname(os.path.dirname(__file__)), filename_raw_data)
+        self.file_lab = os.path.join(os.path.dirname(os.path.dirname(__file__)), filename_lab_out)
+        self.file_rgb = os.path.join(os.path.dirname(os.path.dirname(__file__)), filename_rgb_out)
         self.color_table_lab = self._load_colors_table_lab()
         # self.color_table_rgb = None TODO implement if needed
 
@@ -75,7 +78,6 @@ class ColorTable:
             json.dump(lab_colors, fp=out_lab)
             json.dump(rgb_colors, fp=out_rgb)
         log.info(f"generated files for color tables {self.file_lab} and {self.file_rgb}")
-
 
 # if __name__ == '__main__':
 #     init_logging("log.log")
