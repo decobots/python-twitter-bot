@@ -20,8 +20,6 @@ class Color:
             color=self.rgb,
             target_cs=colormath.color_objects.LabColor)
 
-    def __eq__(self, other) -> bool:
-        return self.rgb_values == (other.r, other.g, other.b)
 
     @staticmethod
     def __rgb_checker(r, g, b):

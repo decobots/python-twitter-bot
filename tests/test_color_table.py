@@ -34,3 +34,13 @@ def test_color_table():
     assert test_table.color_table_lab['Afterglow'].get_value_tuple() == Color(206, 151, 50).lab_values
     assert test_table.color_table_lab['Ajay'].get_value_tuple() == Color(176, 172, 174).lab_values
     assert test_table.color_table_lab['Akaroa'].get_value_tuple() == Color(190, 178, 154).lab_values
+
+
+def test_calculate_deltas():
+    color1 = Color(0, 0, 0)
+    color2 = Color(255, 255, 255)
+    test_table = ColorTable(filename_raw_data=os.path.join("tests", "colors_test.txt"),
+                            filename_lab_out=os.path.join("tests", "lab_test_txt"),
+                            filename_rgb_out=os.path.join("tests", "rgb_test.txt"))
+    assert test_table.calculate_deltas(color1.lab)[0] == {'Ajay': 5071.449903923883}
+    assert test_table.calculate_deltas(color2.lab)[0] == {'Ajay': 1669.4534123987478}
