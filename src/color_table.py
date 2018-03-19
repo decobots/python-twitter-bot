@@ -58,7 +58,7 @@ class ColorTable:
 
     def calculate_deltas(self, clr_lab: colormath.color_objects.LabColor) -> List[
         Dict[str, colormath.color_objects.LabColor]]:
-        calculated_deltas = [{name: colormath.color_diff.delta_e_cie1976(clr_lab, value)}
+        calculated_deltas = [{self.color_table_lab[name]: colormath.color_diff.delta_e_cie1976(clr_lab, value)}
                              for name, value in self.color_table_lab.items()
                              ]
         return sorted(calculated_deltas, key=lambda x: list(x.values())[0])
