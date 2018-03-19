@@ -10,10 +10,12 @@ import colormath.color_objects
 
 log = logging.getLogger()
 
+DATA_DEFAULT_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data')
+
 
 class Color:
     def __init__(self, r: int, g: int, b: int):
-        self.__rgb_checker(r, g, b)
+        self.__rgb_check(r, g, b)
 
         self.rgb = colormath.color_objects.AdobeRGBColor(rgb_r=r, rgb_g=g, rgb_b=b, is_upscaled=True)
         self.lab = colormath.color_conversions.convert_color(
@@ -21,7 +23,7 @@ class Color:
             target_cs=colormath.color_objects.LabColor)
 
     @staticmethod
-    def __rgb_checker(r, g, b):
+    def __rgb_check(r, g, b):
         if not (0 <= r <= 256 and 0 <= g <= 256 and 0 <= b <= 256):
             message = f"each of r, g, and, b values should be between 0 and 256. \nYour values r={r} g={g} b={b}"
             log.error(message)
@@ -38,17 +40,14 @@ class Color:
 
 class ColorTable:
     def __init__(self,
-                 path_to_raw_data: os.path = os.path.join(
-                     os.path.dirname(os.path.dirname(__file__)), 'src', 'colors.txt'),
-                 path_to_lab_out: os.path = os.path.join(
-                     os.path.dirname(os.path.dirname(__file__)), 'src', 'out_lab.txt'),
-                 path_to_rgb_out: os.path = os.path.join(
-                     os.path.dirname(os.path.dirname(__file__)), 'src', 'out_rgb.txt')):
+                 path_to_raw_data: os.path = os.path.join(DATA_DEFAULT_PATH, 'colors.txt'),
+                 path_to_lab_out: os.path = os.path.join(DATA_DEFAULT_PATH, 'out_lab.txt'),
+                 path_to_rgb_out: os.path = os.path.join(DATA_DEFAULT_PATH, 'out_rgb.txt')):
         self.path_to_raw = path_to_raw_data
         self.path_to_lab = path_to_lab_out
         self.path_to_rgb = path_to_rgb_out
         self.color_table_lab = self._load_colors_table_lab()
-        # self.color_table_rgb = None TODO implement if needed
+        #  TODO implement if needed self.color_table_rgb = None
 
     def _load_colors_table_lab(self) -> Dict[str, colormath.color_objects.LabColor]:
         if not Path(self.path_to_lab).exists():  # generate files
@@ -78,8 +77,3 @@ class ColorTable:
             json.dump(lab_colors, fp=out_lab)
             json.dump(rgb_colors, fp=out_rgb)
         log.info(f"generated files for color tables {self.path_to_lab} and {self.path_to_rgb}")
-
-
-if __name__ == '__main__':
-    my_color = Color(150, 1, 1)
-    tab = ColorTable()

@@ -22,7 +22,7 @@ def photo():
                        server="2",
                        title="test_04",
                        farm="5")
-    pic_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "test_pic.jpg")
+    pic_path = os.path.join(os.path.dirname(os.path.dirname(__file__)),'test_data', "test_pic.jpg")
     with open(pic_path, "br") as f:
         photo_mock.data = f.read()
     photo_mock.id_twitter = 321
