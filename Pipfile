@@ -13,6 +13,7 @@ pytest = "*"
 "psycopg2" = "*"
 pytest-cov = "*"
 colormath = "*"
+svgwrite = "*"
 
 
 [dev-packages]

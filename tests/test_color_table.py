@@ -1,11 +1,9 @@
 import logging
 import os
-from contextlib import suppress
-from pathlib import Path
 
 import pytest
 
-from src.color_table import Color, ColorTable
+from src.color_table import Color, ColorTable, colors_delta
 from src.logger import init_logging
 
 log = logging.getLogger()
@@ -13,15 +11,10 @@ log = logging.getLogger()
 TEST_DATA_DEFAULT_PATH = os.path.join(os.path.dirname(__file__), 'test_data')
 
 COLORS_FILE = "colors_test.txt"
-LAB_FILE = "lab_test_txt"
-RGB_FILE = "rgb_test.txt"
 
 
 def setup_module():
     init_logging("test_log.log")
-    test_table = ColorTable(path_to_raw_data=os.path.join(TEST_DATA_DEFAULT_PATH, COLORS_FILE),
-                            path_to_lab_out=os.path.join(TEST_DATA_DEFAULT_PATH, LAB_FILE),
-                            path_to_rgb_out=os.path.join(TEST_DATA_DEFAULT_PATH, RGB_FILE))
 
 
 def test_color_correct():
@@ -39,6 +32,19 @@ def test_color_incorrect():
         Color(300, 125, 125)
 
 
+def test_eq_correct():
+    # color names not used in comparison
+    c1 = Color(0, 0, 0)
+    c2 = Color(0, 0, 0, 'Black')
+    c3 = Color(0, 0, 0, 'Red')
+
+    c4 = Color(100, 100, 100)
+    c5 = Color(100, 100, 100, 'Black')
+    assert c1 == c2 == c3
+    assert c1 != c4
+    assert c2 != c5
+
+
 def test_rgb_values():
     c = Color(125, 125, 125)
     assert c.rgb_values == (125, 125, 125)
@@ -50,27 +56,17 @@ def test_lab_values():
 
 
 def test_color_table_if_lab_and_rdb_files_deleted():
-    with suppress(FileNotFoundError):
-        os.remove(os.path.join(TEST_DATA_DEFAULT_PATH, "lab_test_txt"))
-    with suppress(FileNotFoundError):
-        os.remove(os.path.join(TEST_DATA_DEFAULT_PATH, "rgb_test.txt"))
-    test_table = ColorTable(path_to_raw_data=os.path.join(TEST_DATA_DEFAULT_PATH, COLORS_FILE),
-                            path_to_lab_out=os.path.join(TEST_DATA_DEFAULT_PATH, LAB_FILE),
-                            path_to_rgb_out=os.path.join(TEST_DATA_DEFAULT_PATH, RGB_FILE))
-    assert Path(os.path.join(TEST_DATA_DEFAULT_PATH, "lab_test_txt")).exists() is True
-    assert Path(os.path.join(TEST_DATA_DEFAULT_PATH, "rgb_test.txt")).exists() is True
+    test_table = ColorTable(path_to_raw_data=os.path.join(TEST_DATA_DEFAULT_PATH, COLORS_FILE), )
     # can't actually compare LAB colors
-    assert len(test_table.color_table_lab) == 3
-    assert test_table.color_table_lab['Afterglow'].get_value_tuple() == Color(206, 151, 50).lab_values
-    assert test_table.color_table_lab['Ajay'].get_value_tuple() == Color(176, 172, 174).lab_values
-    assert test_table.color_table_lab['Akaroa'].get_value_tuple() == Color(190, 178, 154).lab_values
+    assert len(test_table.color_table) == 3
+    assert test_table.color_table[0].lab_values == Color(206, 151, 50).lab_values
+    assert test_table.color_table[1].lab_values == Color(176, 172, 174).lab_values
+    assert test_table.color_table[2].lab_values == Color(190, 178, 154).lab_values
 
 
-def test_calculate_deltas():
+def test_nearest_color():
     color1 = Color(0, 0, 0)
     color2 = Color(255, 255, 255)
-    test_table = ColorTable(path_to_raw_data=os.path.join(TEST_DATA_DEFAULT_PATH, COLORS_FILE),
-                            path_to_lab_out=os.path.join(TEST_DATA_DEFAULT_PATH, LAB_FILE),
-                            path_to_rgb_out=os.path.join(TEST_DATA_DEFAULT_PATH, RGB_FILE))
-    assert test_table.calculate_deltas(color1.lab)[0] == {'Ajay': 71.44594936202925}
-    assert test_table.calculate_deltas(color2.lab)[0] == {'Ajay': 28.693146244154423}
+    test_table = ColorTable(path_to_raw_data=os.path.join(TEST_DATA_DEFAULT_PATH, COLORS_FILE))
+    assert test_table.nearest_color(color1.lab) == colors_delta(Color(176, 172, 174, 'Ajay'), 71.44594936202925)
+    assert test_table.nearest_color(color2.lab) == colors_delta(Color(176, 172, 174, 'Ajay'), 28.693146244154423)
