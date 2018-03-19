@@ -21,9 +21,11 @@ def test_color_correct():
     c = Color(0, 0, 0)
     assert c.rgb_values == (0, 0, 0)
     assert c.lab_values == (0, 0, 0)
+    assert c.hex == '#000000'
 
     c = Color(255, 255, 255)
     assert c.rgb_values == (255, 255, 255)
+    assert c.hex == '#ffffff'
     assert tuple(int(v) for v in c.lab_values) == (100, 0, 0)  # library returns floats that not exactly the 100,0,0
 
 
