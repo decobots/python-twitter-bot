@@ -12,7 +12,7 @@ H = 40
 
 
 def create_svg(color_groups: List[List['Color']]):
-    with open(os.path.join(DATA_DEFAULT_PATH, "test.svg"), mode='w') as file:
+    with open(os.path.join(DATA_DEFAULT_PATH, "test.svg"), mode='w') as f:
         dwg = svgwrite.Drawing(size=(f'{W * len(color_groups[0])}px',
                                      f'{H * len(color_groups)}px'
                                      ))
@@ -20,13 +20,13 @@ def create_svg(color_groups: List[List['Color']]):
             for x, color in enumerate(group):
                 rect = dwg.rect(insert=(x * W, y), size=(W, H), fill=color.hex)
                 dwg.add(rect)
-                text = dwg.text(list(map(int, color.lab_values)),
+                text = dwg.text([int(v) for v in color.lab_values],
                                 insert=(x * W, y),
                                 dy=[H / 2],
                                 style=f'font-size:{H/2.2}px'
                                 )
                 dwg.add(text)
-        dwg.write(file)
+        dwg.write(f)
 
 
 def generate_colors(number_of_colors: int = 10, number_of_additional_colors: int = 1):
@@ -45,5 +45,4 @@ def generate_colors(number_of_colors: int = 10, number_of_additional_colors: int
 
 
 if __name__ == '__main__':
-
     create_svg(generate_colors(number_of_colors=19, number_of_additional_colors=10))
