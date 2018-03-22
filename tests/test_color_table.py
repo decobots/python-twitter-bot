@@ -21,9 +21,11 @@ def test_color_correct():
     c = Color(0, 0, 0)
     assert c.rgb_values == (0, 0, 0)
     assert c.lab_values == (0, 0, 0)
+    assert c.hex == '#000000'
 
     c = Color(255, 255, 255)
     assert c.rgb_values == (255, 255, 255)
+    assert c.hex == '#ffffff'
     assert tuple(int(v) for v in c.lab_values) == (100, 0, 0)  # library returns floats that not exactly the 100,0,0
 
 
@@ -55,7 +57,7 @@ def test_lab_values():
     assert c.lab_values == (0, 0, 0)
 
 
-def test_color_table_if_lab_and_rdb_files_deleted():
+def test_color_table():
     test_table = ColorTable(path_to_raw_data=os.path.join(TEST_DATA_DEFAULT_PATH, COLORS_FILE), )
     # can't actually compare LAB colors
     assert len(test_table.color_table) == 3

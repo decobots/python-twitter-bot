@@ -37,6 +37,10 @@ class Color:
     def lab_values(self) -> Tuple[int]:
         return self.lab.get_value_tuple()
 
+    @property
+    def hex(self) -> str:
+        return self.rgb.get_rgb_hex()
+
     def __eq__(self, other):
         # name not considered
         return self.rgb_values == other.rgb_values
@@ -62,5 +66,5 @@ class ColorTable:
                              ]
         return sorted(calculated_deltas, key=lambda x: x.delta)
 
-    def nearest_color(self, clr: colormath.color_objects.LabColor) -> Tuple["Color", float]:
+    def nearest_color(self, clr: colormath.color_objects.LabColor) -> 'colors_delta':
         return self.calculate_deltas(clr_lab=clr)[0]
