@@ -13,9 +13,7 @@ class Photo:
         self.id_posted_tweet = None
 
     @property
-    def data(self):
-        return base64.b64encode(self.__data)
+    def data_b64(self):
+        return base64.b64encode(self.data)
 
-    @data.setter
-    def data(self, data):
-        self.__data = data
+

@@ -36,7 +36,7 @@ class Twitter:
         log.info("started function Twitter upload_photo")
         uploaded_photo = self.requester.request_json(self.twitter_upload_pic.type,
                                                      self.twitter_upload_pic.url,
-                                                     data={"name": photo.title, "media_data": photo.data},
+                                                     data={"name": photo.title, "media_data": photo.data_b64},
                                                      auth=self.auth)
         photo.id_twitter = uploaded_photo['media_id']
         log.info(f"Photo with flickr id '{photo.id_flickr}' uploaded to twitter with id '{photo.id_twitter}'")
