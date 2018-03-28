@@ -16,4 +16,5 @@ class Photo:
     def data_b64(self):
         return base64.b64encode(self.data)
 
-
+    def __repr__(self):  # pragma: no cover
+        return f"flickr id={self.id_flickr} twitter id={self.id_twitter}"

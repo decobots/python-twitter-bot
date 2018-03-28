@@ -1,20 +1,19 @@
-import math
-import os
-from typing import List, Callable
+import math  # pragma: no cover
+import os  # pragma: no cover
+from typing import List, Callable  # pragma: no cover
 
-import colormath.color_diff
-import colormath.color_objects
+import colormath.color_diff  # pragma: no cover
+import colormath.color_objects  # pragma: no cover
 
-from src.color_table import Color, ColorTable, DATA_DEFAULT_PATH, colors_delta
-from src.svgmaker import create_svg
+from src.color_table import Color, ColorTable, DATA_DEFAULT_PATH, colors_delta  # pragma: no cover
+from src.svgmaker import create_svg  # pragma: no cover
 
 
-
-def nearest_color(clr: colormath.color_objects.LabColor, method: Callable) -> 'colors_delta':
+def nearest_color(clr: colormath.color_objects.LabColor, method: Callable) -> 'colors_delta':  # pragma: no cover
     return method(clr_lab=clr)
 
 
-def colormath_cie1976(color_table, input_color: 'Color') -> List['colors_delta']:
+def colormath_cie1976(color_table, input_color: 'Color') -> List['colors_delta']:  # pragma: no cover
     calculated_deltas = []
     for table_color in color_table:
         delta = colormath.color_diff.delta_e_cie1976(input_color.lab, table_color.lab)
@@ -22,7 +21,7 @@ def colormath_cie1976(color_table, input_color: 'Color') -> List['colors_delta']
     return sorted(calculated_deltas, key=lambda x: x.delta)
 
 
-def colormath_cie1994(color_table, input_color: 'Color') -> List['colors_delta']:
+def colormath_cie1994(color_table, input_color: 'Color') -> List['colors_delta']:  # pragma: no cover
     calculated_deltas = []
     for table_color in color_table:
         delta = colormath.color_diff.delta_e_cie1994(input_color.lab, table_color.lab)
@@ -30,7 +29,7 @@ def colormath_cie1994(color_table, input_color: 'Color') -> List['colors_delta']
     return sorted(calculated_deltas, key=lambda x: x.delta)
 
 
-def colormath_cie2000(color_table, input_color: 'Color') -> List['colors_delta']:
+def colormath_cie2000(color_table, input_color: 'Color') -> List['colors_delta']:  # pragma: no cover
     calculated_deltas = []
     for table_color in color_table:
         delta = colormath.color_diff.delta_e_cie2000(input_color.lab, table_color.lab)
@@ -38,7 +37,7 @@ def colormath_cie2000(color_table, input_color: 'Color') -> List['colors_delta']
     return sorted(calculated_deltas, key=lambda x: x.delta)
 
 
-def colormath_cms(color_table, input_color: 'Color') -> List['colors_delta']:
+def colormath_cms(color_table, input_color: 'Color') -> List['colors_delta']:  # pragma: no cover
     calculated_deltas = []
     for table_color in color_table:
         delta = colormath.color_diff.delta_e_cmc(input_color.lab, table_color.lab)
@@ -46,7 +45,8 @@ def colormath_cms(color_table, input_color: 'Color') -> List['colors_delta']:
     return sorted(calculated_deltas, key=lambda x: x.delta)
 
 
-def simple_Euclidean_distance(color_table, input_color: 'Color'): # I will use it
+def simple_Euclidean_distance(color_table, input_color: 'Color'):  # pragma: no cover
+    # I will use it
     lc, ac, bc = input_color.lab_values  # lab of Color
     calculated_deltas = []
     for table_color in color_table:
@@ -56,7 +56,7 @@ def simple_Euclidean_distance(color_table, input_color: 'Color'): # I will use i
     return sorted(calculated_deltas, key=lambda x: x.delta)
 
 
-def lab_weighted_Euclidean_distance(color_table, input_color: 'Color'):
+def lab_weighted_Euclidean_distance(color_table, input_color: 'Color'):  # pragma: no cover
     lc, ac, bc = input_color.lab_values  # lab of Color
     calculated_deltas = []
     for table_color in color_table:
@@ -66,11 +66,8 @@ def lab_weighted_Euclidean_distance(color_table, input_color: 'Color'):
     return sorted(calculated_deltas, key=lambda x: x.delta)
 
 
-
-
-
 def generate_colors(color_table: ColorTable, methods: List[Callable] = None, number_of_colors: int = 10) -> List[
-    List['colors_delta']]:
+    List['colors_delta']]:  # pragma: no cover
     lst = []
     colors = [Color(0, 0, 0)]
     print('modulate_colors')
@@ -98,7 +95,7 @@ def generate_colors(color_table: ColorTable, methods: List[Callable] = None, num
     return lst
 
 
-def modulate_color(stop_color, arr, step=10, start_color=None):
+def modulate_color(stop_color, arr, step=10, start_color=None):  # pragma: no cover
     if not start_color:
         start_color = arr[-1].rgb_values
     fs = [None] * 3
@@ -116,22 +113,22 @@ def modulate_color(stop_color, arr, step=10, start_color=None):
         arr.append(color)
 
 
-def gen_up(step=1):
+def gen_up(step=1):  # pragma: no cover
     for _ in range(0, 256, step):
         yield _
 
 
-def gen_down(step=1):
+def gen_down(step=1):  # pragma: no cover
     for _ in range(255, -1, -step):
         yield _
 
 
-def gen_n(n):
+def gen_n(n):  # pragma: no cover
     while True:
         yield n
 
 
-if __name__ == '__main__':
+if __name__ == '__main__':  # pragma: no cover
     tab = ColorTable(path_to_raw_data=os.path.join(DATA_DEFAULT_PATH, 'colors3.txt'))
 
     # colors = generate_colors(color_table=tab, number_of_colors=1000, methods=[

@@ -50,7 +50,7 @@ def teardown_module():
 @pytest.mark.end_to_end
 def test_upload_photo_correct(photo, empty_table):
     twitter = Twitter(table=empty_table)
-    empty_table.add_photos({photo.id_flickr:photo})
+    empty_table.add_photos({photo.id_flickr: photo})
     result = twitter.upload_photo(photo)
     assert isinstance(result, Photo)
     assert isinstance(result.id_twitter, int)
@@ -66,16 +66,31 @@ def test_upload_photo_incorrect(photo, empty_table):
 
 
 @pytest.mark.end_to_end
-def test_create_post_correct(photo, empty_table):
+def test_create_post_correct(photo, photo2, empty_table):
     twitter = Twitter(table=empty_table)
-    empty_table.add_photos({photo.id_flickr:photo})
+    empty_table.add_photos({photo.id_flickr: photo})
+    empty_table.add_photos({photo2.id_flickr: photo2})
     twitter.upload_photo(photo)
-    result = twitter.create_post(status=photo.title, photo=photo)
+    twitter.upload_photo(photo2)
+    result = twitter.create_post(status=photo.title, photos=[photo])
     assert isinstance(result, str)
     result = twitter.create_post(status="test")
     assert isinstance(result, str)
-    result = twitter.create_post(photo=photo)
+    result = twitter.create_post(photos=[photo, photo2])
     assert isinstance(result, str)
+
+
+def test_create_post_and_db(photo, photo2, empty_table):
+    twitter = Twitter(table=empty_table)
+    empty_table.add_photos({photo.id_flickr: photo})
+    empty_table.add_photos({photo2.id_flickr: photo2})
+    twitter.upload_photo(photo)
+    twitter.upload_photo(photo2)
+    result = twitter.create_post(status=photo.title, photos=[photo, photo2])
+    posted = empty_table.db.select(
+        query="SELECT * FROM {}",
+        identifiers=[TABLE_NAME])
+    assert set(posted) == {(photo.id_flickr, True, result), (photo2.id_flickr, True, result)}
 
 
 @pytest.mark.end_to_end
@@ -96,14 +111,15 @@ def test_delete_tweet_by_id_no_photo_correct(empty_table):
 
 
 @pytest.mark.end_to_end
-def test_delete_tweet_by_id_with_photo_correct(empty_table, photo):
+def test_delete_tweet_by_id_with_photo_correct(empty_table, photo, photo2):
     twitter = Twitter(table=empty_table)
     empty_table.add_photos({photo.id_flickr: photo})
+    empty_table.add_photos({photo2.id_flickr: photo2})
     pic = twitter.upload_photo(photo)
-    tw_id = twitter.create_post(status=f"test{random.random()}", photo=pic)
+    pic2 = twitter.upload_photo(photo2)
+    tw_id = twitter.create_post(status=f"test{random.random()}", photos=[pic, pic2])
     twitter._delete_tweet_by_id(tweet_id=tw_id)
     posted = empty_table.db.select(
-        query="SELECT * FROM {} WHERE id=%s",
-        identifiers=[TABLE_NAME],
-        arguments=(photo.id_flickr,))
-    assert posted == [(photo.id_flickr, False, None)]
+        query="SELECT * FROM {}",
+        identifiers=[TABLE_NAME])
+    assert set(posted) == {(photo.id_flickr, False, None), (photo2.id_flickr, False, None)}

@@ -10,6 +10,7 @@ from src.logger import init_logging
 from src.photo import Photo
 from src.requester import Requester
 import psycopg2
+
 endpoint = collections.namedtuple('endpoint', ["url", "type"])
 
 log = logging.getLogger()
@@ -42,18 +43,19 @@ class Twitter:
         log.info(f"Photo with flickr id '{photo.id_flickr}' uploaded to twitter with id '{photo.id_twitter}'")
         return photo
 
-    def create_post(self, status: Any = "_", photo: Optional[Photo] = None) -> str:
+    def create_post(self, status: Any = "_", photos: Optional[List[Photo]] = None) -> str:
         log.info("started function Twitter create_post")
-        media_ids = photo.id_twitter if photo else None
+        media_ids = [photo.id_twitter for photo in photos] if photos else None
         created_post = self.requester.request_json(self.twitter_create_post.type,
                                                    self.twitter_create_post.url,
                                                    payload={"status": status, "media_ids": media_ids},
                                                    auth=self.auth)
-        if photo != {} and media_ids:
-            photo.id_posted_tweet = created_post["id"]  # TODO TEST IT!!!!
-            self.table.post_photo(photo_id=photo.id_flickr, post_id=photo.id_posted_tweet)
-        log.info(
-            f"Post with text '{status}' and photos '{photo}' uploaded to twitter with id '{created_post['id']}'")
+        if photos != {} and media_ids:
+            for photo in photos:
+                photo.id_posted_tweet = created_post["id"]  # TODO TEST IT!!!!
+                self.table.post_photo(photo_id=photo.id_flickr, post_id=photo.id_posted_tweet)
+            log.info(
+                f"Post with text '{status}' and photos '{photos}' uploaded to twitter with id '{created_post['id']}'")
         return str(created_post['id'])
 
     def get_user_posts(self, amount: int) -> List[int]:
@@ -74,9 +76,3 @@ class Twitter:
             log.debug(f"deleted twitter message with id '{tweet_id}', and photos marked as unposted")
         except psycopg2.ProgrammingError:
             log.debug(f"deleted twitter message with id '{tweet_id}', NO photos marked as unposted")
-
-# if __name__ == '__main__':
-#     init_logging("log.log")
-# with DataBase("twitter") as table:
-#     t = Twitter(table=table)
-#     t.get_user_posts(1)

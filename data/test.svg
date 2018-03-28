@@ -1,2 +1,423 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<svg baseProfile="full" height="760px" version="1.1" width="1540px" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink"><defs /><rect fill="#24df04" height="40" width="140" x="0" y="0" /><text dy="20.0" style="font-size:18.18181818181818px" x="0" y="0">[74, -121, 82]</text><rect fill="#44c553" height="40" width="140" x="140" y="0" /><text dy="20.0" style="font-size:18.18181818181818px" x="140" y="0">[67, -89, 47]</text><rect fill="#81ca2b" height="40" width="140" x="280" y="0" /><text dy="20.0" style="font-size:18.18181818181818px" x="280" y="0">[72, -63, 73]</text><rect fill="#5fb33a" height="40" width="140" x="420" y="0" /><text dy="20.0" style="font-size:18.18181818181818px" x="420" y="0">[63, -68, 55]</text><rect fill="#92d333" height="40" width="140" x="560" y="0" /><text dy="20.0" style="font-size:18.18181818181818px" x="560" y="0">[76, -58, 74]</text><rect fill="#50a743" height="40" width="140" x="700" y="0" /><text dy="20.0" style="font-size:18.18181818181818px" x="700" y="0">[59, -68, 45]</text><rect fill="#00802a" height="40" width="140" x="840" y="0" /><text dy="20.0" style="font-size:18.18181818181818px" x="840" y="0">[44, -79, 40]</text><rect fill="#66b348" height="40" width="140" x="980" y="0" /><text dy="20.0" style="font-size:18.18181818181818px" x="980" y="0">[64, -62, 49]</text><rect fill="#00be78" height="40" width="140" x="1120" y="0" /><text dy="20.0" style="font-size:18.18181818181818px" x="1120" y="0">[65, -90, 21]</text><rect fill="#a3d92d" height="40" width="140" x="1260" y="0" /><text dy="20.0" style="font-size:18.18181818181818px" x="1260" y="0">[79, -52, 79]</text><rect fill="#a3d92d" height="40" width="140" x="1400" y="0" /><text dy="20.0" style="font-size:18.18181818181818px" x="1400" y="0">[79, -52, 79]</text><rect fill="#30a3d3" height="40" width="140" x="0" y="40" /><text dy="20.0" style="font-size:18.18181818181818px" x="0" y="40">[60, -30, -38]</text><rect fill="#1d95c9" height="40" width="140" x="140" y="40" /><text dy="20.0" style="font-size:18.18181818181818px" x="140" y="40">[56, -27, -40]</text><rect fill="#43a8c5" height="40" width="140" x="280" y="40" /><text dy="20.0" style="font-size:18.18181818181818px" x="280" y="40">[62, -35, -27]</text><rect fill="#66b7e1" height="40" width="140" x="420" y="40" /><text dy="20.0" style="font-size:18.18181818181818px" x="420" y="40">[69, -24, -32]</text><rect fill="#0084ac" height="40" width="140" x="560" y="40" /><text dy="20.0" style="font-size:18.18181818181818px" x="560" y="40">[49, -29, -34]</text><rect fill="#4e93ba" height="40" width="140" x="700" y="40" /><text dy="20.0" style="font-size:18.18181818181818px" x="700" y="40">[56, -20, -30]</text><rect fill="#5ba0d0" height="40" width="140" x="840" y="40" /><text dy="20.0" style="font-size:18.18181818181818px" x="840" y="40">[61, -17, -34]</text><rect fill="#5ba0d0" height="40" width="140" x="980" y="40" /><text dy="20.0" style="font-size:18.18181818181818px" x="980" y="40">[61, -17, -34]</text><rect fill="#4190ad" height="40" width="140" x="1120" y="40" /><text dy="20.0" style="font-size:18.18181818181818px" x="1120" y="40">[54, -27, -26]</text><rect fill="#438eac" height="40" width="140" x="1260" y="40" /><text dy="20.0" style="font-size:18.18181818181818px" x="1260" y="40">[54, -25, -26]</text><rect fill="#2599b2" height="40" width="140" x="1400" y="40" /><text dy="20.0" style="font-size:18.18181818181818px" x="1400" y="40">[56, -39, -26]</text><rect fill="#0b070d" height="40" width="140" x="0" y="80" /><text dy="20.0" style="font-size:18.18181818181818px" x="0" y="80">[0, 1, -1]</text><rect fill="#000000" height="40" width="140" x="140" y="80" /><text dy="20.0" style="font-size:18.18181818181818px" x="140" y="80">[0, 0, 0]</text><rect fill="#181818" height="40" width="140" x="280" y="80" /><text dy="20.0" style="font-size:18.18181818181818px" x="280" y="80">[4, 0, 0]</text><rect fill="#191818" height="40" width="140" x="420" y="80" /><text dy="20.0" style="font-size:18.18181818181818px" x="420" y="80">[5, 0, 0]</text><rect fill="#1c1d1f" height="40" width="140" x="560" y="80" /><text dy="20.0" style="font-size:18.18181818181818px" x="560" y="80">[7, 0, -1]</text><rect fill="#1e1e1e" height="40" width="140" x="700" y="80" /><text dy="20.0" style="font-size:18.18181818181818px" x="700" y="80">[8, 0, 0]</text><rect fill="#1d2020" height="40" width="140" x="840" y="80" /><text dy="20.0" style="font-size:18.18181818181818px" x="840" y="80">[8, -2, 0]</text><rect fill="#1d2020" height="40" width="140" x="980" y="80" /><text dy="20.0" style="font-size:18.18181818181818px" x="980" y="80">[8, -2, 0]</text><rect fill="#211916" height="40" width="140" x="1120" y="80" /><text dy="20.0" style="font-size:18.18181818181818px" x="1120" y="80">[6, 5, 4]</text><rect fill="#26211f" height="40" width="140" x="1260" y="80" /><text dy="20.0" style="font-size:18.18181818181818px" x="1260" y="80">[10, 3, 3]</text><rect fill="#252525" height="40" width="140" x="1400" y="80" /><text dy="20.0" style="font-size:18.18181818181818px" x="1400" y="80">[12, 0, 0]</text><rect fill="#df9eae" height="40" width="140" x="0" y="120" /><text dy="20.0" style="font-size:18.18181818181818px" x="0" y="120">[74, 33, 4]</text><rect fill="#da9ca6" height="40" width="140" x="140" y="120" /><text dy="20.0" style="font-size:18.18181818181818px" x="140" y="120">[73, 31, 6]</text><rect fill="#e093ab" height="40" width="140" x="280" y="120" /><text dy="20.0" style="font-size:18.18181818181818px" x="280" y="120">[72, 40, 3]</text><rect fill="#d08a9b" height="40" width="140" x="420" y="120" /><text dy="20.0" style="font-size:18.18181818181818px" x="420" y="120">[67, 36, 5]</text><rect fill="#f5b2c5" height="40" width="140" x="560" y="120" /><text dy="20.0" style="font-size:18.18181818181818px" x="560" y="120">[81, 33, 2]</text><rect fill="#dfacb7" height="40" width="140" x="700" y="120" /><text dy="20.0" style="font-size:18.18181818181818px" x="700" y="120">[77, 26, 3]</text><rect fill="#c58f9d" height="40" width="140" x="840" y="120" /><text dy="20.0" style="font-size:18.18181818181818px" x="840" y="120">[67, 28, 3]</text><rect fill="#d5a4a8" height="40" width="140" x="980" y="120" /><text dy="20.0" style="font-size:18.18181818181818px" x="980" y="120">[74, 24, 7]</text><rect fill="#edb8c7" height="40" width="140" x="1120" y="120" /><text dy="20.0" style="font-size:18.18181818181818px" x="1120" y="120">[81, 27, 2]</text><rect fill="#edb8c7" height="40" width="140" x="1260" y="120" /><text dy="20.0" style="font-size:18.18181818181818px" x="1260" y="120">[81, 27, 2]</text><rect fill="#c99aa0" height="40" width="140" x="1400" y="120" /><text dy="20.0" style="font-size:18.18181818181818px" x="1400" y="120">[70, 24, 5]</text><rect fill="#395260" height="40" width="140" x="0" y="160" /><text dy="20.0" style="font-size:18.18181818181818px" x="0" y="160">[32, -10, -13]</text><rect fill="#374e59" height="40" width="140" x="140" y="160" /><text dy="20.0" style="font-size:18.18181818181818px" x="140" y="160">[30, -10, -11]</text><rect fill="#304e5e" height="40" width="140" x="280" y="160" /><text dy="20.0" style="font-size:18.18181818181818px" x="280" y="160">[29, -11, -15]</text><rect fill="#3a4e58" height="40" width="140" x="420" y="160" /><text dy="20.0" style="font-size:18.18181818181818px" x="420" y="160">[30, -8, -10]</text><rect fill="#3a4e5f" height="40" width="140" x="560" y="160" /><text dy="20.0" style="font-size:18.18181818181818px" x="560" y="160">[30, -6, -14]</text><rect fill="#2e5060" height="40" width="140" x="700" y="160" /><text dy="20.0" style="font-size:18.18181818181818px" x="700" y="160">[30, -13, -16]</text><rect fill="#3b4c57" height="40" width="140" x="840" y="160" /><text dy="20.0" style="font-size:18.18181818181818px" x="840" y="160">[30, -6, -10]</text><rect fill="#445761" height="40" width="140" x="980" y="160" /><text dy="20.0" style="font-size:18.18181818181818px" x="980" y="160">[34, -8, -9]</text><rect fill="#40505a" height="40" width="140" x="1120" y="160" /><text dy="20.0" style="font-size:18.18181818181818px" x="1120" y="160">[31, -6, -9]</text><rect fill="#3f545a" height="40" width="140" x="1260" y="160" /><text dy="20.0" style="font-size:18.18181818181818px" x="1260" y="160">[33, -10, -7]</text><rect fill="#305563" height="40" width="140" x="1400" y="160" /><text dy="20.0" style="font-size:18.18181818181818px" x="1400" y="160">[32, -15, -15]</text><rect fill="#ccce3f" height="40" width="140" x="0" y="200" /><text dy="20.0" style="font-size:18.18181818181818px" x="0" y="200">[80, -18, 74]</text><rect fill="#d6ca3d" height="40" width="140" x="140" y="200" /><text dy="20.0" style="font-size:18.18181818181818px" x="140" y="200">[80, -10, 75]</text><rect fill="#e2e64d" height="40" width="140" x="280" y="200" /><text dy="20.0" style="font-size:18.18181818181818px" x="280" y="200">[88, -21, 77]</text><rect fill="#b7c52c" height="40" width="140" x="420" y="200" /><text dy="20.0" style="font-size:18.18181818181818px" x="420" y="200">[76, -26, 77]</text><rect fill="#e4db55" height="40" width="140" x="560" y="200" /><text dy="20.0" style="font-size:18.18181818181818px" x="560" y="200">[86, -12, 70]</text><rect fill="#c0bb1d" height="40" width="140" x="700" y="200" /><text dy="20.0" style="font-size:18.18181818181818px" x="700" y="200">[74, -14, 80]</text><rect fill="#bac00e" height="40" width="140" x="840" y="200" /><text dy="20.0" style="font-size:18.18181818181818px" x="840" y="200">[75, -21, 84]</text><rect fill="#d2db32" height="40" width="140" x="980" y="200" /><text dy="20.0" style="font-size:18.18181818181818px" x="980" y="200">[84, -24, 83]</text><rect fill="#e3dd39" height="40" width="140" x="1120" y="200" /><text dy="20.0" style="font-size:18.18181818181818px" x="1120" y="200">[86, -15, 83]</text><rect fill="#ddcb46" height="40" width="140" x="1260" y="200" /><text dy="20.0" style="font-size:18.18181818181818px" x="1260" y="200">[81, -6, 72]</text><rect fill="#b7c61a" height="40" width="140" x="1400" y="200" /><text dy="20.0" style="font-size:18.18181818181818px" x="1400" y="200">[76, -27, 82]</text><rect fill="#c08741" height="40" width="140" x="0" y="240" /><text dy="20.0" style="font-size:18.18181818181818px" x="0" y="240">[63, 21, 52]</text><rect fill="#b78038" height="40" width="140" x="140" y="240" /><text dy="20.0" style="font-size:18.18181818181818px" x="140" y="240">[60, 21, 53]</text><rect fill="#b78239" height="40" width="140" x="280" y="240" /><text dy="20.0" style="font-size:18.18181818181818px" x="280" y="240">[60, 19, 53]</text><rect fill="#b78239" height="40" width="140" x="420" y="240" /><text dy="20.0" style="font-size:18.18181818181818px" x="420" y="240">[60, 19, 53]</text><rect fill="#b98036" height="40" width="140" x="560" y="240" /><text dy="20.0" style="font-size:18.18181818181818px" x="560" y="240">[60, 22, 55]</text><rect fill="#c68e3f" height="40" width="140" x="700" y="240" /><text dy="20.0" style="font-size:18.18181818181818px" x="700" y="240">[65, 20, 56]</text><rect fill="#bf8d3c" height="40" width="140" x="840" y="240" /><text dy="20.0" style="font-size:18.18181818181818px" x="840" y="240">[64, 17, 56]</text><rect fill="#b88a3d" height="40" width="140" x="980" y="240" /><text dy="20.0" style="font-size:18.18181818181818px" x="980" y="240">[62, 15, 53]</text><rect fill="#b57b2e" height="40" width="140" x="1120" y="240" /><text dy="20.0" style="font-size:18.18181818181818px" x="1120" y="240">[58, 22, 57]</text><rect fill="#bf914b" height="40" width="140" x="1260" y="240" /><text dy="20.0" style="font-size:18.18181818181818px" x="1260" y="240">[65, 15, 49]</text><rect fill="#c07c40" height="40" width="140" x="1400" y="240" /><text dy="20.0" style="font-size:18.18181818181818px" x="1400" y="240">[60, 28, 50]</text><rect fill="#eedff5" height="40" width="140" x="0" y="280" /><text dy="20.0" style="font-size:18.18181818181818px" x="0" y="280">[91, 10, -8]</text><rect fill="#e6def3" height="40" width="140" x="140" y="280" /><text dy="20.0" style="font-size:18.18181818181818px" x="140" y="280">[90, 7, -9]</text><rect fill="#e3d6e9" height="40" width="140" x="280" y="280" /><text dy="20.0" style="font-size:18.18181818181818px" x="280" y="280">[87, 9, -7]</text><rect fill="#e4d7e5" height="40" width="140" x="420" y="280" /><text dy="20.0" style="font-size:18.18181818181818px" x="420" y="280">[88, 8, -4]</text><rect fill="#e4ceec" height="40" width="140" x="560" y="280" /><text dy="20.0" style="font-size:18.18181818181818px" x="560" y="280">[86, 15, -11]</text><rect fill="#d5cee2" height="40" width="140" x="700" y="280" /><text dy="20.0" style="font-size:18.18181818181818px" x="700" y="280">[84, 7, -8]</text><rect fill="#ecdce3" height="40" width="140" x="840" y="280" /><text dy="20.0" style="font-size:18.18181818181818px" x="840" y="280">[89, 8, 0]</text><rect fill="#ddd6e1" height="40" width="140" x="980" y="280" /><text dy="20.0" style="font-size:18.18181818181818px" x="980" y="280">[87, 5, -4]</text><rect fill="#e4dee7" height="40" width="140" x="1120" y="280" /><text dy="20.0" style="font-size:18.18181818181818px" x="1120" y="280">[89, 4, -3]</text><rect fill="#e6dfe7" height="40" width="140" x="1260" y="280" /><text dy="20.0" style="font-size:18.18181818181818px" x="1260" y="280">[90, 4, -2]</text><rect fill="#dcd5de" height="40" width="140" x="1400" y="280" /><text dy="20.0" style="font-size:18.18181818181818px" x="1400" y="280">[86, 4, -3]</text><rect fill="#3b1797" height="40" width="140" x="0" y="320" /><text dy="20.0" style="font-size:18.18181818181818px" x="0" y="320">[23, 52, -64]</text><rect fill="#2d2480" height="40" width="140" x="140" y="320" /><text dy="20.0" style="font-size:18.18181818181818px" x="140" y="320">[20, 37, -54]</text><rect fill="#4b3c8e" height="40" width="140" x="280" y="320" /><text dy="20.0" style="font-size:18.18181818181818px" x="280" y="320">[31, 32, -45]</text><rect fill="#5b3e90" height="40" width="140" x="420" y="320" /><text dy="20.0" style="font-size:18.18181818181818px" x="420" y="320">[34, 36, -42]</text><rect fill="#462c77" height="40" width="140" x="560" y="320" /><text dy="20.0" style="font-size:18.18181818181818px" x="560" y="320">[25, 34, -40]</text><rect fill="#353a8b" height="40" width="140" x="700" y="320" /><text dy="20.0" style="font-size:18.18181818181818px" x="700" y="320">[27, 26, -49]</text><rect fill="#724aa1" height="40" width="140" x="840" y="320" /><text dy="20.0" style="font-size:18.18181818181818px" x="840" y="320">[41, 40, -41]</text><rect fill="#724aa1" height="40" width="140" x="980" y="320" /><text dy="20.0" style="font-size:18.18181818181818px" x="980" y="320">[41, 40, -41]</text><rect fill="#583580" height="40" width="140" x="1120" y="320" /><text dy="20.0" style="font-size:18.18181818181818px" x="1120" y="320">[30, 37, -37]</text><rect fill="#583580" height="40" width="140" x="1260" y="320" /><text dy="20.0" style="font-size:18.18181818181818px" x="1260" y="320">[30, 37, -37]</text><rect fill="#352f77" height="40" width="140" x="1400" y="320" /><text dy="20.0" style="font-size:18.18181818181818px" x="1400" y="320">[23, 27, -43]</text><rect fill="#75849d" height="40" width="140" x="0" y="360" /><text dy="20.0" style="font-size:18.18181818181818px" x="0" y="360">[54, -1, -16]</text><rect fill="#758a9c" height="40" width="140" x="140" y="360" /><text dy="20.0" style="font-size:18.18181818181818px" x="140" y="360">[56, -6, -13]</text><rect fill="#758a9c" height="40" width="140" x="280" y="360" /><text dy="20.0" style="font-size:18.18181818181818px" x="280" y="360">[56, -6, -13]</text><rect fill="#667c91" height="40" width="140" x="420" y="360" /><text dy="20.0" style="font-size:18.18181818181818px" x="420" y="360">[50, -6, -15]</text><rect fill="#7988ab" height="40" width="140" x="560" y="360" /><text dy="20.0" style="font-size:18.18181818181818px" x="560" y="360">[56, 1, -21]</text><rect fill="#808aac" height="40" width="140" x="700" y="360" /><text dy="20.0" style="font-size:18.18181818181818px" x="700" y="360">[57, 3, -20]</text><rect fill="#6b8393" height="40" width="140" x="840" y="360" /><text dy="20.0" style="font-size:18.18181818181818px" x="840" y="360">[53, -8, -13]</text><rect fill="#60768b" height="40" width="140" x="980" y="360" /><text dy="20.0" style="font-size:18.18181818181818px" x="980" y="360">[48, -6, -16]</text><rect fill="#607c9a" height="40" width="140" x="1120" y="360" /><text dy="20.0" style="font-size:18.18181818181818px" x="1120" y="360">[50, -6, -21]</text><rect fill="#6f8c9f" height="40" width="140" x="1260" y="360" /><text dy="20.0" style="font-size:18.18181818181818px" x="1260" y="360">[56, -9, -15]</text><rect fill="#818392" height="40" width="140" x="1400" y="360" /><text dy="20.0" style="font-size:18.18181818181818px" x="1400" y="360">[55, 2, -8]</text><rect fill="#af8d6d" height="40" width="140" x="0" y="400" /><text dy="20.0" style="font-size:18.18181818181818px" x="0" y="400">[62, 12, 25]</text><rect fill="#ab8e6b" height="40" width="140" x="140" y="400" /><text dy="20.0" style="font-size:18.18181818181818px" x="140" y="400">[62, 9, 25]</text><rect fill="#ac916e" height="40" width="140" x="280" y="400" /><text dy="20.0" style="font-size:18.18181818181818px" x="280" y="400">[63, 8, 25]</text><rect fill="#a3876a" height="40" width="140" x="420" y="400" /><text dy="20.0" style="font-size:18.18181818181818px" x="420" y="400">[59, 10, 22]</text><rect fill="#a58b6f" height="40" width="140" x="560" y="400" /><text dy="20.0" style="font-size:18.18181818181818px" x="560" y="400">[60, 9, 21]</text><rect fill="#a38a6d" height="40" width="140" x="700" y="400" /><text dy="20.0" style="font-size:18.18181818181818px" x="700" y="400">[60, 8, 21]</text><rect fill="#9f8460" height="40" width="140" x="840" y="400" /><text dy="20.0" style="font-size:18.18181818181818px" x="840" y="400">[58, 8, 26]</text><rect fill="#a17d60" height="40" width="140" x="980" y="400" /><text dy="20.0" style="font-size:18.18181818181818px" x="980" y="400">[56, 14, 24]</text><rect fill="#9d7f61" height="40" width="140" x="1120" y="400" /><text dy="20.0" style="font-size:18.18181818181818px" x="1120" y="400">[56, 11, 23]</text><rect fill="#9d8261" height="40" width="140" x="1260" y="400" /><text dy="20.0" style="font-size:18.18181818181818px" x="1260" y="400">[57, 9, 24]</text><rect fill="#c19676" height="40" width="140" x="1400" y="400" /><text dy="20.0" style="font-size:18.18181818181818px" x="1400" y="400">[67, 17, 26]</text><rect fill="#31fb0a" height="40" width="140" x="0" y="440" /><text dy="20.0" style="font-size:18.18181818181818px" x="0" y="440">[82, -130, 89]</text><rect fill="#44c553" height="40" width="140" x="140" y="440" /><text dy="20.0" style="font-size:18.18181818181818px" x="140" y="440">[67, -89, 47]</text><rect fill="#81ca2b" height="40" width="140" x="280" y="440" /><text dy="20.0" style="font-size:18.18181818181818px" x="280" y="440">[72, -63, 73]</text><rect fill="#5fb33a" height="40" width="140" x="420" y="440" /><text dy="20.0" style="font-size:18.18181818181818px" x="420" y="440">[63, -68, 55]</text><rect fill="#92d333" height="40" width="140" x="560" y="440" /><text dy="20.0" style="font-size:18.18181818181818px" x="560" y="440">[76, -58, 74]</text><rect fill="#a3d92d" height="40" width="140" x="700" y="440" /><text dy="20.0" style="font-size:18.18181818181818px" x="700" y="440">[79, -52, 79]</text><rect fill="#a3d92d" height="40" width="140" x="840" y="440" /><text dy="20.0" style="font-size:18.18181818181818px" x="840" y="440">[79, -52, 79]</text><rect fill="#96ca00" height="40" width="140" x="980" y="440" /><text dy="20.0" style="font-size:18.18181818181818px" x="980" y="440">[74, -51, 83]</text><rect fill="#50a743" height="40" width="140" x="1120" y="440" /><text dy="20.0" style="font-size:18.18181818181818px" x="1120" y="440">[59, -68, 45]</text><rect fill="#00802a" height="40" width="140" x="1260" y="440" /><text dy="20.0" style="font-size:18.18181818181818px" x="1260" y="440">[44, -79, 40]</text><rect fill="#00be78" height="40" width="140" x="1400" y="440" /><text dy="20.0" style="font-size:18.18181818181818px" x="1400" y="440">[65, -90, 21]</text><rect fill="#3f5e35" height="40" width="140" x="0" y="480" /><text dy="20.0" style="font-size:18.18181818181818px" x="0" y="480">[35, -29, 21]</text><rect fill="#365c34" height="40" width="140" x="140" y="480" /><text dy="20.0" style="font-size:18.18181818181818px" x="140" y="480">[33, -34, 20]</text><rect fill="#3e6334" height="40" width="140" x="280" y="480" /><text dy="20.0" style="font-size:18.18181818181818px" x="280" y="480">[36, -34, 24]</text><rect fill="#3e6334" height="40" width="140" x="420" y="480" /><text dy="20.0" style="font-size:18.18181818181818px" x="420" y="480">[36, -34, 24]</text><rect fill="#486531" height="40" width="140" x="560" y="480" /><text dy="20.0" style="font-size:18.18181818181818px" x="560" y="480">[38, -29, 28]</text><rect fill="#394f2b" height="40" width="140" x="700" y="480" /><text dy="20.0" style="font-size:18.18181818181818px" x="700" y="480">[29, -23, 20]</text><rect fill="#354c28" height="40" width="140" x="840" y="480" /><text dy="20.0" style="font-size:18.18181818181818px" x="840" y="480">[27, -24, 20]</text><rect fill="#305d35" height="40" width="140" x="980" y="480" /><text dy="20.0" style="font-size:18.18181818181818px" x="980" y="480">[33, -38, 19]</text><rect fill="#366243" height="40" width="140" x="1120" y="480" /><text dy="20.0" style="font-size:18.18181818181818px" x="1120" y="480">[36, -35, 12]</text><rect fill="#47562f" height="40" width="140" x="1260" y="480" /><text dy="20.0" style="font-size:18.18181818181818px" x="1260" y="480">[33, -18, 23]</text><rect fill="#44583b" height="40" width="140" x="1400" y="480" /><text dy="20.0" style="font-size:18.18181818181818px" x="1400" y="480">[33, -19, 15]</text><rect fill="#93cd36" height="40" width="140" x="0" y="520" /><text dy="20.0" style="font-size:18.18181818181818px" x="0" y="520">[74, -53, 71]</text><rect fill="#9cd03b" height="40" width="140" x="140" y="520" /><text dy="20.0" style="font-size:18.18181818181818px" x="140" y="520">[76, -49, 70]</text><rect fill="#92d333" height="40" width="140" x="280" y="520" /><text dy="20.0" style="font-size:18.18181818181818px" x="280" y="520">[76, -58, 74]</text><rect fill="#a3d92d" height="40" width="140" x="420" y="520" /><text dy="20.0" style="font-size:18.18181818181818px" x="420" y="520">[79, -52, 79]</text><rect fill="#a3d92d" height="40" width="140" x="560" y="520" /><text dy="20.0" style="font-size:18.18181818181818px" x="560" y="520">[79, -52, 79]</text><rect fill="#81ca2b" height="40" width="140" x="700" y="520" /><text dy="20.0" style="font-size:18.18181818181818px" x="700" y="520">[72, -63, 73]</text><rect fill="#96ca00" height="40" width="140" x="840" y="520" /><text dy="20.0" style="font-size:18.18181818181818px" x="840" y="520">[74, -51, 83]</text><rect fill="#7aac21" height="40" width="140" x="980" y="520" /><text dy="20.0" style="font-size:18.18181818181818px" x="980" y="520">[63, -48, 67]</text><rect fill="#7aac21" height="40" width="140" x="1120" y="520" /><text dy="20.0" style="font-size:18.18181818181818px" x="1120" y="520">[63, -48, 67]</text><rect fill="#b1dd52" height="40" width="140" x="1260" y="520" /><text dy="20.0" style="font-size:18.18181818181818px" x="1260" y="520">[81, -43, 66]</text><rect fill="#71a91d" height="40" width="140" x="1400" y="520" /><text dy="20.0" style="font-size:18.18181818181818px" x="1400" y="520">[62, -52, 67]</text><rect fill="#1b5f9d" height="40" width="140" x="0" y="560" /><text dy="20.0" style="font-size:18.18181818181818px" x="0" y="560">[37, -3, -44]</text><rect fill="#29598b" height="40" width="140" x="140" y="560" /><text dy="20.0" style="font-size:18.18181818181818px" x="140" y="560">[35, -4, -36]</text><rect fill="#29598b" height="40" width="140" x="280" y="560" /><text dy="20.0" style="font-size:18.18181818181818px" x="280" y="560">[35, -4, -36]</text><rect fill="#355d90" height="40" width="140" x="420" y="560" /><text dy="20.0" style="font-size:18.18181818181818px" x="420" y="560">[37, -1, -36]</text><rect fill="#42639f" height="40" width="140" x="560" y="560" /><text dy="20.0" style="font-size:18.18181818181818px" x="560" y="560">[41, 3, -39]</text><rect fill="#42639f" height="40" width="140" x="700" y="560" /><text dy="20.0" style="font-size:18.18181818181818px" x="700" y="560">[41, 3, -39]</text><rect fill="#3973a9" height="40" width="140" x="840" y="560" /><text dy="20.0" style="font-size:18.18181818181818px" x="840" y="560">[45, -8, -38]</text><rect fill="#20608e" height="40" width="140" x="980" y="560" /><text dy="20.0" style="font-size:18.18181818181818px" x="980" y="560">[37, -11, -35]</text><rect fill="#316ea0" height="40" width="140" x="1120" y="560" /><text dy="20.0" style="font-size:18.18181818181818px" x="1120" y="560">[43, -10, -36]</text><rect fill="#325482" height="40" width="140" x="1260" y="560" /><text dy="20.0" style="font-size:18.18181818181818px" x="1260" y="560">[33, 0, -33]</text><rect fill="#00689b" height="40" width="140" x="1400" y="560" /><text dy="20.0" style="font-size:18.18181818181818px" x="1400" y="560">[39, -14, -39]</text><rect fill="#a9212d" height="40" width="140" x="0" y="600" /><text dy="20.0" style="font-size:18.18181818181818px" x="0" y="600">[42, 63, 38]</text><rect fill="#b22833" height="40" width="140" x="140" y="600" /><text dy="20.0" style="font-size:18.18181818181818px" x="140" y="600">[45, 64, 38]</text><rect fill="#a92a37" height="40" width="140" x="280" y="600" /><text dy="20.0" style="font-size:18.18181818181818px" x="280" y="600">[43, 61, 32]</text><rect fill="#b6393a" height="40" width="140" x="420" y="600" /><text dy="20.0" style="font-size:18.18181818181818px" x="420" y="600">[47, 60, 36]</text><rect fill="#ad3539" height="40" width="140" x="560" y="600" /><text dy="20.0" style="font-size:18.18181818181818px" x="560" y="600">[45, 58, 34]</text><rect fill="#ad3539" height="40" width="140" x="700" y="600" /><text dy="20.0" style="font-size:18.18181818181818px" x="700" y="600">[45, 58, 34]</text><rect fill="#b3002f" height="40" width="140" x="840" y="600" /><text dy="20.0" style="font-size:18.18181818181818px" x="840" y="600">[43, 69, 38]</text><rect fill="#b3393e" height="40" width="140" x="980" y="600" /><text dy="20.0" style="font-size:18.18181818181818px" x="980" y="600">[47, 59, 33]</text><rect fill="#9d002f" height="40" width="140" x="1120" y="600" /><text dy="20.0" style="font-size:18.18181818181818px" x="1120" y="600">[38, 63, 31]</text><rect fill="#a83239" height="40" width="140" x="1260" y="600" /><text dy="20.0" style="font-size:18.18181818181818px" x="1260" y="600">[44, 58, 32]</text><rect fill="#9b2a2c" height="40" width="140" x="1400" y="600" /><text dy="20.0" style="font-size:18.18181818181818px" x="1400" y="600">[40, 55, 35]</text><rect fill="#3399a7" height="40" width="140" x="0" y="640" /><text dy="20.0" style="font-size:18.18181818181818px" x="0" y="640">[56, -40, -20]</text><rect fill="#39909b" height="40" width="140" x="140" y="640" /><text dy="20.0" style="font-size:18.18181818181818px" x="140" y="640">[53, -37, -17]</text><rect fill="#489ea8" height="40" width="140" x="280" y="640" /><text dy="20.0" style="font-size:18.18181818181818px" x="280" y="640">[58, -37, -16]</text><rect fill="#0092a5" height="40" width="140" x="420" y="640" /><text dy="20.0" style="font-size:18.18181818181818px" x="420" y="640">[53, -43, -23]</text><rect fill="#308ea0" height="40" width="140" x="560" y="640" /><text dy="20.0" style="font-size:18.18181818181818px" x="560" y="640">[52, -36, -21]</text><rect fill="#2599b2" height="40" width="140" x="700" y="640" /><text dy="20.0" style="font-size:18.18181818181818px" x="700" y="640">[56, -39, -26]</text><rect fill="#008b97" height="40" width="140" x="840" y="640" /><text dy="20.0" style="font-size:18.18181818181818px" x="840" y="640">[50, -44, -19]</text><rect fill="#008b97" height="40" width="140" x="980" y="640" /><text dy="20.0" style="font-size:18.18181818181818px" x="980" y="640">[50, -44, -19]</text><rect fill="#4495a4" height="40" width="140" x="1120" y="640" /><text dy="20.0" style="font-size:18.18181818181818px" x="1120" y="640">[55, -33, -19]</text><rect fill="#20868f" height="40" width="140" x="1260" y="640" /><text dy="20.0" style="font-size:18.18181818181818px" x="1260" y="640">[49, -41, -17]</text><rect fill="#00879f" height="40" width="140" x="1400" y="640" /><text dy="20.0" style="font-size:18.18181818181818px" x="1400" y="640">[49, -37, -26]</text><rect fill="#3a1bb9" height="40" width="140" x="0" y="680" /><text dy="20.0" style="font-size:18.18181818181818px" x="0" y="680">[27, 60, -78]</text><rect fill="#2d2480" height="40" width="140" x="140" y="680" /><text dy="20.0" style="font-size:18.18181818181818px" x="140" y="680">[20, 37, -54]</text><rect fill="#4b3c8e" height="40" width="140" x="280" y="680" /><text dy="20.0" style="font-size:18.18181818181818px" x="280" y="680">[31, 32, -45]</text><rect fill="#5b3e90" height="40" width="140" x="420" y="680" /><text dy="20.0" style="font-size:18.18181818181818px" x="420" y="680">[34, 36, -42]</text><rect fill="#724aa1" height="40" width="140" x="560" y="680" /><text dy="20.0" style="font-size:18.18181818181818px" x="560" y="680">[41, 40, -41]</text><rect fill="#724aa1" height="40" width="140" x="700" y="680" /><text dy="20.0" style="font-size:18.18181818181818px" x="700" y="680">[41, 40, -41]</text><rect fill="#353a8b" height="40" width="140" x="840" y="680" /><text dy="20.0" style="font-size:18.18181818181818px" x="840" y="680">[27, 26, -49]</text><rect fill="#462c77" height="40" width="140" x="980" y="680" /><text dy="20.0" style="font-size:18.18181818181818px" x="980" y="680">[25, 34, -40]</text><rect fill="#7b5cb7" height="40" width="140" x="1120" y="680" /><text dy="20.0" style="font-size:18.18181818181818px" x="1120" y="680">[47, 36, -44]</text><rect fill="#583580" height="40" width="140" x="1260" y="680" /><text dy="20.0" style="font-size:18.18181818181818px" x="1260" y="680">[30, 37, -37]</text><rect fill="#583580" height="40" width="140" x="1400" y="680" /><text dy="20.0" style="font-size:18.18181818181818px" x="1400" y="680">[30, 37, -37]</text><rect fill="#5dc043" height="40" width="140" x="0" y="720" /><text dy="20.0" style="font-size:18.18181818181818px" x="0" y="720">[67, -76, 55]</text><rect fill="#5fb33a" height="40" width="140" x="140" y="720" /><text dy="20.0" style="font-size:18.18181818181818px" x="140" y="720">[63, -68, 55]</text><rect fill="#44c553" height="40" width="140" x="280" y="720" /><text dy="20.0" style="font-size:18.18181818181818px" x="280" y="720">[67, -89, 47]</text><rect fill="#50a743" height="40" width="140" x="420" y="720" /><text dy="20.0" style="font-size:18.18181818181818px" x="420" y="720">[59, -68, 45]</text><rect fill="#66b348" height="40" width="140" x="560" y="720" /><text dy="20.0" style="font-size:18.18181818181818px" x="560" y="720">[64, -62, 49]</text><rect fill="#81ca2b" height="40" width="140" x="700" y="720" /><text dy="20.0" style="font-size:18.18181818181818px" x="700" y="720">[72, -63, 73]</text><rect fill="#5ca345" height="40" width="140" x="840" y="720" /><text dy="20.0" style="font-size:18.18181818181818px" x="840" y="720">[58, -58, 43]</text><rect fill="#4ba351" height="40" width="140" x="980" y="720" /><text dy="20.0" style="font-size:18.18181818181818px" x="980" y="720">[58, -66, 35]</text><rect fill="#7fc15c" height="40" width="140" x="1120" y="720" /><text dy="20.0" style="font-size:18.18181818181818px" x="1120" y="720">[70, -53, 45]</text><rect fill="#428929" height="40" width="140" x="1260" y="720" /><text dy="20.0" style="font-size:18.18181818181818px" x="1260" y="720">[49, -61, 47]</text><rect fill="#5c9625" height="40" width="140" x="1400" y="720" /><text dy="20.0" style="font-size:18.18181818181818px" x="1400" y="720">[54, -53, 56]</text></svg>
+<svg xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink" baseProfile="full" height="760px" version="1.1"
+     width="1540px" xmlns="http://www.w3.org/2000/svg">
+    <defs/>
+    <rect fill="#24df04" height="40" width="140" x="0" y="0"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="0" y="0">[74, -121, 82]</text>
+    <rect fill="#44c553" height="40" width="140" x="140" y="0"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="140" y="0">[67, -89, 47]</text>
+    <rect fill="#81ca2b" height="40" width="140" x="280" y="0"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="280" y="0">[72, -63, 73]</text>
+    <rect fill="#5fb33a" height="40" width="140" x="420" y="0"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="420" y="0">[63, -68, 55]</text>
+    <rect fill="#92d333" height="40" width="140" x="560" y="0"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="560" y="0">[76, -58, 74]</text>
+    <rect fill="#50a743" height="40" width="140" x="700" y="0"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="700" y="0">[59, -68, 45]</text>
+    <rect fill="#00802a" height="40" width="140" x="840" y="0"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="840" y="0">[44, -79, 40]</text>
+    <rect fill="#66b348" height="40" width="140" x="980" y="0"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="980" y="0">[64, -62, 49]</text>
+    <rect fill="#00be78" height="40" width="140" x="1120" y="0"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="1120" y="0">[65, -90, 21]</text>
+    <rect fill="#a3d92d" height="40" width="140" x="1260" y="0"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="1260" y="0">[79, -52, 79]</text>
+    <rect fill="#a3d92d" height="40" width="140" x="1400" y="0"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="1400" y="0">[79, -52, 79]</text>
+    <rect fill="#30a3d3" height="40" width="140" x="0" y="40"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="0" y="40">[60, -30, -38]</text>
+    <rect fill="#1d95c9" height="40" width="140" x="140" y="40"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="140" y="40">[56, -27, -40]</text>
+    <rect fill="#43a8c5" height="40" width="140" x="280" y="40"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="280" y="40">[62, -35, -27]</text>
+    <rect fill="#66b7e1" height="40" width="140" x="420" y="40"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="420" y="40">[69, -24, -32]</text>
+    <rect fill="#0084ac" height="40" width="140" x="560" y="40"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="560" y="40">[49, -29, -34]</text>
+    <rect fill="#4e93ba" height="40" width="140" x="700" y="40"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="700" y="40">[56, -20, -30]</text>
+    <rect fill="#5ba0d0" height="40" width="140" x="840" y="40"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="840" y="40">[61, -17, -34]</text>
+    <rect fill="#5ba0d0" height="40" width="140" x="980" y="40"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="980" y="40">[61, -17, -34]</text>
+    <rect fill="#4190ad" height="40" width="140" x="1120" y="40"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="1120" y="40">[54, -27, -26]</text>
+    <rect fill="#438eac" height="40" width="140" x="1260" y="40"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="1260" y="40">[54, -25, -26]</text>
+    <rect fill="#2599b2" height="40" width="140" x="1400" y="40"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="1400" y="40">[56, -39, -26]</text>
+    <rect fill="#0b070d" height="40" width="140" x="0" y="80"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="0" y="80">[0, 1, -1]</text>
+    <rect fill="#000000" height="40" width="140" x="140" y="80"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="140" y="80">[0, 0, 0]</text>
+    <rect fill="#181818" height="40" width="140" x="280" y="80"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="280" y="80">[4, 0, 0]</text>
+    <rect fill="#191818" height="40" width="140" x="420" y="80"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="420" y="80">[5, 0, 0]</text>
+    <rect fill="#1c1d1f" height="40" width="140" x="560" y="80"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="560" y="80">[7, 0, -1]</text>
+    <rect fill="#1e1e1e" height="40" width="140" x="700" y="80"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="700" y="80">[8, 0, 0]</text>
+    <rect fill="#1d2020" height="40" width="140" x="840" y="80"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="840" y="80">[8, -2, 0]</text>
+    <rect fill="#1d2020" height="40" width="140" x="980" y="80"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="980" y="80">[8, -2, 0]</text>
+    <rect fill="#211916" height="40" width="140" x="1120" y="80"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="1120" y="80">[6, 5, 4]</text>
+    <rect fill="#26211f" height="40" width="140" x="1260" y="80"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="1260" y="80">[10, 3, 3]</text>
+    <rect fill="#252525" height="40" width="140" x="1400" y="80"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="1400" y="80">[12, 0, 0]</text>
+    <rect fill="#df9eae" height="40" width="140" x="0" y="120"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="0" y="120">[74, 33, 4]</text>
+    <rect fill="#da9ca6" height="40" width="140" x="140" y="120"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="140" y="120">[73, 31, 6]</text>
+    <rect fill="#e093ab" height="40" width="140" x="280" y="120"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="280" y="120">[72, 40, 3]</text>
+    <rect fill="#d08a9b" height="40" width="140" x="420" y="120"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="420" y="120">[67, 36, 5]</text>
+    <rect fill="#f5b2c5" height="40" width="140" x="560" y="120"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="560" y="120">[81, 33, 2]</text>
+    <rect fill="#dfacb7" height="40" width="140" x="700" y="120"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="700" y="120">[77, 26, 3]</text>
+    <rect fill="#c58f9d" height="40" width="140" x="840" y="120"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="840" y="120">[67, 28, 3]</text>
+    <rect fill="#d5a4a8" height="40" width="140" x="980" y="120"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="980" y="120">[74, 24, 7]</text>
+    <rect fill="#edb8c7" height="40" width="140" x="1120" y="120"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="1120" y="120">[81, 27, 2]</text>
+    <rect fill="#edb8c7" height="40" width="140" x="1260" y="120"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="1260" y="120">[81, 27, 2]</text>
+    <rect fill="#c99aa0" height="40" width="140" x="1400" y="120"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="1400" y="120">[70, 24, 5]</text>
+    <rect fill="#395260" height="40" width="140" x="0" y="160"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="0" y="160">[32, -10, -13]</text>
+    <rect fill="#374e59" height="40" width="140" x="140" y="160"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="140" y="160">[30, -10, -11]</text>
+    <rect fill="#304e5e" height="40" width="140" x="280" y="160"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="280" y="160">[29, -11, -15]</text>
+    <rect fill="#3a4e58" height="40" width="140" x="420" y="160"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="420" y="160">[30, -8, -10]</text>
+    <rect fill="#3a4e5f" height="40" width="140" x="560" y="160"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="560" y="160">[30, -6, -14]</text>
+    <rect fill="#2e5060" height="40" width="140" x="700" y="160"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="700" y="160">[30, -13, -16]</text>
+    <rect fill="#3b4c57" height="40" width="140" x="840" y="160"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="840" y="160">[30, -6, -10]</text>
+    <rect fill="#445761" height="40" width="140" x="980" y="160"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="980" y="160">[34, -8, -9]</text>
+    <rect fill="#40505a" height="40" width="140" x="1120" y="160"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="1120" y="160">[31, -6, -9]</text>
+    <rect fill="#3f545a" height="40" width="140" x="1260" y="160"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="1260" y="160">[33, -10, -7]</text>
+    <rect fill="#305563" height="40" width="140" x="1400" y="160"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="1400" y="160">[32, -15, -15]</text>
+    <rect fill="#ccce3f" height="40" width="140" x="0" y="200"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="0" y="200">[80, -18, 74]</text>
+    <rect fill="#d6ca3d" height="40" width="140" x="140" y="200"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="140" y="200">[80, -10, 75]</text>
+    <rect fill="#e2e64d" height="40" width="140" x="280" y="200"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="280" y="200">[88, -21, 77]</text>
+    <rect fill="#b7c52c" height="40" width="140" x="420" y="200"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="420" y="200">[76, -26, 77]</text>
+    <rect fill="#e4db55" height="40" width="140" x="560" y="200"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="560" y="200">[86, -12, 70]</text>
+    <rect fill="#c0bb1d" height="40" width="140" x="700" y="200"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="700" y="200">[74, -14, 80]</text>
+    <rect fill="#bac00e" height="40" width="140" x="840" y="200"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="840" y="200">[75, -21, 84]</text>
+    <rect fill="#d2db32" height="40" width="140" x="980" y="200"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="980" y="200">[84, -24, 83]</text>
+    <rect fill="#e3dd39" height="40" width="140" x="1120" y="200"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="1120" y="200">[86, -15, 83]</text>
+    <rect fill="#ddcb46" height="40" width="140" x="1260" y="200"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="1260" y="200">[81, -6, 72]</text>
+    <rect fill="#b7c61a" height="40" width="140" x="1400" y="200"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="1400" y="200">[76, -27, 82]</text>
+    <rect fill="#c08741" height="40" width="140" x="0" y="240"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="0" y="240">[63, 21, 52]</text>
+    <rect fill="#b78038" height="40" width="140" x="140" y="240"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="140" y="240">[60, 21, 53]</text>
+    <rect fill="#b78239" height="40" width="140" x="280" y="240"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="280" y="240">[60, 19, 53]</text>
+    <rect fill="#b78239" height="40" width="140" x="420" y="240"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="420" y="240">[60, 19, 53]</text>
+    <rect fill="#b98036" height="40" width="140" x="560" y="240"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="560" y="240">[60, 22, 55]</text>
+    <rect fill="#c68e3f" height="40" width="140" x="700" y="240"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="700" y="240">[65, 20, 56]</text>
+    <rect fill="#bf8d3c" height="40" width="140" x="840" y="240"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="840" y="240">[64, 17, 56]</text>
+    <rect fill="#b88a3d" height="40" width="140" x="980" y="240"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="980" y="240">[62, 15, 53]</text>
+    <rect fill="#b57b2e" height="40" width="140" x="1120" y="240"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="1120" y="240">[58, 22, 57]</text>
+    <rect fill="#bf914b" height="40" width="140" x="1260" y="240"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="1260" y="240">[65, 15, 49]</text>
+    <rect fill="#c07c40" height="40" width="140" x="1400" y="240"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="1400" y="240">[60, 28, 50]</text>
+    <rect fill="#eedff5" height="40" width="140" x="0" y="280"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="0" y="280">[91, 10, -8]</text>
+    <rect fill="#e6def3" height="40" width="140" x="140" y="280"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="140" y="280">[90, 7, -9]</text>
+    <rect fill="#e3d6e9" height="40" width="140" x="280" y="280"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="280" y="280">[87, 9, -7]</text>
+    <rect fill="#e4d7e5" height="40" width="140" x="420" y="280"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="420" y="280">[88, 8, -4]</text>
+    <rect fill="#e4ceec" height="40" width="140" x="560" y="280"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="560" y="280">[86, 15, -11]</text>
+    <rect fill="#d5cee2" height="40" width="140" x="700" y="280"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="700" y="280">[84, 7, -8]</text>
+    <rect fill="#ecdce3" height="40" width="140" x="840" y="280"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="840" y="280">[89, 8, 0]</text>
+    <rect fill="#ddd6e1" height="40" width="140" x="980" y="280"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="980" y="280">[87, 5, -4]</text>
+    <rect fill="#e4dee7" height="40" width="140" x="1120" y="280"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="1120" y="280">[89, 4, -3]</text>
+    <rect fill="#e6dfe7" height="40" width="140" x="1260" y="280"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="1260" y="280">[90, 4, -2]</text>
+    <rect fill="#dcd5de" height="40" width="140" x="1400" y="280"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="1400" y="280">[86, 4, -3]</text>
+    <rect fill="#3b1797" height="40" width="140" x="0" y="320"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="0" y="320">[23, 52, -64]</text>
+    <rect fill="#2d2480" height="40" width="140" x="140" y="320"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="140" y="320">[20, 37, -54]</text>
+    <rect fill="#4b3c8e" height="40" width="140" x="280" y="320"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="280" y="320">[31, 32, -45]</text>
+    <rect fill="#5b3e90" height="40" width="140" x="420" y="320"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="420" y="320">[34, 36, -42]</text>
+    <rect fill="#462c77" height="40" width="140" x="560" y="320"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="560" y="320">[25, 34, -40]</text>
+    <rect fill="#353a8b" height="40" width="140" x="700" y="320"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="700" y="320">[27, 26, -49]</text>
+    <rect fill="#724aa1" height="40" width="140" x="840" y="320"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="840" y="320">[41, 40, -41]</text>
+    <rect fill="#724aa1" height="40" width="140" x="980" y="320"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="980" y="320">[41, 40, -41]</text>
+    <rect fill="#583580" height="40" width="140" x="1120" y="320"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="1120" y="320">[30, 37, -37]</text>
+    <rect fill="#583580" height="40" width="140" x="1260" y="320"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="1260" y="320">[30, 37, -37]</text>
+    <rect fill="#352f77" height="40" width="140" x="1400" y="320"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="1400" y="320">[23, 27, -43]</text>
+    <rect fill="#75849d" height="40" width="140" x="0" y="360"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="0" y="360">[54, -1, -16]</text>
+    <rect fill="#758a9c" height="40" width="140" x="140" y="360"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="140" y="360">[56, -6, -13]</text>
+    <rect fill="#758a9c" height="40" width="140" x="280" y="360"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="280" y="360">[56, -6, -13]</text>
+    <rect fill="#667c91" height="40" width="140" x="420" y="360"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="420" y="360">[50, -6, -15]</text>
+    <rect fill="#7988ab" height="40" width="140" x="560" y="360"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="560" y="360">[56, 1, -21]</text>
+    <rect fill="#808aac" height="40" width="140" x="700" y="360"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="700" y="360">[57, 3, -20]</text>
+    <rect fill="#6b8393" height="40" width="140" x="840" y="360"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="840" y="360">[53, -8, -13]</text>
+    <rect fill="#60768b" height="40" width="140" x="980" y="360"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="980" y="360">[48, -6, -16]</text>
+    <rect fill="#607c9a" height="40" width="140" x="1120" y="360"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="1120" y="360">[50, -6, -21]</text>
+    <rect fill="#6f8c9f" height="40" width="140" x="1260" y="360"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="1260" y="360">[56, -9, -15]</text>
+    <rect fill="#818392" height="40" width="140" x="1400" y="360"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="1400" y="360">[55, 2, -8]</text>
+    <rect fill="#af8d6d" height="40" width="140" x="0" y="400"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="0" y="400">[62, 12, 25]</text>
+    <rect fill="#ab8e6b" height="40" width="140" x="140" y="400"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="140" y="400">[62, 9, 25]</text>
+    <rect fill="#ac916e" height="40" width="140" x="280" y="400"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="280" y="400">[63, 8, 25]</text>
+    <rect fill="#a3876a" height="40" width="140" x="420" y="400"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="420" y="400">[59, 10, 22]</text>
+    <rect fill="#a58b6f" height="40" width="140" x="560" y="400"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="560" y="400">[60, 9, 21]</text>
+    <rect fill="#a38a6d" height="40" width="140" x="700" y="400"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="700" y="400">[60, 8, 21]</text>
+    <rect fill="#9f8460" height="40" width="140" x="840" y="400"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="840" y="400">[58, 8, 26]</text>
+    <rect fill="#a17d60" height="40" width="140" x="980" y="400"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="980" y="400">[56, 14, 24]</text>
+    <rect fill="#9d7f61" height="40" width="140" x="1120" y="400"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="1120" y="400">[56, 11, 23]</text>
+    <rect fill="#9d8261" height="40" width="140" x="1260" y="400"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="1260" y="400">[57, 9, 24]</text>
+    <rect fill="#c19676" height="40" width="140" x="1400" y="400"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="1400" y="400">[67, 17, 26]</text>
+    <rect fill="#31fb0a" height="40" width="140" x="0" y="440"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="0" y="440">[82, -130, 89]</text>
+    <rect fill="#44c553" height="40" width="140" x="140" y="440"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="140" y="440">[67, -89, 47]</text>
+    <rect fill="#81ca2b" height="40" width="140" x="280" y="440"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="280" y="440">[72, -63, 73]</text>
+    <rect fill="#5fb33a" height="40" width="140" x="420" y="440"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="420" y="440">[63, -68, 55]</text>
+    <rect fill="#92d333" height="40" width="140" x="560" y="440"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="560" y="440">[76, -58, 74]</text>
+    <rect fill="#a3d92d" height="40" width="140" x="700" y="440"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="700" y="440">[79, -52, 79]</text>
+    <rect fill="#a3d92d" height="40" width="140" x="840" y="440"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="840" y="440">[79, -52, 79]</text>
+    <rect fill="#96ca00" height="40" width="140" x="980" y="440"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="980" y="440">[74, -51, 83]</text>
+    <rect fill="#50a743" height="40" width="140" x="1120" y="440"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="1120" y="440">[59, -68, 45]</text>
+    <rect fill="#00802a" height="40" width="140" x="1260" y="440"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="1260" y="440">[44, -79, 40]</text>
+    <rect fill="#00be78" height="40" width="140" x="1400" y="440"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="1400" y="440">[65, -90, 21]</text>
+    <rect fill="#3f5e35" height="40" width="140" x="0" y="480"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="0" y="480">[35, -29, 21]</text>
+    <rect fill="#365c34" height="40" width="140" x="140" y="480"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="140" y="480">[33, -34, 20]</text>
+    <rect fill="#3e6334" height="40" width="140" x="280" y="480"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="280" y="480">[36, -34, 24]</text>
+    <rect fill="#3e6334" height="40" width="140" x="420" y="480"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="420" y="480">[36, -34, 24]</text>
+    <rect fill="#486531" height="40" width="140" x="560" y="480"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="560" y="480">[38, -29, 28]</text>
+    <rect fill="#394f2b" height="40" width="140" x="700" y="480"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="700" y="480">[29, -23, 20]</text>
+    <rect fill="#354c28" height="40" width="140" x="840" y="480"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="840" y="480">[27, -24, 20]</text>
+    <rect fill="#305d35" height="40" width="140" x="980" y="480"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="980" y="480">[33, -38, 19]</text>
+    <rect fill="#366243" height="40" width="140" x="1120" y="480"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="1120" y="480">[36, -35, 12]</text>
+    <rect fill="#47562f" height="40" width="140" x="1260" y="480"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="1260" y="480">[33, -18, 23]</text>
+    <rect fill="#44583b" height="40" width="140" x="1400" y="480"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="1400" y="480">[33, -19, 15]</text>
+    <rect fill="#93cd36" height="40" width="140" x="0" y="520"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="0" y="520">[74, -53, 71]</text>
+    <rect fill="#9cd03b" height="40" width="140" x="140" y="520"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="140" y="520">[76, -49, 70]</text>
+    <rect fill="#92d333" height="40" width="140" x="280" y="520"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="280" y="520">[76, -58, 74]</text>
+    <rect fill="#a3d92d" height="40" width="140" x="420" y="520"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="420" y="520">[79, -52, 79]</text>
+    <rect fill="#a3d92d" height="40" width="140" x="560" y="520"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="560" y="520">[79, -52, 79]</text>
+    <rect fill="#81ca2b" height="40" width="140" x="700" y="520"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="700" y="520">[72, -63, 73]</text>
+    <rect fill="#96ca00" height="40" width="140" x="840" y="520"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="840" y="520">[74, -51, 83]</text>
+    <rect fill="#7aac21" height="40" width="140" x="980" y="520"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="980" y="520">[63, -48, 67]</text>
+    <rect fill="#7aac21" height="40" width="140" x="1120" y="520"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="1120" y="520">[63, -48, 67]</text>
+    <rect fill="#b1dd52" height="40" width="140" x="1260" y="520"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="1260" y="520">[81, -43, 66]</text>
+    <rect fill="#71a91d" height="40" width="140" x="1400" y="520"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="1400" y="520">[62, -52, 67]</text>
+    <rect fill="#1b5f9d" height="40" width="140" x="0" y="560"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="0" y="560">[37, -3, -44]</text>
+    <rect fill="#29598b" height="40" width="140" x="140" y="560"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="140" y="560">[35, -4, -36]</text>
+    <rect fill="#29598b" height="40" width="140" x="280" y="560"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="280" y="560">[35, -4, -36]</text>
+    <rect fill="#355d90" height="40" width="140" x="420" y="560"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="420" y="560">[37, -1, -36]</text>
+    <rect fill="#42639f" height="40" width="140" x="560" y="560"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="560" y="560">[41, 3, -39]</text>
+    <rect fill="#42639f" height="40" width="140" x="700" y="560"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="700" y="560">[41, 3, -39]</text>
+    <rect fill="#3973a9" height="40" width="140" x="840" y="560"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="840" y="560">[45, -8, -38]</text>
+    <rect fill="#20608e" height="40" width="140" x="980" y="560"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="980" y="560">[37, -11, -35]</text>
+    <rect fill="#316ea0" height="40" width="140" x="1120" y="560"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="1120" y="560">[43, -10, -36]</text>
+    <rect fill="#325482" height="40" width="140" x="1260" y="560"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="1260" y="560">[33, 0, -33]</text>
+    <rect fill="#00689b" height="40" width="140" x="1400" y="560"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="1400" y="560">[39, -14, -39]</text>
+    <rect fill="#a9212d" height="40" width="140" x="0" y="600"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="0" y="600">[42, 63, 38]</text>
+    <rect fill="#b22833" height="40" width="140" x="140" y="600"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="140" y="600">[45, 64, 38]</text>
+    <rect fill="#a92a37" height="40" width="140" x="280" y="600"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="280" y="600">[43, 61, 32]</text>
+    <rect fill="#b6393a" height="40" width="140" x="420" y="600"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="420" y="600">[47, 60, 36]</text>
+    <rect fill="#ad3539" height="40" width="140" x="560" y="600"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="560" y="600">[45, 58, 34]</text>
+    <rect fill="#ad3539" height="40" width="140" x="700" y="600"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="700" y="600">[45, 58, 34]</text>
+    <rect fill="#b3002f" height="40" width="140" x="840" y="600"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="840" y="600">[43, 69, 38]</text>
+    <rect fill="#b3393e" height="40" width="140" x="980" y="600"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="980" y="600">[47, 59, 33]</text>
+    <rect fill="#9d002f" height="40" width="140" x="1120" y="600"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="1120" y="600">[38, 63, 31]</text>
+    <rect fill="#a83239" height="40" width="140" x="1260" y="600"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="1260" y="600">[44, 58, 32]</text>
+    <rect fill="#9b2a2c" height="40" width="140" x="1400" y="600"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="1400" y="600">[40, 55, 35]</text>
+    <rect fill="#3399a7" height="40" width="140" x="0" y="640"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="0" y="640">[56, -40, -20]</text>
+    <rect fill="#39909b" height="40" width="140" x="140" y="640"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="140" y="640">[53, -37, -17]</text>
+    <rect fill="#489ea8" height="40" width="140" x="280" y="640"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="280" y="640">[58, -37, -16]</text>
+    <rect fill="#0092a5" height="40" width="140" x="420" y="640"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="420" y="640">[53, -43, -23]</text>
+    <rect fill="#308ea0" height="40" width="140" x="560" y="640"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="560" y="640">[52, -36, -21]</text>
+    <rect fill="#2599b2" height="40" width="140" x="700" y="640"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="700" y="640">[56, -39, -26]</text>
+    <rect fill="#008b97" height="40" width="140" x="840" y="640"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="840" y="640">[50, -44, -19]</text>
+    <rect fill="#008b97" height="40" width="140" x="980" y="640"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="980" y="640">[50, -44, -19]</text>
+    <rect fill="#4495a4" height="40" width="140" x="1120" y="640"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="1120" y="640">[55, -33, -19]</text>
+    <rect fill="#20868f" height="40" width="140" x="1260" y="640"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="1260" y="640">[49, -41, -17]</text>
+    <rect fill="#00879f" height="40" width="140" x="1400" y="640"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="1400" y="640">[49, -37, -26]</text>
+    <rect fill="#3a1bb9" height="40" width="140" x="0" y="680"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="0" y="680">[27, 60, -78]</text>
+    <rect fill="#2d2480" height="40" width="140" x="140" y="680"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="140" y="680">[20, 37, -54]</text>
+    <rect fill="#4b3c8e" height="40" width="140" x="280" y="680"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="280" y="680">[31, 32, -45]</text>
+    <rect fill="#5b3e90" height="40" width="140" x="420" y="680"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="420" y="680">[34, 36, -42]</text>
+    <rect fill="#724aa1" height="40" width="140" x="560" y="680"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="560" y="680">[41, 40, -41]</text>
+    <rect fill="#724aa1" height="40" width="140" x="700" y="680"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="700" y="680">[41, 40, -41]</text>
+    <rect fill="#353a8b" height="40" width="140" x="840" y="680"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="840" y="680">[27, 26, -49]</text>
+    <rect fill="#462c77" height="40" width="140" x="980" y="680"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="980" y="680">[25, 34, -40]</text>
+    <rect fill="#7b5cb7" height="40" width="140" x="1120" y="680"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="1120" y="680">[47, 36, -44]</text>
+    <rect fill="#583580" height="40" width="140" x="1260" y="680"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="1260" y="680">[30, 37, -37]</text>
+    <rect fill="#583580" height="40" width="140" x="1400" y="680"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="1400" y="680">[30, 37, -37]</text>
+    <rect fill="#5dc043" height="40" width="140" x="0" y="720"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="0" y="720">[67, -76, 55]</text>
+    <rect fill="#5fb33a" height="40" width="140" x="140" y="720"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="140" y="720">[63, -68, 55]</text>
+    <rect fill="#44c553" height="40" width="140" x="280" y="720"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="280" y="720">[67, -89, 47]</text>
+    <rect fill="#50a743" height="40" width="140" x="420" y="720"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="420" y="720">[59, -68, 45]</text>
+    <rect fill="#66b348" height="40" width="140" x="560" y="720"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="560" y="720">[64, -62, 49]</text>
+    <rect fill="#81ca2b" height="40" width="140" x="700" y="720"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="700" y="720">[72, -63, 73]</text>
+    <rect fill="#5ca345" height="40" width="140" x="840" y="720"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="840" y="720">[58, -58, 43]</text>
+    <rect fill="#4ba351" height="40" width="140" x="980" y="720"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="980" y="720">[58, -66, 35]</text>
+    <rect fill="#7fc15c" height="40" width="140" x="1120" y="720"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="1120" y="720">[70, -53, 45]</text>
+    <rect fill="#428929" height="40" width="140" x="1260" y="720"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="1260" y="720">[49, -61, 47]</text>
+    <rect fill="#5c9625" height="40" width="140" x="1400" y="720"/>
+    <text dy="20.0" style="font-size:18.18181818181818px" x="1400" y="720">[54, -53, 56]</text>
+</svg>
