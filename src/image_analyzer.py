@@ -1,7 +1,6 @@
 import io
 
-from PIL import Image
-from PIL import ImageStat
+from PIL import Image, ImageStat
 
 from src.color_table import Color
 

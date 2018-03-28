@@ -23,7 +23,7 @@ if __name__ == "__main__":
             photo = flickr.random_photo(pictures)
             photo = flickr.get_photo(photo)
             average_color_of_photo = ImageAnalazer(photo.data).avg_color
-            neariest_color = color_table.nearest_color(average_color_of_photo.lab)
+            nearest_color = color_table.nearest_color(average_color_of_photo.lab)
             photo = twitter.upload_photo(photo)
-            twitter.create_post(neariest_color.color.name, photo)
+            twitter.create_post(nearest_color.color.name, photo)
             time.sleep(2)
