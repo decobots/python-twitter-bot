@@ -7,31 +7,15 @@ import svgwrite
 from src.color_table import Color, ColorTable, colors_delta
 
 DATA_DEFAULT_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data')
-W = 140
-H = 40
+W = 200
+H = 200
 
 
-def create_svg(color_groups: List[List[colors_delta]], filename: str):
+def create_svg(color: Color, filename: str):
     with open(os.path.join(DATA_DEFAULT_PATH, filename), mode='w') as f:
-        dwg = svgwrite.Drawing(size=(f'{W * len(color_groups[0])}px',
-                                     f'{H * len(color_groups)}px'
-                                     ))
-        for group, y in zip(color_groups, range(0, len(color_groups) * H, H)):
-            for x, color in enumerate(group):
-                rect = dwg.rect(insert=(x * W, y), size=(W, H), fill=color.color.hex)
-                dwg.add(rect)
-                text = dwg.text([int(v) for v in color.color.rgb_values],
-                                insert=(x * W, y),
-                                dy=[H / 2],
-                                style=f'font-size:{H/2.2}px'
-                                )
-                dwg.add(text)
-                text2 = dwg.text("{0:.2f} {1}".format(color.delta, color.color.name),
-                                 insert=(x * W, y),
-                                 dy=[H / 2 + H / 3],
-                                 style=f'font-size:{H/2.2}px'
-                                 )
-                dwg.add(text2)
+        dwg = svgwrite.Drawing(size=(f'{W}px', f'{H}px'))
+        rect = dwg.rect(insert=(0, 0), size=(W, H), fill=color.hex)
+        dwg.add(rect)
         dwg.write(f)
 
 

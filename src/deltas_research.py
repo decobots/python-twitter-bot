@@ -1,12 +1,10 @@
 import math  # pragma: no cover
-import os  # pragma: no cover
 from typing import List, Callable  # pragma: no cover
 
 import colormath.color_diff  # pragma: no cover
 import colormath.color_objects  # pragma: no cover
 
-from src.color_table import Color, ColorTable, DATA_DEFAULT_PATH, colors_delta  # pragma: no cover
-from src.svgmaker import create_svg  # pragma: no cover
+from src.color_table import ColorTable, DATA_DEFAULT_PATH  # pragma: no cover
 
 
 def nearest_color(clr: colormath.color_objects.LabColor, method: Callable) -> 'colors_delta':  # pragma: no cover
@@ -126,6 +124,41 @@ def gen_down(step=1):  # pragma: no cover
 def gen_n(n):  # pragma: no cover
     while True:
         yield n
+
+
+import os
+from typing import List
+
+import svgwrite
+
+from src.color_table import Color, ColorTable, colors_delta
+
+W = 140
+H = 40
+
+
+def create_svg(color_groups: List[List[colors_delta]], filename: str):
+    with open(os.path.join(DATA_DEFAULT_PATH, filename), mode='w') as f:
+        dwg = svgwrite.Drawing(size=(f'{W * len(color_groups[0])}px',
+                                     f'{H * len(color_groups)}px'
+                                     ))
+        for group, y in zip(color_groups, range(0, len(color_groups) * H, H)):
+            for x, color in enumerate(group):
+                rect = dwg.rect(insert=(x * W, y), size=(W, H), fill=color.color.hex)
+                dwg.add(rect)
+                text = dwg.text([int(v) for v in color.color.rgb_values],
+                                insert=(x * W, y),
+                                dy=[H / 2],
+                                style=f'font-size:{H/2.2}px'
+                                )
+                dwg.add(text)
+                text2 = dwg.text("{0:.2f} {1}".format(color.delta, color.color.name),
+                                 insert=(x * W, y),
+                                 dy=[H / 2 + H / 3],
+                                 style=f'font-size:{H/2.2}px'
+                                 )
+                dwg.add(text2)
+        dwg.write(f)
 
 
 if __name__ == '__main__':  # pragma: no cover
