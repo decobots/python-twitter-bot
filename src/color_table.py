@@ -30,11 +30,11 @@ class Color:
             raise ValueError(message)
 
     @property
-    def rgb_values(self) -> Tuple[int]:
+    def rgb_values(self) -> Tuple[int, int, int]:
         return self.rgb.get_upscaled_value_tuple()
 
     @property
-    def lab_values(self) -> Tuple[int]:
+    def lab_values(self) -> Tuple[int, int, int]:
         return self.lab.get_value_tuple()
 
     @property
@@ -44,6 +44,9 @@ class Color:
     def __eq__(self, other):
         # name not considered
         return self.rgb_values == other.rgb_values
+
+    def __repr__(self):
+        return ','.join([str(v) for v in self.rgb_values])
 
 
 class ColorTable:

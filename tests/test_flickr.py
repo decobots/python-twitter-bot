@@ -59,7 +59,7 @@ def test_flickr_get_photo_correct(mock_requester, mock_table):
                                    title="test_04",
                                    farm="5"))
     assert photo is not None
-    assert photo.data == base64.b64encode(b"/ff/ff")
+    assert photo.data_b64 == base64.b64encode(b"/ff/ff")
 
 
 def test_random_photo_correct(mock_requester, mock_table):
