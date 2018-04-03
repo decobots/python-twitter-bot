@@ -82,6 +82,7 @@ def test_create_post_correct(photo, photo2, empty_table):
     assert isinstance(result, str)
 
 
+@pytest.mark.end_to_end
 def test_create_post_and_db(photo, photo2, empty_table):
     twitter = Twitter(table=empty_table)
     empty_table.add_photos({photo.id_flickr: photo})
