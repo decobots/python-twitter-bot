@@ -177,7 +177,7 @@ if __name__ == '__main__':  # pragma: no cover
                                                                              lab_weighted_Euclidean_distance,
                                                                              ]
                              )
-    # create_svg(colors, filename='test_deltas_colors2.svg')
+    # create_plate(colors, filename='test_deltas_colors2.svg')
 
     # cd = [[colors_delta(c, 0)] for c in tab.color_table]
     #

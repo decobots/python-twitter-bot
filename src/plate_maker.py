@@ -13,15 +13,21 @@ W = 200
 H = 200
 
 
-def create_svg(color: Color) -> Photo:
-    canvas = Image.new('RGB', (W, H))
+def create_plate(color: Color) -> Photo:
+    canvas = Image.new('RGBA', (W, H), color=(0, 0, 0, 0))
     draw = ImageDraw.Draw(canvas)
-    draw.rectangle((0, 0, W, H), fill=color.rgb_values)
+    draw.rectangle((0, 0, W - 2, H), fill=color.rgb_values)
+    # 2 transparent pixels to prevent converting to jpeg and compressing during twitter upload
+    draw.rectangle((W - 2, 1, W, H), fill=color.rgb_values)
     f_color = (30, 30, 30) if color.lab_values[0] > 50 else (230, 230, 230)
-    font = ImageFont.truetype(os.path.join(DATA_DEFAULT_PATH, 'Monotony.ttf'))
-    draw.text((10, 50), color.name, fill=f_color, font=font, layout_engine=ImageFont.LAYOUT_BASIC)
+    font = ImageFont.truetype(os.path.join(DATA_DEFAULT_PATH, 'Roboto-Regular.ttf'), 18)
+    draw.text((10, 50), color.name, fill=f_color, font=font)
+
     buffer = io.BytesIO()
-    canvas.save(buffer, format='JPEG')
+    f = open("test.PNG", mode='wb')
+    canvas.save(f, format='PNG')
+    f.close()
+    canvas.save(buffer, format='PNG')
     p = Photo("", '', '', '', '')
     p.data = buffer.getvalue()
     return p

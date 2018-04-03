@@ -13,10 +13,12 @@ log = logging.getLogger()
 TABLE_NAME = "test_Twitter_end_to_end"
 
 
+@pytest.mark.end_to_end
 def setup_function(func):
     log_func_name_started(func)
 
 
+@pytest.mark.end_to_end
 def teardown_function(func):
     log_func_name_ended(func)
 
