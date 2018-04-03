@@ -45,7 +45,7 @@ class Twitter:
 
     def create_post(self, status: Any = "_", photos: Optional[List[Photo]] = None) -> str:
         log.info("started function Twitter create_post")
-        media_ids = [photo.id_twitter for photo in photos] if photos else None
+        media_ids = ','.join([str(photo.id_twitter) for photo in photos]) if photos else None
         created_post = self.requester.request_json(self.twitter_create_post.type,
                                                    self.twitter_create_post.url,
                                                    payload={"status": status, "media_ids": media_ids},
