@@ -15,6 +15,7 @@ pytest-cov = "*"
 svgwrite = "*"
 pillow = "*"
 colormath = "*"
+apscheduler = "*"
 
 
 [dev-packages]
