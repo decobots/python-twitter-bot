@@ -11,7 +11,7 @@ def nearest_color(clr: colormath.color_objects.LabColor, method: Callable) -> 'c
     return method(clr_lab=clr)
 
 
-def colormath_cie1976(color_table, input_color: 'Color') -> List['colors_delta']:  # pragma: no cover
+def colormath_cie1976(color_table, input_color: 'Color') -> List['colors_delta']:
     calculated_deltas = []
     for table_color in color_table:
         delta = colormath.color_diff.delta_e_cie1976(input_color.lab, table_color.lab)
@@ -19,7 +19,7 @@ def colormath_cie1976(color_table, input_color: 'Color') -> List['colors_delta']
     return sorted(calculated_deltas, key=lambda x: x.delta)
 
 
-def colormath_cie1994(color_table, input_color: 'Color') -> List['colors_delta']:  # pragma: no cover
+def colormath_cie1994(color_table, input_color: 'Color') -> List['colors_delta']:
     calculated_deltas = []
     for table_color in color_table:
         delta = colormath.color_diff.delta_e_cie1994(input_color.lab, table_color.lab)
@@ -27,7 +27,7 @@ def colormath_cie1994(color_table, input_color: 'Color') -> List['colors_delta']
     return sorted(calculated_deltas, key=lambda x: x.delta)
 
 
-def colormath_cie2000(color_table, input_color: 'Color') -> List['colors_delta']:  # pragma: no cover
+def colormath_cie2000(color_table, input_color: 'Color') -> List['colors_delta']:
     calculated_deltas = []
     for table_color in color_table:
         delta = colormath.color_diff.delta_e_cie2000(input_color.lab, table_color.lab)
@@ -35,7 +35,7 @@ def colormath_cie2000(color_table, input_color: 'Color') -> List['colors_delta']
     return sorted(calculated_deltas, key=lambda x: x.delta)
 
 
-def colormath_cms(color_table, input_color: 'Color') -> List['colors_delta']:  # pragma: no cover
+def colormath_cms(color_table, input_color: 'Color') -> List['colors_delta']:
     calculated_deltas = []
     for table_color in color_table:
         delta = colormath.color_diff.delta_e_cmc(input_color.lab, table_color.lab)
@@ -43,7 +43,7 @@ def colormath_cms(color_table, input_color: 'Color') -> List['colors_delta']:  #
     return sorted(calculated_deltas, key=lambda x: x.delta)
 
 
-def simple_Euclidean_distance(color_table, input_color: 'Color'):  # pragma: no cover
+def simple_Euclidean_distance(color_table, input_color: 'Color'):
     # I will use it
     lc, ac, bc = input_color.lab_values  # lab of Color
     calculated_deltas = []
@@ -54,7 +54,7 @@ def simple_Euclidean_distance(color_table, input_color: 'Color'):  # pragma: no 
     return sorted(calculated_deltas, key=lambda x: x.delta)
 
 
-def lab_weighted_Euclidean_distance(color_table, input_color: 'Color'):  # pragma: no cover
+def lab_weighted_Euclidean_distance(color_table, input_color: 'Color'):
     lc, ac, bc = input_color.lab_values  # lab of Color
     calculated_deltas = []
     for table_color in color_table:
@@ -65,7 +65,7 @@ def lab_weighted_Euclidean_distance(color_table, input_color: 'Color'):  # pragm
 
 
 def generate_colors(color_table: ColorTable, methods: List[Callable] = None, number_of_colors: int = 10) -> List[
-    List['colors_delta']]:  # pragma: no cover
+    List['colors_delta']]:
     lst = []
     colors = [Color(0, 0, 0)]
     print('modulate_colors')
@@ -93,7 +93,7 @@ def generate_colors(color_table: ColorTable, methods: List[Callable] = None, num
     return lst
 
 
-def modulate_color(stop_color, arr, step=10, start_color=None):  # pragma: no cover
+def modulate_color(stop_color, arr, step=10, start_color=None):
     if not start_color:
         start_color = arr[-1].rgb_values
     fs = [None] * 3
@@ -111,17 +111,17 @@ def modulate_color(stop_color, arr, step=10, start_color=None):  # pragma: no co
         arr.append(color)
 
 
-def gen_up(step=1):  # pragma: no cover
+def gen_up(step=1):
     for _ in range(0, 256, step):
         yield _
 
 
-def gen_down(step=1):  # pragma: no cover
+def gen_down(step=1):
     for _ in range(255, -1, -step):
         yield _
 
 
-def gen_n(n):  # pragma: no cover
+def gen_n(n):
     while True:
         yield n
 
@@ -161,7 +161,7 @@ def create_svg(color_groups: List[List[colors_delta]], filename: str):
         dwg.write(f)
 
 
-if __name__ == '__main__':  # pragma: no cover
+if __name__ == '__main__':
     tab = ColorTable(path_to_raw_data=os.path.join(DATA_DEFAULT_PATH, 'colors3.txt'))
 
     # colors = generate_colors(color_table=tab, number_of_colors=1000, methods=[
@@ -177,7 +177,7 @@ if __name__ == '__main__':  # pragma: no cover
                                                                              lab_weighted_Euclidean_distance,
                                                                              ]
                              )
-    # create_plate(colors, filename='test_deltas_colors2.svg')
+    # create_tile(colors, filename='test_deltas_colors2.svg')
 
     # cd = [[colors_delta(c, 0)] for c in tab.color_table]
     #

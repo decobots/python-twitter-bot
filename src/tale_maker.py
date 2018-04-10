@@ -13,7 +13,7 @@ W = 200
 H = 200
 
 
-def create_plate(color: Color) -> Photo:
+def create_tile(color: Color) -> Photo:
     canvas = Image.new('RGBA', (W, H), color=(0, 0, 0, 0))
     draw = ImageDraw.Draw(canvas)
     draw.rectangle((0, 0, W - 2, H), fill=color.rgb_values)
