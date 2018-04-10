@@ -1,16 +1,13 @@
-import math
-import os
-from typing import List, Callable
+import math  # pragma: no cover
+from typing import List, Callable  # pragma: no cover
 
-import colormath.color_diff
-import colormath.color_objects
+import colormath.color_diff  # pragma: no cover
+import colormath.color_objects  # pragma: no cover
 
-from src.color_table import Color, ColorTable, DATA_DEFAULT_PATH, colors_delta
-from src.svgmaker import create_svg
+from src.color_table import ColorTable, DATA_DEFAULT_PATH  # pragma: no cover
 
 
-
-def nearest_color(clr: colormath.color_objects.LabColor, method: Callable) -> 'colors_delta':
+def nearest_color(clr: colormath.color_objects.LabColor, method: Callable) -> 'colors_delta':  # pragma: no cover
     return method(clr_lab=clr)
 
 
@@ -46,7 +43,8 @@ def colormath_cms(color_table, input_color: 'Color') -> List['colors_delta']:
     return sorted(calculated_deltas, key=lambda x: x.delta)
 
 
-def simple_Euclidean_distance(color_table, input_color: 'Color'): # I will use it
+def simple_Euclidean_distance(color_table, input_color: 'Color'):
+    # I will use it
     lc, ac, bc = input_color.lab_values  # lab of Color
     calculated_deltas = []
     for table_color in color_table:
@@ -64,9 +62,6 @@ def lab_weighted_Euclidean_distance(color_table, input_color: 'Color'):
         delta = math.sqrt(2 * pow(lt - lc, 2) + pow(at - ac, 2) + pow(bt - bc, 2))
         calculated_deltas.append(colors_delta(table_color, delta))
     return sorted(calculated_deltas, key=lambda x: x.delta)
-
-
-
 
 
 def generate_colors(color_table: ColorTable, methods: List[Callable] = None, number_of_colors: int = 10) -> List[
@@ -131,6 +126,41 @@ def gen_n(n):
         yield n
 
 
+import os
+from typing import List
+
+import svgwrite
+
+from src.color_table import Color, ColorTable, colors_delta
+
+W = 140
+H = 40
+
+
+def create_svg(color_groups: List[List[colors_delta]], filename: str):
+    with open(os.path.join(DATA_DEFAULT_PATH, filename), mode='w') as f:
+        dwg = svgwrite.Drawing(size=(f'{W * len(color_groups[0])}px',
+                                     f'{H * len(color_groups)}px'
+                                     ))
+        for group, y in zip(color_groups, range(0, len(color_groups) * H, H)):
+            for x, color in enumerate(group):
+                rect = dwg.rect(insert=(x * W, y), size=(W, H), fill=color.color.hex)
+                dwg.add(rect)
+                text = dwg.text([int(v) for v in color.color.rgb_values],
+                                insert=(x * W, y),
+                                dy=[H / 2],
+                                style=f'font-size:{H/2.2}px'
+                                )
+                dwg.add(text)
+                text2 = dwg.text("{0:.2f} {1}".format(color.delta, color.color.name),
+                                 insert=(x * W, y),
+                                 dy=[H / 2 + H / 3],
+                                 style=f'font-size:{H/2.2}px'
+                                 )
+                dwg.add(text2)
+        dwg.write(f)
+
+
 if __name__ == '__main__':
     tab = ColorTable(path_to_raw_data=os.path.join(DATA_DEFAULT_PATH, 'colors3.txt'))
 
@@ -147,7 +177,7 @@ if __name__ == '__main__':
                                                                              lab_weighted_Euclidean_distance,
                                                                              ]
                              )
-    # create_svg(colors, filename='test_deltas_colors2.svg')
+    # create_tile(colors, filename='test_deltas_colors2.svg')
 
     # cd = [[colors_delta(c, 0)] for c in tab.color_table]
     #
