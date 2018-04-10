@@ -31,7 +31,7 @@ class Twitter:
         self.requester = requester
         self.table = table
         log.debug(
-            f"class Twitter initialized with requester={requester.__class__} and table={self.table.table_name}")
+            f"class Twitter initialized with requester={requester.__class__} and table={self.table}")
 
     def upload_photo(self, photo: Photo) -> Photo:
         log.info("started function Twitter upload_photo")

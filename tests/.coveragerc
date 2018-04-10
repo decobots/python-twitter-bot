@@ -1,0 +1,2 @@
+[run]
+omit = *\src\deltas_research.py
