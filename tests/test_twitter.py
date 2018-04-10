@@ -47,7 +47,7 @@ def test_create_post_text_and_photo_correct(photo, mock_requester, mock_table):
     mock_requester.request_json.return_value = {"id": 243145735212777472}
     mock_table.post_photo = mock.MagicMock()
     twitter = Twitter(requester=mock_requester, table=mock_table)
-    result = twitter.create_post(status="Test_status", photo=photo)
+    result = twitter.create_post(status="Test_status", photos=[photo])
     assert result == '243145735212777472'
 
 
@@ -63,7 +63,15 @@ def test_create_post_photo_only_correct(photo, mock_requester, mock_table):
     mock_requester.request_json.return_value = {"id": 243145735212777472}
     mock_table.post_photo = mock.MagicMock()
     twitter = Twitter(requester=mock_requester, table=mock_table)
-    result = twitter.create_post(photo=photo)
+    result = twitter.create_post(photos=[photo])
+    assert result == '243145735212777472'
+
+
+def test_create_post_two_photo_only_correct(photo, mock_requester, mock_table):
+    mock_requester.request_json.return_value = {"id": 243145735212777472}
+    mock_table.post_photo = mock.MagicMock()
+    twitter = Twitter(requester=mock_requester, table=mock_table)
+    result = twitter.create_post(photos=[photo, photo])
     assert result == '243145735212777472'
 
 
@@ -84,4 +92,3 @@ def test_delete_tweet_by_id_correct(mock_requester, mock_table):
     mock_table.delete_photo_from_twitter = mock.MagicMock()
     twitter = Twitter(requester=mock_requester, table=mock_table)
     twitter._delete_tweet_by_id(tweet_id='123456')
-

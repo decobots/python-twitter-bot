@@ -1,4 +1,4 @@
-from src.image_analyzer import  ImageAnalazer
+from src.image_analyzer import ImageAnalazer
 
 
 def test_avg_color(photo):

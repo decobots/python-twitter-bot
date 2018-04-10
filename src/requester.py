@@ -53,8 +53,7 @@ class Requester:
         log.debug("server returned bytes data")
         return response.content
 
-
 # if __name__ == '__main__':
-    # init_logging("test_log.log")
-    # r = Requester()
-    # r.request_xml(method_type="GET", url="https://farm4.staticflickr.com/3856/14848963128_9e4e83e446.jpg")
+# init_logging("test_log.log")
+# r = Requester()
+# r.request_xml(method_type="GET", url="https://farm4.staticflickr.com/3856/14848963128_9e4e83e446.jpg")

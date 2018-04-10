@@ -2786,40 +2786,40 @@ Strobe	121	115	92
 Stromboli	64	99	86
 Studio	114	74	161
 Stun	167	172	139
-Style Pasifika Black Light	37	37	37
-Style Pasifika Black Tan	58	47	45
-Style Pasifika Blue Whale	61	77	120
-Style Pasifika Brown Earth	69	41	36
-Style Pasifika Burnt Charcoal	50	44	43
-Style Pasifika Coconut Crab	92	60	109
-Style Pasifika Dark Moss	79	77	50
-Style Pasifika Dark Soil	54	45	38
-Style Pasifika Dark Stone	45	45	36
-Style Pasifika Dark Sun	182	162	55
-Style Pasifika Dry Bamboo	136	136	91
-Style Pasifika Fallen Gold	198	170	36
-Style Pasifika Hibiscus Blood	101	28	38
-Style Pasifika Lagoon Blue	78	105	154
-Style Pasifika Lagoon Spray	147	162	183
-Style Pasifika Night Fox	44	44	50
-Style Pasifika Ocean Clam	106	57	104
-Style Pasifika Ocean Deep	30	47	60
-Style Pasifika Orange Wood	187	95	52
-Style Pasifika Palm Green	102	112	40
-Style Pasifika Pink Night	205	174	112
-Style Pasifika Purple Deep	42	37	81
-Style Pasifika Purple Flax	105	50	110
-Style Pasifika Red Frangipani	131	43	41
-Style Pasifika Red Pineapple	152	61	57
-Style Pasifika Red Soil	78	39	40
-Style Pasifika Sand Frond	179	171	110
-Style Pasifika Sandalwood	183	130	57
-Style Pasifika Shore Sand	165	101	49
-Style Pasifika Sky White	217	208	193
-Style Pasifika Turquoise Sea	39	74	93
-Style Pasifika Volcanic Rock	45	47	40
-Style Pasifika Whirlpool	64	99	86
-Style Pasifika White Cloud	223	221	214
+Pasifika Black Light	37	37	37
+Pasifika Black Tan	58	47	45
+Pasifika Blue Whale	61	77	120
+Pasifika Brown Earth	69	41	36
+Pasifika Burnt Charcoal	50	44	43
+Pasifika Coconut Crab	92	60	109
+Pasifika Dark Moss	79	77	50
+Pasifika Dark Soil	54	45	38
+Pasifika Dark Stone	45	45	36
+Pasifika Dark Sun	182	162	55
+Pasifika Dry Bamboo	136	136	91
+Pasifika Fallen Gold	198	170	36
+Pasifika Hibiscus Blood	101	28	38
+Pasifika Lagoon Blue	78	105	154
+Pasifika Lagoon Spray	147	162	183
+Pasifika Night Fox	44	44	50
+Pasifika Ocean Clam	106	57	104
+Pasifika Ocean Deep	30	47	60
+Pasifika Orange Wood	187	95	52
+Pasifika Palm Green	102	112	40
+Pasifika Pink Night	205	174	112
+Pasifika Purple Deep	42	37	81
+Pasifika Purple Flax	105	50	110
+Pasifika Red Frangipani	131	43	41
+Pasifika Red Pineapple	152	61	57
+Pasifika Red Soil	78	39	40
+Pasifika Sand Frond	179	171	110
+Pasifika Sandalwood	183	130	57
+Pasifika Shore Sand	165	101	49
+Pasifika Sky White	217	208	193
+Pasifika Turquoise Sea	39	74	93
+Pasifika Volcanic Rock	45	47	40
+Pasifika Whirlpool	64	99	86
+Pasifika White Cloud	223	221	214
 Sublime	205	230	93
 Submarine	140	156	156
 Submerge	17	55	117
